@@ -15,6 +15,20 @@ namespace TAIO
         private Dictionary<char, int> controlFunction;
 
         /// <summary>
+        /// Initializes class with provided information.
+        /// </summary>
+        /// <param name="isAccepting"></param>
+        /// <param name="controlFunctionArray"></param>
+        public State(bool isAccepting, char[] alphabet, int[] controlFunctionArray)
+        {
+            this.isAccepting = isAccepting;
+            controlFunction = new Dictionary<char, int>();
+
+            for(int i = 0; i < controlFunctionArray.Length; i++)
+                controlFunction.Add(alphabet[i++], controlFunctionArray[i]);
+        }
+
+        /// <summary>
         /// Returns next state number according to controlFunction associated with this state.
         /// </summary>
         /// <param name="letter"></param>
