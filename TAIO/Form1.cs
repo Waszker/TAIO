@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+/// <summary>
+/// Main window class
+/// </summary>
 namespace TAIO
 {
     public partial class Form1 : Form
