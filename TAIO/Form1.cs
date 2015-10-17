@@ -18,6 +18,18 @@ namespace TAIO
         public Form1()
         {
             InitializeComponent();
+
+            // Example parser usage
+            string[][] functionTables = null;
+            string[] alphabetLetters =
+                InputFileParser.Parse(
+                    @"C:\\Users\\Paweł\\Documents\\Visual Studio 2015\\Projects\\TAIO\\TAIO\\input.txt",
+                    out functionTables);
+
+            Automaton automaton = new Automaton(alphabetLetters, functionTables);
+            int finalState = automaton.GetFinalState("01");
+
+            Console.WriteLine(finalState);
         }
     }
 }
