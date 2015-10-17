@@ -24,8 +24,8 @@ namespace TAIO
             this.isAccepting = isAccepting;
             controlFunction = new Dictionary<char, int>();
 
-            for(int i = 0; i < controlFunctionArray.Length; i++)
-                controlFunction.Add(alphabet[i++], controlFunctionArray[i]);
+            for (int i = 0; i < controlFunctionArray.Length; i++)
+                controlFunction.Add(alphabet[i], controlFunctionArray[i]);
         }
 
         /// <summary>

@@ -21,28 +21,25 @@ namespace TAIO
         public Automaton(string[] alphabetLetters, string[][] functionTables)
         {
             states = new List<State>();
+            char[] alphabet = new char[alphabetLetters.Length];
+
+            // Converting string alphabet to char array
+            for (int j = 0; j < alphabetLetters.Length; j++)
+                char.TryParse(alphabetLetters[j], out alphabet[j]);
+
+            // Parse each state provided in functionTable
             foreach (string[] function in functionTables)
             {
-                char[] alphabet = new char[alphabetLetters.Length];
+                bool isAccepting = (function[0] == "1");    
+                int[] stateFunction = new int[function.Length - 1];
 
-                // Converting string alphabet to char array
-                for (int j = 0; j < alphabetLetters.Length; j++)
-                    char.TryParse(alphabetLetters[j], out alphabet[j]);
+                // Converting string function to integer array for State constructor
+                for (int j = 1; j < function.Length; j++)
+                    int.TryParse(function[j], out stateFunction[j - 1]);
 
-                // Parse each state provided in functionTable
-                for (int i = 0; i < functionTables.Length; i++)
-                {
-                    bool isAccepting = (functionTables[i][0] == "1");    
-                    int[] stateFunction = new int[functionTables[i].Length - 1];
-
-                    // Converting string function to integer array for State constructor
-                    for (int j = 1; j < functionTables[i].Length; j++)
-                        int.TryParse(functionTables[i][j], out stateFunction[j - 1]);
-
-                    states.Add(new State(isAccepting, alphabet, stateFunction));
-                }
+                states.Add(new State(isAccepting, alphabet, stateFunction));
             }
-}
+        }
 
         /// <summary>
         /// Returns number of active state after computations.
@@ -52,7 +49,7 @@ namespace TAIO
         public int GetFinalState(String word)
         {
             State currentState = states[0];
-            for (int i = 0; i < states.Count; i++)
+            for (int i = 0; i < states.Count - 1; i++)
                 currentState = states.ElementAt(currentState.GetNextStateNumber(word[i]));
             return states.IndexOf(currentState);
         }

@@ -27,7 +27,7 @@ namespace TAIO
                     out functionTables);
 
             Automaton automaton = new Automaton(alphabetLetters, functionTables);
-            int finalState = automaton.GetFinalState("01");
+            int finalState = automaton.GetFinalState("10101011");
 
             Console.WriteLine(finalState);
         }
