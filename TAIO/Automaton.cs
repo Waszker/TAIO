@@ -49,7 +49,7 @@ namespace TAIO
         public int GetFinalState(String word)
         {
             State currentState = states[0];
-            for (int i = 0; i < states.Count - 1; i++)
+            for (int i = 0; i < word.Length; i++)
                 currentState = states.ElementAt(currentState.GetNextStateNumber(word[i]));
             return states.IndexOf(currentState);
         }
