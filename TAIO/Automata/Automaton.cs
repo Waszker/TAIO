@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Automata
+namespace TAIO.Automata
 {
     /// <summary>
     /// Class representing finite, deterministic automaton.
@@ -30,14 +28,12 @@ namespace Automata
             // Parse each state provided in functionTable
             foreach (string[] function in functionTables)
             {
-                bool isAccepting = (function[0] == "1");    
-                int[] stateFunction = new int[function.Length - 1];
-
+                int[] stateFunction = new int[function.Length];
                 // Converting string function to integer array for State constructor
-                for (int j = 1; j < function.Length; j++)
-                    int.TryParse(function[j], out stateFunction[j - 1]);
+                for (int j = 0; j < function.Length; j++)
+                    int.TryParse(function[j], out stateFunction[j]);
 
-                states.Add(new State(isAccepting, alphabet, stateFunction));
+                states.Add(new State(alphabet, stateFunction));
             }
         }
 

@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using TAIO.Automata;
 
 /// <summary>
 /// Main window class
@@ -21,12 +15,11 @@ namespace TAIO
 
             // Example parser usage
             string[][] functionTables = null;
-            string[] alphabetLetters =
-                InputFileParser.Parse(
-                    @"C:\\Users\\Paweł\\Documents\\Visual Studio 2015\\Projects\\TAIO\\TAIO\\input.txt",
+            string[] alphabetLetters = InputFileParser.Parse(
+                    @"...\\input.txt",
                     out functionTables);
 
-            Automaton automaton = new Automaton(alphabetLetters, functionTables);
+            Automaton automaton = new Automata.Automaton(alphabetLetters, functionTables);
             int finalState = automaton.GetFinalState("10101011");
 
             Console.WriteLine(finalState);

@@ -1,29 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace Automata
+namespace TAIO.Automata
 {
     /// <summary>
     /// Class representing automaton state during computation.
     /// </summary>
     class State
     {
-        private bool isAccepting;
         private Dictionary<char, int> controlFunction;
 
         /// <summary>
         /// Initializes class with provided information.
         /// </summary>
-        /// <param name="isAccepting"></param>
         /// <param name="controlFunctionArray"></param>
-        public State(bool isAccepting, char[] alphabet, int[] controlFunctionArray)
+        public State(char[] alphabet, int[] controlFunctionArray)
         {
-            this.isAccepting = isAccepting;
             controlFunction = new Dictionary<char, int>();
-
             for (int i = 0; i < controlFunctionArray.Length; i++)
                 controlFunction.Add(alphabet[i], controlFunctionArray[i]);
         }
