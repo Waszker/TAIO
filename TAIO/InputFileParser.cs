@@ -5,7 +5,7 @@ namespace TAIO
     /// <summary>
     /// Implementation of input file parser
     /// </summary>
-    class InputFileParser
+    abstract class InputFileParser
     {
         /// <summary>
         /// Returns data needed for automaton construction
