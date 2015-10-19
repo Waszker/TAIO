@@ -5,5 +5,7 @@
     /// </summary>
     class Particle
     {
+        private double lbest;
+        private Velocity velocity;
     }
 }
