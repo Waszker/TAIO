@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Automata\Automaton.cs" />
+    <Compile Include="Automata\WordSetGenerator.cs" />
     <Compile Include="Automata\TargetFunction.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
