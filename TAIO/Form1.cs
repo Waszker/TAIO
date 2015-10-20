@@ -4,11 +4,12 @@ using System.IO;
 using System.Windows.Forms;
 using TAIO.Automata;
 
-/// <summary>
-/// Main window class
-/// </summary>
+
 namespace TAIO
 {
+    /// <summary>
+    /// Main window class
+    /// </summary>
     public partial class Form1 : Form
     {
         private Automaton automaton;
