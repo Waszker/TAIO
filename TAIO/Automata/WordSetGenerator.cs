@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace TAIO.Automata
 {
@@ -46,6 +47,18 @@ namespace TAIO.Automata
             {
                 if ((i & 1) != 0) yield return n;
                 n++;
+            }
+        }
+
+        public void GenerateWordsByPepe(StringBuilder builder, int recursionLevel, int maxRecursionLevel)
+        {
+            if (recursionLevel == maxRecursionLevel) return;
+            for(int i = 'A'; i < 'Z'; i++)
+            {
+                builder.Append((char)i);
+                Words.Add(builder.ToString());
+                GenerateWordsByPepe(builder, recursionLevel+1, maxRecursionLevel);
+                builder.Remove(builder.Length - 1, 1);
             }
         }
     }
