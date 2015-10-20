@@ -73,13 +73,13 @@ namespace TAIO.Automata
         {
             AdjacencyGraph<int, TaggedEdge<int,int>> g = new AdjacencyGraph<int, TaggedEdge<int, int>>(true);
 
-            for (int i = 0; i < states.Count; i++)
+            for (int i = 0; i < _states.Count; i++)
                 g.AddVertex(i);
 
-            for (int i = 0; i < states.Count; i++)
+            for (int i = 0; i < _states.Count; i++)
             {
-                g.AddEdge(new TaggedEdge<int, int>(i, states.ElementAt(i).GetNextStateNumber('0'), 0));
-                g.AddEdge(new TaggedEdge<int, int>(i, states.ElementAt(i).GetNextStateNumber('1'), 1));
+                g.AddEdge(new TaggedEdge<int, int>(i, _states.ElementAt(i).GetNextStateNumber('0'), 0));
+                g.AddEdge(new TaggedEdge<int, int>(i, _states.ElementAt(i).GetNextStateNumber('1'), 1));
             }
 
             GraphvizAlgorithm<int, TaggedEdge<int, int>> graphviz = new GraphvizAlgorithm<int, TaggedEdge<int, int>>(g);
