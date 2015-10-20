@@ -52,7 +52,7 @@ namespace TAIO.Automata
         /// </summary>
         /// <param name="word"></param>
         /// <returns></returns>
-        public int GetFinalState(String word)
+        public int GetFinalState(string word)
         {
             State currentState = _states[0];
             for (int i = 0; i < word.Length; i++)

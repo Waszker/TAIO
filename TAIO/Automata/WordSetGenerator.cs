@@ -8,7 +8,7 @@ namespace TAIO.Automata
     public class WordSetGenerator
     {
         private readonly char[] _letters;
-        public List<String> Words { get; private set; }
+        public List<string> Words { get; private set; }
 
         public WordSetGenerator(char[] letters)
         {
@@ -18,7 +18,7 @@ namespace TAIO.Automata
 
         public void GenerateWords(int maxLength)
         {
-            List<String> alphabet = new List<string>();
+            List<string> alphabet = new List<string>();
             alphabet.AddRange(_letters.Select(letter => letter.ToString()).ToList());
             foreach (string word in ProduceWithRecursion(alphabet))
             {
@@ -53,9 +53,10 @@ namespace TAIO.Automata
         public void GenerateWordsByPepe(StringBuilder builder, int recursionLevel, int maxRecursionLevel)
         {
             if (recursionLevel == maxRecursionLevel) return;
-            for(int i = 'A'; i < 'Z'; i++)
+            for(int i = 0; i < _letters.Length; i++)
             {
-                builder.Append((char)i);
+                char letter = _letters[i];
+                builder.Append(letter);
                 Words.Add(builder.ToString());
                 GenerateWordsByPepe(builder, recursionLevel+1, maxRecursionLevel);
                 builder.Remove(builder.Length - 1, 1);
