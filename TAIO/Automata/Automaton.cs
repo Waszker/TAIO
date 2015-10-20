@@ -5,6 +5,7 @@ using QuickGraph;
 using QuickGraph.Graphviz;
 using QuickGraph.Graphviz.Dot;
 using System.IO;
+using TAIO.PSO;
 
 namespace TAIO.Automata
 {
@@ -39,6 +40,11 @@ namespace TAIO.Automata
 
                 _states.Add(new State(alphabet, stateFunction));
             }
+        }
+
+        public Automaton(Position bestPositionSoFar)
+        {
+            throw new NotImplementedException("This will be handled by Paweł ^_^");
         }
 
         /// <summary>
