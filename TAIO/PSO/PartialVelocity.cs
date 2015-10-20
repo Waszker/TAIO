@@ -12,17 +12,10 @@ namespace TAIO.PSO
     class PartialVelocity
     {
         // Velocities for every state on symbol's plane
-        public int[] velocities
+        public int[] PVelocities
         {
-            get
-            {
-                return velocities;
-            }
-
-            private set
-            {
-                velocities = value;
-            }
+            get;
+            private set;
         }
 
         /// <summary>
@@ -33,13 +26,13 @@ namespace TAIO.PSO
         /// <param name="seed"></param>
         public PartialVelocity(int numberOfAutomatonStates, int seed = -1)
         {
-            velocities = new int[numberOfAutomatonStates];
+            PVelocities = new int[numberOfAutomatonStates];
 
             if (seed > 0)
             {
                 Random rand = new Random(seed);
-                for (int i = 0; i < velocities.Length; i++)
-                    velocities[i] = rand.Next() % velocities.Length;
+                for (int i = 0; i < PVelocities.Length; i++)
+                    PVelocities[i] = rand.Next() % PVelocities.Length;
             }
         }
 
@@ -49,10 +42,10 @@ namespace TAIO.PSO
         /// <param name="partialVelocityValues"></param>
         public PartialVelocity(int[] partialVelocityValues)
         {
-            velocities = new int[partialVelocityValues.Length];
+            PVelocities = new int[partialVelocityValues.Length];
 
             for (int i = 0; i < partialVelocityValues.Length; i++)
-                velocities[i] = partialVelocityValues[i];
+                PVelocities[i] = partialVelocityValues[i];
         }
     }
 }

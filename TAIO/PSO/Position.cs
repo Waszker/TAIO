@@ -11,6 +11,10 @@ namespace TAIO.PSO
     /// </summary>
     class Position
     {
+        /// <summary>
+        /// For each symbol we store information about its array function in form of a vector where we put number of next state.
+        /// E.g. [a] -> [2][1][0]  :: for symbol 'a' while being in state q0 we move to state q2
+        /// </summary>
         private int[,] onePositions;
 
         public Position(int numberOfAutomatonSymbols, int numberOfAutomatonStates)
@@ -25,9 +29,9 @@ namespace TAIO.PSO
         public void UpdatePosition(Velocity velocity)
         {
             // Updating position is in fact moving "ones" inside array
-            for (int symbol = 0; symbol < velocity.velocities.Length; symbol++)
-                for (int state = 0; state < velocity.velocities[symbol].velocities.Length; state++)
-                    onePositions[symbol, state] = (onePositions[symbol, state] + velocity.velocities[symbol].velocities[state]) % onePositions.GetLength(1);
+            for (int symbol = 0; symbol < velocity.Velocities.Length; symbol++)
+                for (int state = 0; state < velocity.Velocities[symbol].PVelocities.Length; state++)
+                    onePositions[symbol, state] = (onePositions[symbol, state] + velocity.Velocities[symbol].PVelocities[state]) % onePositions.GetLength(1);
         }
     }
 }
