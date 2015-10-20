@@ -5,20 +5,18 @@
     /// </summary>
     class Particle
     {
-        private Position _personalBestPosition;
+        public Position PersonalBestPosition { get; private set; }
         private Velocity _velocity;
-        private Position _position;
-
-        public Particle()
+        public Position Position
         {
-                // TODO: Implement this!
+            get; private set;
         }
 
-        public Particle(Position position, Velocity velocity)
+        public Particle(int symbolCount, int stateCount)
         {
-            _personalBestPosition = position;
-            _position = position;
-            _velocity = velocity;
+            Position = new Position(symbolCount, stateCount);
+            PersonalBestPosition = Position;
+            _velocity = new Velocity(symbolCount, stateCount);
         }
 
         /// <summary>
@@ -35,8 +33,8 @@
         {
             // TODO: Implement
             UpdateVelocity(globalBestPosition, c1, c2, localBestPosition);
-            _position.UpdatePosition(_velocity);
-            if (_position.CompareTo(_personalBestPosition) == 1) _personalBestPosition = _position;
+            Position.UpdatePosition(_velocity);
+            if (Position.CompareTo(PersonalBestPosition) == 1) PersonalBestPosition = Position;
         }
 
         private void UpdateVelocity(Position globalBestPosition, int c1, int c2, Position localBestPosition = null)

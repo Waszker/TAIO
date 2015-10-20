@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using TAIO.Automata;
 
 namespace TAIO.PSO
@@ -8,6 +10,7 @@ namespace TAIO.PSO
     /// <summary>
     /// Represents position of particle inside the system.
     /// </summary>
+    [Serializable]
     class Position : IComparable<Position>
     {
         /// <summary>
@@ -41,6 +44,18 @@ namespace TAIO.PSO
         public int CompareTo(Position x)
         {
             return TargetFunctionValue.CompareTo(x.TargetFunctionValue);
+        }
+
+        public static T DeepClone<T>(T obj)
+        {
+            using (var ms = new MemoryStream())
+            {
+                var formatter = new BinaryFormatter();
+                formatter.Serialize(ms, obj);
+                ms.Position = 0;
+
+                return (T)formatter.Deserialize(ms);
+            }
         }
 
         private void UpdateTargetFunctionValue()
