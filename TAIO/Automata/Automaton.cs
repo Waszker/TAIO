@@ -60,8 +60,6 @@ namespace TAIO.Automata
             {
                 string output = outputFileName;
                 File.WriteAllText(output, dot);
-
-                // assumes dot.exe is on the path:
                 var args = string.Format(@"{0} -Tjpg -O", output);
                 System.Diagnostics.Process.Start("dot.exe", args);
                 return output;
@@ -84,7 +82,7 @@ namespace TAIO.Automata
 
             GraphvizAlgorithm<int, TaggedEdge<int, int>> graphviz = new GraphvizAlgorithm<int, TaggedEdge<int, int>>(g);
             graphviz.ImageType = GraphvizImageType.Png;
-
+            graphviz.FormatEdge += (sender, args) => { args.EdgeFormatter.Label.Value = args.Edge.Tag.ToString(); };
             string output = graphviz.Generate(new FileDotEngine(), automatonName);
             return output;
         }
