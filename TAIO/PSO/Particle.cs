@@ -5,9 +5,9 @@
     /// </summary>
     class Particle
     {
-        private double pbest;
-        private Velocity velocity;
-        private Position position;
+        private double _pbest;
+        private Velocity _velocity;
+        private Position _position;
 
         /// <summary>
         /// Returns the distance to provided particle.

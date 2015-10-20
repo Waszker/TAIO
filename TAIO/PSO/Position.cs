@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TAIO.PSO
+﻿namespace TAIO.PSO
 {
     /// <summary>
     /// Represents position of particle inside the system.
@@ -15,11 +9,11 @@ namespace TAIO.PSO
         /// For each symbol we store information about its array function in form of a vector where we put number of next state.
         /// E.g. [a] -> [2][1][0]  :: for symbol 'a' while being in state q0 we move to state q2
         /// </summary>
-        private int[,] onePositions;
+        private int[,] _onePositions;
 
         public Position(int numberOfAutomatonSymbols, int numberOfAutomatonStates)
         {
-            onePositions = new int[numberOfAutomatonSymbols, numberOfAutomatonStates];
+            _onePositions = new int[numberOfAutomatonSymbols, numberOfAutomatonStates];
         }
 
         /// <summary>
@@ -31,7 +25,7 @@ namespace TAIO.PSO
             // Updating position is in fact moving "ones" inside array
             for (int symbol = 0; symbol < velocity.Velocities.Length; symbol++)
                 for (int state = 0; state < velocity.Velocities[symbol].PVelocities.Length; state++)
-                    onePositions[symbol, state] = (onePositions[symbol, state] + velocity.Velocities[symbol].PVelocities[state]) % onePositions.GetLength(1);
+                    _onePositions[symbol, state] = (_onePositions[symbol, state] + velocity.Velocities[symbol].PVelocities[state]) % _onePositions.GetLength(1);
         }
     }
 }

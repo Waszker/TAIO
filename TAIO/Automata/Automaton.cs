@@ -9,7 +9,7 @@ namespace TAIO.Automata
     /// </summary>
     class Automaton
     {
-        private List<State> states;
+        private List<State> _states;
 
         /// <summary>
         /// Takes alphabet letters as string array convertible to char array and function table for each state.
@@ -18,7 +18,7 @@ namespace TAIO.Automata
         /// <param name="functionTables"></param>
         public Automaton(string[] alphabetLetters, string[][] functionTables)
         {
-            states = new List<State>();
+            _states = new List<State>();
             char[] alphabet = new char[alphabetLetters.Length];
 
             // Converting string alphabet to char array
@@ -33,7 +33,7 @@ namespace TAIO.Automata
                 for (int j = 0; j < function.Length; j++)
                     int.TryParse(function[j], out stateFunction[j]);
 
-                states.Add(new State(alphabet, stateFunction));
+                _states.Add(new State(alphabet, stateFunction));
             }
         }
 
@@ -44,10 +44,10 @@ namespace TAIO.Automata
         /// <returns></returns>
         public int GetFinalState(String word)
         {
-            State currentState = states[0];
+            State currentState = _states[0];
             for (int i = 0; i < word.Length; i++)
-                currentState = states.ElementAt(currentState.GetNextStateNumber(word[i]));
-            return states.IndexOf(currentState);
+                currentState = _states.ElementAt(currentState.GetNextStateNumber(word[i]));
+            return _states.IndexOf(currentState);
         }
     }
 }

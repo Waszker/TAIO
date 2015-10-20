@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TAIO.PSO
+﻿namespace TAIO.PSO
 {
     /// <summary>
     /// Represents velocity in machine space.
@@ -12,10 +6,7 @@ namespace TAIO.PSO
     class Velocity
     {
         public PartialVelocity[] Velocities
-        {
-            get;
-            private set;
-        }
+        { get; }
 
         public Velocity(int numberOfAutomatonSymbols, int numberOfAutomatonStates)
         {

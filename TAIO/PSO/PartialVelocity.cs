@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TAIO.PSO
 {
@@ -13,10 +9,7 @@ namespace TAIO.PSO
     {
         // Velocities for every state on symbol's plane
         public int[] PVelocities
-        {
-            get;
-            private set;
-        }
+        { get; }
 
         /// <summary>
         /// Creates partial velocity for one plane.

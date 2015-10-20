@@ -7,7 +7,7 @@ namespace TAIO.Automata
     /// </summary>
     class State
     {
-        private Dictionary<char, int> controlFunction;
+        private Dictionary<char, int> _controlFunction;
 
         /// <summary>
         /// Initializes class with provided information.
@@ -15,9 +15,9 @@ namespace TAIO.Automata
         /// <param name="controlFunctionArray"></param>
         public State(char[] alphabet, int[] controlFunctionArray)
         {
-            controlFunction = new Dictionary<char, int>();
+            _controlFunction = new Dictionary<char, int>();
             for (int i = 0; i < controlFunctionArray.Length; i++)
-                controlFunction.Add(alphabet[i], controlFunctionArray[i]);
+                _controlFunction.Add(alphabet[i], controlFunctionArray[i]);
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace TAIO.Automata
         public int GetNextStateNumber(char letter)
         {
             int nextStateNumber;
-            controlFunction.TryGetValue(letter, out nextStateNumber);
+            _controlFunction.TryGetValue(letter, out nextStateNumber);
             return nextStateNumber;
         }
     }
