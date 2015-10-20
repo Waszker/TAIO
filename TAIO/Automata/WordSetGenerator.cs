@@ -6,35 +6,36 @@ namespace TAIO.Automata
 {
     public class WordSetGenerator
     {
-        private char[] _letters;
-        private List<String> _words; 
+        private readonly char[] _letters;
+        public List<String> Words { get; private set; }
 
         public WordSetGenerator(char[] letters)
         {
             _letters = letters;
-            _words = new List<string>();
+            Words = new List<string>();
         }
 
         public void GenerateWords(int maxLength)
         {
-            _words = _letters.Select(letter => letter.ToString()).ToList();
-            var produceWithRecursion = ProduceWithRecursion(_words);
-            foreach (var word in produceWithRecursion)
+            List<String> alphabet = new List<string>();
+            alphabet.AddRange(_letters.Select(letter => letter.ToString()).ToList());
+            foreach (string word in ProduceWithRecursion(alphabet))
             {
-                Console.WriteLine(word);
+                Words.Add(word);
             }
         }
 
-        private void GenerateWordsSpecifiedLength(int length)
-        {
-            
-        }
-
-        private IEnumerable<List<String>> ProduceWithRecursion(List<String> allValues)
+        private IEnumerable<string> ProduceWithRecursion(List<string> allValues)
         {
             for (var i = 0; i < (1 << allValues.Count); i++)
             {
-                yield return ConstructSetFromBits(i).Select(n => allValues[n]).ToList();
+                var list = ConstructSetFromBits(i).Select(n => allValues[n]).ToList();
+                var word = "";
+                foreach (var letter in list)
+                {
+                    word = word + letter;
+                }
+                yield return word;
             }
         }
 
