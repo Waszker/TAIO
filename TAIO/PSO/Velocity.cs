@@ -11,7 +11,18 @@ namespace TAIO.PSO
     /// </summary>
     class Velocity
     {
-        private PartialVelocity[] velocities;
+        public PartialVelocity[] velocities
+        {
+            get
+            {
+                return velocities;
+            }
+
+            private set
+            {
+                velocities = value;
+            }
+        }
 
         public Velocity(int numberOfAutomatonSymbols, int numberOfAutomatonStates)
         {

@@ -71,9 +71,10 @@
     <Compile Include="InputFileParser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PSO\ParitalVelocity.cs" />
+    <Compile Include="PSO\PartialVelocity.cs" />
     <Compile Include="PSO\Particle.cs" />
     <Compile Include="Automata\State.cs" />
+    <Compile Include="PSO\Position.cs" />
     <Compile Include="PSO\Velocity.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
