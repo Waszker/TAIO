@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using TAIO.Automata;
 
@@ -9,6 +11,8 @@ namespace TAIO
 {
     public partial class Form1 : Form
     {
+        private Automaton automaton;
+
         public Form1()
         {
             InitializeComponent();
@@ -35,14 +39,20 @@ namespace TAIO
             if (theDialog.ShowDialog() == DialogResult.OK)
             {
                 string filename = theDialog.FileName;              
-
                 string[][] functionTables = null;
                 string[] alphabetLetters = InputFileParser.Parse(filename,
                         out functionTables);
+                automaton = new Automata.Automaton(alphabetLetters, functionTables); 
+            }
+        }
 
-                Automaton automaton = new Automata.Automaton(alphabetLetters, functionTables);
-                int finalState = automaton.GetFinalState("10101011");
-                MessageBox.Show(finalState.ToString());
+        private void inputPicture_Click(object sender, EventArgs e)
+        {
+            automaton.GetGraph("InputAutomaton");
+            if (File.Exists("InputAutomaton.jpg"))
+            {
+                PictureWindow pw = new PictureWindow("Input Automaton", "InputAutomaton.jpg");
+                pw.Show();
             }
         }
     }
