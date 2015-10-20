@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TAIO.Automata;
 
 namespace TAIO.PSO
 {
     /// <summary>
     /// Represents position of particle inside the system.
     /// </summary>
-    class Position : IComparer<Position>
+    class Position : IComparable<Position>
     {
         /// <summary>
         /// For each symbol we store information about its array function in form of a vector where we put number of next state.
@@ -37,15 +38,14 @@ namespace TAIO.PSO
             UpdateTargetFunctionValue();
         }
 
-        public int Compare(Position x)
+        public int CompareTo(Position x)
         {
             return TargetFunctionValue.CompareTo(x.TargetFunctionValue);
         }
 
         private void UpdateTargetFunctionValue()
         {
-            // TODO: Implement that
-            TargetFunctionValue = 0;
+            TargetFunctionValue = TargetFunction.GetFunctionValue(this);
         }
     }
 }

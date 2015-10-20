@@ -9,6 +9,11 @@
         private Velocity _velocity;
         private Position _position;
 
+        public Particle()
+        {
+                // TODO: Implement this!
+        }
+
         public Particle(Position position, Velocity velocity)
         {
             _personalBestPosition = position;
@@ -31,8 +36,8 @@
             // TODO: Implement
             UpdateVelocity(globalBestPosition, c1, c2, localBestPosition);
             _position.UpdatePosition(_velocity);
-            if (_position.Compare(_personalBestPosition) == 1) _personalBestPosition = _position;
-       } 
+            if (_position.CompareTo(_personalBestPosition) == 1) _personalBestPosition = _position;
+        }
 
         private void UpdateVelocity(Position globalBestPosition, int c1, int c2, Position localBestPosition = null)
         {
