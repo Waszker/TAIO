@@ -8,8 +8,7 @@ namespace TAIO.PSO
     class PartialVelocity
     {
         // Velocities for every state on symbol's plane
-        public int[] PVelocities
-        { get; }
+        public int[] PVelocities { get; }
 
         /// <summary>
         /// Creates partial velocity for one plane.

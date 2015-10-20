@@ -5,8 +5,7 @@
     /// </summary>
     class Velocity
     {
-        public PartialVelocity[] Velocities
-        { get; }
+        public PartialVelocity[] Velocities { get; }
 
         public Velocity(int numberOfAutomatonSymbols, int numberOfAutomatonStates)
         {
