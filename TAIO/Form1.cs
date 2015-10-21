@@ -43,13 +43,17 @@ namespace TAIO
                 string[][] functionTables = null;
                 string[] alphabetLetters = InputFileParser.Parse(filename,
                         out functionTables);
-                automaton = new Automata.Automaton(alphabetLetters, functionTables); 
+                automaton = new Automata.Automaton(alphabetLetters, functionTables);
+
+                showInputPictureButton.Enabled = true;
+                findResultButton.Enabled = true;
             }
         }
 
         private void inputPicture_Click(object sender, EventArgs e)
         {
             automaton.GetGraph("InputAutomaton");
+            System.Threading.Thread.Sleep(1000); //CHANGE THIS SHIT
             if (File.Exists("InputAutomaton.jpg"))
             {
                 PictureWindow pw = new PictureWindow("Input Automaton", "InputAutomaton.jpg");
