@@ -32,13 +32,9 @@ $RECYCLE.BIN/
 *.user
 *.userosscache
 *.sln.docstates
-!gvc.dll
-!cgraph.dll
-!cdt.dll
-!Pathplan.dll
-!ltdl.dll
-!libexpat.dll
-!zlib1.dll
+
+# Add folder
+!TAIO_Execs/*
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
