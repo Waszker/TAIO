@@ -34,7 +34,7 @@ $RECYCLE.BIN/
 *.sln.docstates
 
 # Add folder
-!TAIO_Execs/*
+!bin/TAIO_Execs/*
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

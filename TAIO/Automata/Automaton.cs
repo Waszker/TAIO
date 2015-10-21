@@ -67,7 +67,7 @@ namespace TAIO.Automata
                 string output = outputFileName;
                 File.WriteAllText(output, dot);
                 var args = string.Format(@"{0} -Tjpg -O", output);
-                System.Diagnostics.Process.Start("dot.exe", args);
+                System.Diagnostics.Process.Start("TAIO_Execs\\dot.exe", args);
                 return output;
             }
         }
