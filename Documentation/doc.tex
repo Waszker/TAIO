@@ -1,0 +1,71 @@
+\documentclass{mini}
+\usepackage[utf8]{inputenc}
+%------------------------------------------------------------------------------%
+\title{Teoretyczne opracowanie rozwiązania zadania}
+\author{Anna Zawadzka\\Sylwia Nowal\\Pavel Kuzmich\\Piotr Waszkiewicz}
+\supervisor{dr inż. Wojciech Zabołotny}
+\type{inżyniers}
+\discipline{informatyka}
+\monthyear{październik 2015}
+\date{\today}
+\album{123456}
+%------------------------------------------------------------------------------%
+\begin{document}
+\maketitle
+\tableofcontents
+
+%\chapter*{Wstęp}
+
+\chapter{Cel projektu}
+
+Celem projektu jest stworzenie minimalnego deterministycznego automatu skończonego sprawdzającego zachodzenie relacji indukowanej przez język dla podanych słów na podstawie podanego narzędzia.
+
+\section{Sposób realizacji w etapach}
+
+\begin{enumerate}
+	\item Wprowadzenie narzędzia (automatu), pozwalającego sprawdzić czy $\forall_{x,y \in (\Sigma)*} x R_{L} y$.
+	\item Utworzenie treningowego i testowego zbioru słów.
+	\item Znalezienie skończonego automatu deterministycznego spełniającego cel projektu z wykorzystaniem algorytmu PSO (Particle Swarm Optimization).
+	\item Sprawdzenie utworzonego automatu wykorzystując zbiór testowy słów.
+\end{enumerate}
+
+\chapter{Teoretyczny opis poszczególnych etapów pracy}
+
+\section{Automat wejściowy}
+
+Automatem wejściowym jest narzędzie sprawdzające, czy dwa słowa są ze sobą w relacji wprowadzane jest do programu w postaci pliku tekstowego. Format reprezentacji automatu jest następujący:
+
+\begin{itemize}
+	\item Stany numerowane liczbami $1, 2, …, n$, gdzie $n$ to liczba stanów, 1 – stan początkowy.
+	\item $r$ – liczba symboli w alfabecie (jeśli jest taka potrzeba, to numerować symbole alfabetu numerowane liczbami $1, 2, ..., r$).
+	\item Tabela funkcji przejścia
+	\item Automat jest reprezentowany w postaci pliku tekstowego (.txt) zawierającego ciąg liczb naturalnych dziesiętnych oddzielonych przecinkami: $n$ – liczba stanów, $r$ – liczba symboli w alfabecie, kolejne wiersze tabelki funkcji przejścia, razem w pliku jest $2 + n*r$ liczb.
+\end{itemize}
+
+Po wprowadzeniu pliku z opisem automatu będzie można zobaczyć jego graficzną reprezentację w postaci grafu.
+
+\section{Zbiór treningowy i zbiór testowy}
+
+Utworzenie treningowego i testowego zbioru słów nastąpi poprzez wygenerowanie odpowiednich zbiorów słów. Zbiory te po wygenerowaniu dostępne będą dopóty dopóki nie zmieni się zbiór symboli alfabetu. Zbiór treningowy zawierać będzie wszystkie słowa znad alfabetu o długości mniejszej bądź równej 5 symboli oraz (...!!!...). Zbiór treningowy i testowy są zbiorami rozłącznymi. Zbiór testowy składa się ze słów wygenerowanych według następujących zasad: (...!!!...)
+
+\section{Opis przestrzeni poszukiwania dla algorytmu PSO}
+
+Przestrzeń poszukiwania w algorytmie PSO będą stanowić wszystkie deterministyczne automaty skończone o określonej liczbie stanów, z alfabetem wejściowym równoważnym z alfabetem języka $L$. Zapis cyfrowy każdego automatu można przedstawić jako zbiór macierzy binarnych o wymiarach $|Q|^2$ (gdzie $|Q|$ to ilość stanów automatu). Zbiór ten jest równoliczny ze zbiorem symboli alfabetu automatu (każdemu symbolowi odpowiadać będzie inna macierz). Jeżeli jako dodatkowe założenie przyjmiemy, że w każdym wierszu każdej macierzy znajdować może się tylko jedna jedynka, to wtedy taką macierz traktować możemy jako część tabelki funkcji przejścia automatu, która dla wiersza o numerze i oraz jedynce w kolumnie $j$ odpowiada przejściu ze stanu $q_{i}$ do stanu $q_{j}$ po wczytaniu symbolu przypisanego do tej macierzy. Ponieważ następująca reprezentacja jest nieoptymalna pod względem zużycia pamięci zapis można uprościć do tablicy jednowymiarowej która dla każdego indeksu odpowiadającego numerowi stanu w którym automat znajduje się przed wczytaniem symbolu, przyporządkowuje numer stanu w którym automat znajdzie się po wczytaniu elementu z taśmy.
+
+Przyjmijmy $d = |\Sigma|$ liczba symboli alfabetu, $f = |Q|$ liczba stanów automatu. Tak więc przestrzeń wszystkich automatów stanowić będą wszystkie możliwe ciągi liczb o długości $d*f$ i wartościach z przedziału $[0, f)$. Cząstki poruszające się w przestrzeni będą przyjmowały pozycje będące reprezentacją tych automatów. Dla każdej cząsteczki jej prędkość definiowana będzie jako $V_{p} = (V_{s1}, V_{s2}, …, V_{ss})$ gdzie $V_{si}$ oznacza prędkość cząstki na płaszczyźnie odpowiadającej symbolowi o numerze $i$, definowanej jako $V_{si} = (V_{c1}, V_{c2}, …, V_{cq})$. $V_{cj}$ reprezentuje tutaj prędkość cząstki dla wiersza numer $j$ w macierzy zdefiniowanej wcześnie jako reprezentacja tabeli funkcji przejścia dla danego symbolu. Tak zdefiniowaną prędkość można (podobnie jak położenie) przedstawić w postaci tablicy jednowymiarowej o długości $d*f$ (gdzie $d$ i $f$ - zdefiniowane wcześniej). Zmiana położenia cząstki następuje więc poprzez dodanie wektora prędkości do wektora położenia tym samym otrzymując nowe położenie.
+
+Przeszukiwanie przestrzeni automatów realizowane jest poprzez wygenerowanie pewnej ilości cząstek (nazywanych rojem) poruszających się według określonych zasad i dążących do osiągnięcia postawionego celu. Za cel najczęściej przyjmuje się minimalizację wartości pewnej funkcji nazywanej funkcją celu. W tym projekcie będzie to funkcja $f:A \rightarrow N$ ($A$ - zbiór automatów, $N$ - liczby naturalne) która dla danego automatu zwraca liczbę błędnie zaklasyfikowanych słów. W każdym przebiegu algorytmu ze zbioru cząstek możemy wyróżnić jedną o najlepszym położeniu (global best oznaczamy gbest). Każda cząstka posiadać będzie również informację o swoim dotychczasowym najlepszym wyniku (personal best oznaczamy pbest). Dane te umożliwią wyliczenie nowej wartości prędkości dla każdej cząstki zgodnie ze wzorem: 
+
+\begin{center}
+$v[] = v[] = c1 * rand() * (pbest[] - present[]) + c2 * rand() * (gbest[] - present[])$
+\end{center}
+
+Zmiana położeń cząstek będzie odbywać się dopóki oba warunki będą spełnione:
+
+\begin{itemize}
+	\item któraś z cząstek nie osiągnie założonej wartości minimalnej błędu;
+	\item nie zostanie osiągnięta z góry wyznaczona ilość iteracji ruchu.
+\end{itemize}
+
+\end{document}
+
