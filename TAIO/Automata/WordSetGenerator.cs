@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
 
 namespace TAIO.Automata
@@ -8,7 +6,7 @@ namespace TAIO.Automata
     public class WordSetGenerator
     {
         private readonly char[] _letters;
-        public List<string> Words { get; private set; }
+        public List<string> Words { get; }
 
         public WordSetGenerator(char[] letters)
         {
@@ -18,39 +16,11 @@ namespace TAIO.Automata
 
         public void GenerateWords(int maxLength)
         {
-            List<string> alphabet = new List<string>();
-            alphabet.AddRange(_letters.Select(letter => letter.ToString()).ToList());
-            foreach (string word in ProduceWithRecursion(alphabet))
-            {
-                Words.Add(word);
-            }
+            StringBuilder stringBuilder = new StringBuilder();
+            GenerateRecusivelyWords(stringBuilder, 0, 4);
         }
 
-        private IEnumerable<string> ProduceWithRecursion(List<string> allValues)
-        {
-            for (var i = 0; i < (1 << allValues.Count); i++)
-            {
-                var list = ConstructSetFromBits(i).Select(n => allValues[n]).ToList();
-                var word = "";
-                foreach (var letter in list)
-                {
-                    word = word + letter;
-                }
-                yield return word;
-            }
-        }
-
-        private IEnumerable<int> ConstructSetFromBits(int i)
-        {
-            var n = 0;
-            for (; i != 0; i /= 2)
-            {
-                if ((i & 1) != 0) yield return n;
-                n++;
-            }
-        }
-
-        public void GenerateWordsByPepe(StringBuilder builder, int recursionLevel, int maxRecursionLevel)
+        public void GenerateRecusivelyWords(StringBuilder builder, int recursionLevel, int maxRecursionLevel)
         {
             if (recursionLevel == maxRecursionLevel) return;
             for(int i = 0; i < _letters.Length; i++)
@@ -58,7 +28,7 @@ namespace TAIO.Automata
                 char letter = _letters[i];
                 builder.Append(letter);
                 Words.Add(builder.ToString());
-                GenerateWordsByPepe(builder, recursionLevel+1, maxRecursionLevel);
+                GenerateRecusivelyWords(builder, recursionLevel+1, maxRecursionLevel);
                 builder.Remove(builder.Length - 1, 1);
             }
         }

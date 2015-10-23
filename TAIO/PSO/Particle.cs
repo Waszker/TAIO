@@ -7,10 +7,7 @@
     {
         public Position PersonalBestPosition { get; private set; }
         private Velocity _velocity;
-        public Position Position
-        {
-            get; private set;
-        }
+        public Position Position { get; }
 
         public Particle(int symbolCount, int stateCount)
         {

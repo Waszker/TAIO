@@ -1,5 +1,4 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using TAIO.Automata;
 
 namespace TAIOTest
@@ -9,16 +8,20 @@ namespace TAIOTest
         [Test]
         public void GenerateVariationsTest()
         {
-            //TODO generate variations with repeats
             char[] letters = {'A', 'B', 'C'};
             WordSetGenerator wordSetGenerator = new WordSetGenerator(letters);
-            //wordSetGenerator.GenerateWords(3);
-            wordSetGenerator.GenerateWordsByPepe(new System.Text.StringBuilder(), 0, 3);
+            int maxLength = 3;
+            wordSetGenerator.GenerateRecusivelyWords(new System.Text.StringBuilder(), 0, maxLength);
             var words = wordSetGenerator.Words;
-            foreach (var word in words)
+            int expectedAmount = 0;
+            int amountOfLetters = letters.Length;
+            int temp = 1;
+            for (int i = 0; i < maxLength; i++)
             {
-                Console.WriteLine(word);
+                temp *= amountOfLetters;
+                expectedAmount += temp;
             }
+            Assert.AreEqual(expectedAmount, words.Count);
         }
     }
 }
