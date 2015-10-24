@@ -1,54 +1,89 @@
-\documentclass{mini}
+\documentclass{llncs}
+\usepackage[polish]{babel}
 \usepackage[utf8]{inputenc}
-%------------------------------------------------------------------------------%
-\title{Teoretyczne opracowanie rozwiązania zadania}
-\author{Anna Zawadzka\\Sylwia Nowal\\Pavel Kuzmich\\Piotr Waszkiewicz}
-\supervisor{dr inż. Wojciech Zabołotny}
-\type{inżyniers}
-\discipline{informatyka}
-\monthyear{październik 2015}
-\date{\today}
-\album{123456}
-%------------------------------------------------------------------------------%
+\usepackage{polski}
+\frenchspacing
+\setcounter{tocdepth}{2}
+
 \begin{document}
-\maketitle
+	
+\begin{titlepage}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\center
+
+%----------------------------------------------------------------------------------------
+
+\textsc{\LARGE Politechnika Warszawska}\\[5mm]
+\textsc{\LARGE Wydział Matematyki i Nauk Informacyjnych}\\[4cm]
+ 
+%----------------------------------------------------------------------------------------
+
+\textsc{\Large Teoria Algorytmów i Obliczeń}\\[0.5cm]
+
+%----------------------------------------------------------------------------------------
+
+\HRule \\[0.4cm]
+{ \huge \bfseries Konstrukcja automatu deterministycznego skończonego\\(teoretyczne opracowanie zadania)}\\[0.4cm] % Title of your document
+\HRule \\[1.5cm]
+ 
+%----------------------------------------------------------------------------------------
+
+\begin{flushright}
+\Large \emph{Autorzy:}\\[0.5cm]
+Sylwia \textsc{Nowak}\\
+Anna \textsc{Zawadzka}\\
+Pavel \textsc{Kuzmich}\\
+Piotr \textsc{Waszkiewicz}\\
+\end{flushright}
+
+%----------------------------------------------------------------------------------------
+
+\vfill
+{\large \today}\\[3cm]
+
+\end{titlepage}
+	
 \tableofcontents
+\newpage
 
-%\chapter*{Wstęp}
+\section{Wstęp}
 
-\chapter{Cel projektu}
+\subsection{Cel projektu}
 
 Celem projektu jest stworzenie minimalnego deterministycznego automatu skończonego sprawdzającego zachodzenie relacji indukowanej przez język dla podanych słów na podstawie podanego narzędzia.
 
-\section{Sposób realizacji w etapach}
+\subsection{Sposób realizacji w etapach}
 
 \begin{enumerate}
-	\item Wprowadzenie narzędzia (automatu), pozwalającego sprawdzić czy $\forall_{x,y \in (\Sigma)*} x R_{L} y$.
-	\item Utworzenie treningowego i testowego zbioru słów.
-	\item Znalezienie skończonego automatu deterministycznego spełniającego cel projektu z wykorzystaniem algorytmu PSO (Particle Swarm Optimization).
-	\item Sprawdzenie utworzonego automatu wykorzystując zbiór testowy słów.
+	\item[•] Wprowadzenie narzędzia (automatu), pozwalającego sprawdzić czy $\forall_{x,y \in (\Sigma)*} x R_{L} y$.
+	\item[•] Utworzenie treningowego i testowego zbioru słów.
+	\item[•] Znalezienie skończonego automatu deterministycznego spełniającego cel projektu z wykorzystaniem algorytmu PSO (Particle Swarm Optimization).
+	\item[•] Sprawdzenie utworzonego automatu wykorzystując zbiór testowy słów.
 \end{enumerate}
 
-\chapter{Teoretyczny opis poszczególnych etapów pracy}
+\newpage
 
-\section{Automat wejściowy}
+\section{Teoretyczny opis etapów pracy}
+
+\subsection{Automat wejściowy}
 
 Automatem wejściowym jest narzędzie sprawdzające, czy dwa słowa są ze sobą w relacji wprowadzane jest do programu w postaci pliku tekstowego. Format reprezentacji automatu jest następujący:
 
 \begin{itemize}
-	\item Stany numerowane liczbami $1, 2, …, n$, gdzie $n$ to liczba stanów, 1 – stan początkowy.
-	\item $r$ – liczba symboli w alfabecie (jeśli jest taka potrzeba, to numerować symbole alfabetu numerowane liczbami $1, 2, ..., r$).
-	\item Tabela funkcji przejścia
-	\item Automat jest reprezentowany w postaci pliku tekstowego (.txt) zawierającego ciąg liczb naturalnych dziesiętnych oddzielonych przecinkami: $n$ – liczba stanów, $r$ – liczba symboli w alfabecie, kolejne wiersze tabelki funkcji przejścia, razem w pliku jest $2 + n*r$ liczb.
+	\item[•] Stany numerowane liczbami $1, 2, …, n$, gdzie $n$ to liczba stanów, 1 – stan początkowy.
+	\item[•] $r$ – liczba symboli w alfabecie (jeśli jest taka potrzeba, to numerować symbole alfabetu numerowane liczbami $1, 2, ..., r$).
+	\item[•] Tabela funkcji przejścia
+	\item[•] Automat jest reprezentowany w postaci pliku tekstowego (.txt) zawierającego ciąg liczb naturalnych dziesiętnych oddzielonych przecinkami: $n$ – liczba stanów, $r$ – liczba symboli w alfabecie, kolejne wiersze tabelki funkcji przejścia, razem w pliku jest $2 + n*r$ liczb.
 \end{itemize}
-
 Po wprowadzeniu pliku z opisem automatu będzie można zobaczyć jego graficzną reprezentację w postaci grafu.
 
-\section{Zbiór treningowy i zbiór testowy}
+\subsection{Zbiór treningowy i zbiór testowy}
 
 Utworzenie treningowego i testowego zbioru słów nastąpi poprzez wygenerowanie odpowiednich zbiorów słów. Zbiory te po wygenerowaniu dostępne będą dopóty dopóki nie zmieni się zbiór symboli alfabetu. Zbiór treningowy zawierać będzie wszystkie słowa znad alfabetu o długości mniejszej bądź równej 5 symboli oraz (...!!!...). Zbiór treningowy i testowy są zbiorami rozłącznymi. Zbiór testowy składa się ze słów wygenerowanych według następujących zasad: (...!!!...)
 
-\section{Opis przestrzeni poszukiwania dla algorytmu PSO}
+\subsection{Opis przestrzeni poszukiwania dla algorytmu PSO}
 
 Przestrzeń poszukiwania w algorytmie PSO będą stanowić wszystkie deterministyczne automaty skończone o określonej liczbie stanów, z alfabetem wejściowym równoważnym z alfabetem języka $L$. Zapis cyfrowy każdego automatu można przedstawić jako zbiór macierzy binarnych o wymiarach $|Q|^2$ (gdzie $|Q|$ to ilość stanów automatu). Zbiór ten jest równoliczny ze zbiorem symboli alfabetu automatu (każdemu symbolowi odpowiadać będzie inna macierz). Jeżeli jako dodatkowe założenie przyjmiemy, że w każdym wierszu każdej macierzy znajdować może się tylko jedna jedynka, to wtedy taką macierz traktować możemy jako część tabelki funkcji przejścia automatu, która dla wiersza o numerze i oraz jedynce w kolumnie $j$ odpowiada przejściu ze stanu $q_{i}$ do stanu $q_{j}$ po wczytaniu symbolu przypisanego do tej macierzy. Ponieważ następująca reprezentacja jest nieoptymalna pod względem zużycia pamięci zapis można uprościć do tablicy jednowymiarowej która dla każdego indeksu odpowiadającego numerowi stanu w którym automat znajduje się przed wczytaniem symbolu, przyporządkowuje numer stanu w którym automat znajdzie się po wczytaniu elementu z taśmy.
 
@@ -63,9 +98,8 @@ $v[] = v[] = c1 * rand() * (pbest[] - present[]) + c2 * rand() * (gbest[] - pres
 Zmiana położeń cząstek będzie odbywać się dopóki oba warunki będą spełnione:
 
 \begin{itemize}
-	\item któraś z cząstek nie osiągnie założonej wartości minimalnej błędu;
-	\item nie zostanie osiągnięta z góry wyznaczona ilość iteracji ruchu.
+	\item[•] któraś z cząstek nie osiągnie założonej wartości minimalnej błędu;
+	\item[•] nie zostanie osiągnięta z góry wyznaczona ilość iteracji ruchu.
 \end{itemize}
 
 \end{document}
-
