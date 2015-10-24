@@ -25,7 +25,7 @@
 %----------------------------------------------------------------------------------------
 
 \HRule \\[0.4cm]
-{ \huge \bfseries Konstrukcja automatu deterministycznego skończonego\\(teoretyczne opracowanie zadania)}\\[0.4cm] % Title of your document
+{ \huge \bfseries Konstrukcja automatu deterministycznego skończonego\\(teoretyczne opracowanie zadania)}\\[0.4cm]
 \HRule \\[1.5cm]
  
 %----------------------------------------------------------------------------------------
@@ -57,10 +57,10 @@ Celem projektu jest stworzenie minimalnego deterministycznego automatu skończon
 \subsection{Sposób realizacji w etapach}
 
 \begin{enumerate}
-	\item[•] Wprowadzenie narzędzia (automatu), pozwalającego sprawdzić czy $\forall_{x,y \in (\Sigma)*} x R_{L} y$.
-	\item[•] Utworzenie treningowego i testowego zbioru słów.
-	\item[•] Znalezienie skończonego automatu deterministycznego spełniającego cel projektu z wykorzystaniem algorytmu PSO (Particle Swarm Optimization).
-	\item[•] Sprawdzenie utworzonego automatu wykorzystując zbiór testowy słów.
+\item[•] Wprowadzenie narzędzia (automatu), pozwalającego sprawdzić czy $\forall_{x,y \in (\Sigma)*} x R_{L} y$.
+\item[•] Utworzenie treningowego i testowego zbioru słów.
+\item[•] Znalezienie skończonego automatu deterministycznego spełniającego cel projektu z wykorzystaniem algorytmu PSO (Particle Swarm Optimization).
+\item[•] Sprawdzenie utworzonego automatu wykorzystując zbiór testowy słów.
 \end{enumerate}
 
 \newpage
@@ -72,10 +72,10 @@ Celem projektu jest stworzenie minimalnego deterministycznego automatu skończon
 Automatem wejściowym jest narzędzie sprawdzające, czy dwa słowa są ze sobą w relacji wprowadzane jest do programu w postaci pliku tekstowego. Format reprezentacji automatu jest następujący:
 
 \begin{itemize}
-	\item[•] Stany numerowane liczbami $1, 2, …, n$, gdzie $n$ to liczba stanów, 1 – stan początkowy.
-	\item[•] $r$ – liczba symboli w alfabecie (jeśli jest taka potrzeba, to numerować symbole alfabetu numerowane liczbami $1, 2, ..., r$).
-	\item[•] Tabela funkcji przejścia
-	\item[•] Automat jest reprezentowany w postaci pliku tekstowego (.txt) zawierającego ciąg liczb naturalnych dziesiętnych oddzielonych przecinkami: $n$ – liczba stanów, $r$ – liczba symboli w alfabecie, kolejne wiersze tabelki funkcji przejścia, razem w pliku jest $2 + n*r$ liczb.
+\item[•] Stany numerowane liczbami $1, 2, …, n$, gdzie $n$ to liczba stanów, 1 – stan początkowy.
+\item[•] $r$ – liczba symboli w alfabecie (jeśli jest taka potrzeba, to numerować symbole alfabetu numerowane liczbami $1, 2, ..., r$).
+\item[•] Tabela funkcji przejścia
+\item[•] Automat jest reprezentowany w postaci pliku tekstowego (.txt) zawierającego ciąg liczb naturalnych dziesiętnych oddzielonych przecinkami: $n$ – liczba stanów, $r$ – liczba symboli w alfabecie, kolejne wiersze tabelki funkcji przejścia, razem w pliku jest $2 + n*r$ liczb.
 \end{itemize}
 Po wprowadzeniu pliku z opisem automatu będzie można zobaczyć jego graficzną reprezentację w postaci grafu.
 
@@ -98,8 +98,8 @@ $v[] = v[] = c1 * rand() * (pbest[] - present[]) + c2 * rand() * (gbest[] - pres
 Zmiana położeń cząstek będzie odbywać się dopóki oba warunki będą spełnione:
 
 \begin{itemize}
-	\item[•] któraś z cząstek nie osiągnie założonej wartości minimalnej błędu;
-	\item[•] nie zostanie osiągnięta z góry wyznaczona ilość iteracji ruchu.
+\item[•] któraś z cząstek nie osiągnie założonej wartości minimalnej błędu;
+\item[•] nie zostanie osiągnięta z góry wyznaczona ilość iteracji ruchu.
 \end{itemize}
 
 \end{document}
