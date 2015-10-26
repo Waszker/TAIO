@@ -25,7 +25,7 @@
 %----------------------------------------------------------------------------------------
 
 \HRule \\[0.4cm]
-{ \huge \bfseries Konstrukcja automatu deterministycznego skończonego\\(teoretyczne opracowanie zadania)}\\[0.4cm]
+{ \huge \bfseries Konstrukcja automatu deterministycznego skończonego sprawdzającego zachodzenie relacji indukowanej przez język dla słów z danego języka (teoretyczne opracowanie zadania)}\\[0.4cm]
 \HRule \\[1.5cm]
  
 %----------------------------------------------------------------------------------------
@@ -52,54 +52,120 @@ Piotr \textsc{Waszkiewicz}\\
 
 \subsection{Cel projektu}
 
-Celem projektu jest stworzenie minimalnego deterministycznego automatu skończonego sprawdzającego zachodzenie relacji indukowanej przez język dla podanych słów na podstawie podanego narzędzia.
+Celem projektu jest stworzenie deterministycznego automatu skończonego realizującego funkcję relacji indukowanej przez język na podstawie odpowiedzi udzielanych przez gotowe, nieznane narzędzie pełniące tę samą rolę.
 
 \subsection{Sposób realizacji w etapach}
 
-\begin{enumerate}
-\item[•] Wprowadzenie narzędzia (automatu), pozwalającego sprawdzić czy $\forall_{x,y \in (\Sigma)*} x R_{L} y$.
+\begin{itemize}
+\item[•] Wprowadzenie narzędzia (automatu), pozwalającego sprawdzić czy $\forall_{x,y \in \Sigma^*} x R_{L} y$.
 \item[•] Utworzenie treningowego i testowego zbioru słów.
-\item[•] Znalezienie skończonego automatu deterministycznego spełniającego cel projektu z wykorzystaniem algorytmu PSO (Particle Swarm Optimization).
-\item[•] Sprawdzenie utworzonego automatu wykorzystując zbiór testowy słów.
-\end{enumerate}
+\item[•] Znalezienie skończonych automatów deterministycznych spełniających cel projektu z wykorzystaniem algorytmu PSO (Particle Swarm Optimization) i zbioru treningowego słów.
+\item[•] Wybranie najlepszego utworzonego automatu wykorzystując zbiór testowy słów.
+\end{itemize}
 
 \newpage
 
-\section{Teoretyczny opis etapów pracy}
+\section{Szczegółówy opis sposobu realizacji zadania}
 
 \subsection{Automat wejściowy}
 
-Automatem wejściowym jest narzędzie sprawdzające, czy dwa słowa są ze sobą w relacji wprowadzane jest do programu w postaci pliku tekstowego. Format reprezentacji automatu jest następujący:
+Na podstawie automatu wejściowego zostanie stworzone narzędzie sprawdzające, czy dwa słowa są ze sobą w relacji. Informacje o automacie wejściowym będą przechowywane w pliku tekstowym podawanym na wejście programu. Format reprezentacji automatu jest następujący:
 
 \begin{itemize}
-\item[•] Stany numerowane liczbami $1, 2, …, n$, gdzie $n$ to liczba stanów, 1 – stan początkowy.
-\item[•] $r$ – liczba symboli w alfabecie (jeśli jest taka potrzeba, to numerować symbole alfabetu numerowane liczbami $1, 2, ..., r$).
-\item[•] Tabela funkcji przejścia
-\item[•] Automat jest reprezentowany w postaci pliku tekstowego (.txt) zawierającego ciąg liczb naturalnych dziesiętnych oddzielonych przecinkami: $n$ – liczba stanów, $r$ – liczba symboli w alfabecie, kolejne wiersze tabelki funkcji przejścia, razem w pliku jest $2 + n*r$ liczb.
+\item[•] Stany numerowane liczbami 1, 2, …, n, gdzie n to liczba stanów, 1 – stan początkowy.
+\item[•] $r$ – liczba symboli w alfabecie.
+\item[•] Tabela funkcji przejścia.
 \end{itemize}
+
 Po wprowadzeniu pliku z opisem automatu będzie można zobaczyć jego graficzną reprezentację w postaci grafu.
 
 \subsection{Zbiór treningowy i zbiór testowy}
 
-Utworzenie treningowego i testowego zbioru słów nastąpi poprzez wygenerowanie odpowiednich zbiorów słów. Zbiory te po wygenerowaniu dostępne będą dopóty dopóki nie zmieni się zbiór symboli alfabetu. Zbiór treningowy zawierać będzie wszystkie słowa znad alfabetu o długości mniejszej bądź równej 5 symboli oraz (...!!!...). Zbiór treningowy i testowy są zbiorami rozłącznymi. Zbiór testowy składa się ze słów wygenerowanych według następujących zasad: (...!!!...)
+Utworzenie treningowego i testowego zbioru słów nastąpi poprzez wygenerowanie odpowiednich zbiorów. Będą one dostępne (nie zmienią się) dopóki zbiór symboli alfabetu pozostanie ten sam. Zbiór treningowy zawierać będzie wszystkie słowa nad alfabetem o długości mniejszej bądź równej 5 symboli oraz wariacje bez powtórzeń dla słów o długości 6.\\
+
+Zbiór treningowy i testowy są zbiorami rozłącznymi.\\
+
+Zbiór testowy składać się będzie ze słów będących wariacjami bez powtórzeń dla słów o  długości nie mniejszej niż 7 i nie większej niż maksymalna ilość stanów poszukiwanego automatu. W przypadku mniejszej ilości symboli alfabetu niż wymagałyby tego wariacje następuje konstrukcja nowego, tymczasowego zbioru poprzez powielenie wszystkich symboli alfabetu i dodanie ich do istniejących już symboli. Nowe symbole będą dodatkowo indeksowane numerem oznaczających w której iteracji zostały dodane. Zapewni to ich rozróżnialność podczas konstrukcji zbiorów.\\
+
+Przykład zbioru: {0, 1}. 
+Zbiór po przygotowaniu do utworzenia wariacji bez powtórzeń dla słów długości 6: {0, 1, $0_{1}$, $1_{1}$, $0_{2}$, $1_{2}$}.
+
 
 \subsection{Opis przestrzeni poszukiwania dla algorytmu PSO}
 
-Przestrzeń poszukiwania w algorytmie PSO będą stanowić wszystkie deterministyczne automaty skończone o określonej liczbie stanów, z alfabetem wejściowym równoważnym z alfabetem języka $L$. Zapis cyfrowy każdego automatu można przedstawić jako zbiór macierzy binarnych o wymiarach $|Q|^2$ (gdzie $|Q|$ to ilość stanów automatu). Zbiór ten jest równoliczny ze zbiorem symboli alfabetu automatu (każdemu symbolowi odpowiadać będzie inna macierz). Jeżeli jako dodatkowe założenie przyjmiemy, że w każdym wierszu każdej macierzy znajdować może się tylko jedna jedynka, to wtedy taką macierz traktować możemy jako część tabelki funkcji przejścia automatu, która dla wiersza o numerze i oraz jedynce w kolumnie $j$ odpowiada przejściu ze stanu $q_{i}$ do stanu $q_{j}$ po wczytaniu symbolu przypisanego do tej macierzy. Ponieważ następująca reprezentacja jest nieoptymalna pod względem zużycia pamięci zapis można uprościć do tablicy jednowymiarowej która dla każdego indeksu odpowiadającego numerowi stanu w którym automat znajduje się przed wczytaniem symbolu, przyporządkowuje numer stanu w którym automat znajdzie się po wczytaniu elementu z taśmy.
+Przestrzeń poszukiwania w algorytmie PSO będą stanowić wszystkie deterministyczne automaty skończone o określonej liczbie stanów, z alfabetem wejściowym równoważnym z alfabetem języka $L$. Zapis cyfrowy każdego automatu można przedstawić jako zbiór macierzy binarnych o wymiarach $|Q|^2$ (gdzie $|Q|$ to ilość stanów automatu). Zbiór ten jest równoliczny ze zbiorem symboli alfabetu automatu (każdemu symbolowi odpowiadać będzie inna macierz). Jeżeli jako dodatkowe założenie przyjmiemy, że w każdym wierszu każdej macierzy znajdować może się tylko jedna jedynka, to wtedy taką macierz traktować możemy jako część tabelki funkcji przejścia automatu, która dla wiersza o numerze i oraz jedynce w kolumnie $j$ odpowiada przejściu ze stanu $q_{i}$ do stanu $q_{j}$ po wczytaniu symbolu przypisanego do tej macierzy. Ponieważ następująca reprezentacja jest nieoptymalna pod względem zużycia pamięci zapis można uprościć do tablicy jednowymiarowej która dla każdego indeksu odpowiadającego numerowi stanu w którym automat znajduje się przed wczytaniem symbolu, przyporządkowuje numer stanu w którym automat znajdzie się po wczytaniu elementu z taśmy.\\
 
-Przyjmijmy $d = |\Sigma|$ liczba symboli alfabetu, $f = |Q|$ liczba stanów automatu. Tak więc przestrzeń wszystkich automatów stanowić będą wszystkie możliwe ciągi liczb o długości $d*f$ i wartościach z przedziału $[0, f)$. Cząstki poruszające się w przestrzeni będą przyjmowały pozycje będące reprezentacją tych automatów. Dla każdej cząsteczki jej prędkość definiowana będzie jako $V_{p} = (V_{s1}, V_{s2}, …, V_{ss})$ gdzie $V_{si}$ oznacza prędkość cząstki na płaszczyźnie odpowiadającej symbolowi o numerze $i$, definowanej jako $V_{si} = (V_{c1}, V_{c2}, …, V_{cq})$. $V_{cj}$ reprezentuje tutaj prędkość cząstki dla wiersza numer $j$ w macierzy zdefiniowanej wcześnie jako reprezentacja tabeli funkcji przejścia dla danego symbolu. Tak zdefiniowaną prędkość można (podobnie jak położenie) przedstawić w postaci tablicy jednowymiarowej o długości $d*f$ (gdzie $d$ i $f$ - zdefiniowane wcześniej). Zmiana położenia cząstki następuje więc poprzez dodanie wektora prędkości do wektora położenia tym samym otrzymując nowe położenie.
+Dla przykładu, po zastosowaniu takiej optymalizacji dla tabeli funkcji przejścia 
+\begin{table}[]
+\centering
+\begin{tabular}{c|c|c|c|}
+symbol                   & $q_{1}$ & $q_{2}$ & $q_{3}$ \\ \hline
+\multicolumn{1}{c|}{$q_{1}$} & 0  & 1  & 0  \\ \hline
+\multicolumn{1}{c|}{$q_{2}$} & 1  & 0  & 0  \\ \hline
+\multicolumn{1}{c|}{$q_{3}$} & 0  & 0  & 1  \\ \hline
+\end{tabular}
+\vspace{0.5cm}
+\caption{Przykładowa tabela funkcji prześcia}
+\end{table}
 
-Przeszukiwanie przestrzeni automatów realizowane jest poprzez wygenerowanie pewnej ilości cząstek (nazywanych rojem) poruszających się według określonych zasad i dążących do osiągnięcia postawionego celu. Za cel najczęściej przyjmuje się minimalizację wartości pewnej funkcji nazywanej funkcją celu. W tym projekcie będzie to funkcja $f:A \rightarrow N$ ($A$ - zbiór automatów, $N$ - liczby naturalne) która dla danego automatu zwraca liczbę błędnie zaklasyfikowanych słów. W każdym przebiegu algorytmu ze zbioru cząstek możemy wyróżnić jedną o najlepszym położeniu (global best oznaczamy gbest). Każda cząstka posiadać będzie również informację o swoim dotychczasowym najlepszym wyniku (personal best oznaczamy pbest). Dane te umożliwią wyliczenie nowej wartości prędkości dla każdej cząstki zgodnie ze wzorem: 
+otrzymamy jako wynik wektor [1 0 2].\\
 
-\begin{center}
-$v[] = v[] = c1 * rand() * (pbest[] - present[]) + c2 * rand() * (gbest[] - present[])$
-\end{center}
+Przyjmijmy $d = |\Sigma|$ liczba symboli alfabetu, $f = |Q|$ liczba stanów automatu. Tak więc przestrzeń wszystkich automatów stanowić będą wszystkie możliwe ciągi liczb o długości $d*f$ i wartościach z przedziału $[0, f)$. Cząstki poruszające się w przestrzeni będą przyjmowały pozycje będące reprezentacją tych automatów. Dla każdej cząsteczki jej prędkość definiowana będzie jako $V_{p} = (V_{1}, V_{2}, …, V_{d})$ gdzie $V_{i (1 \leq i \leq d)}$ oznacza prędkość cząstki na płaszczyźnie odpowiadającej symbolowi o numerze $i$, definowanej jako $V_{pi} = (V_{1}, V_{2}, …, V_{f})$. $V_{j (1 \leq j \leq f)}$ reprezentuje tutaj prędkość cząstki dla wiersza numer $j$ w macierzy zdefiniowanej wcześnie jako reprezentacja tabeli funkcji przejścia dla danego symbolu. Tak zdefiniowaną prędkość można (podobnie jak położenie) przedstawić w postaci tablicy jednowymiarowej o długości $d*f$ (gdzie $d$ i $f$ - zdefiniowane wcześniej). Zmiana położenia cząstki następuje więc poprzez dodanie wektora prędkości do wektora położenia tym samym otrzymując nowe położenie.
 
-Zmiana położeń cząstek będzie odbywać się dopóki oba warunki będą spełnione:
+\subsection{Odległość w przeszukiwanej przestrzeni}
+
+Dla tak zdefiniowanej przestrzeni i ciągów liczb długości d*f, które reprezentować będą automaty wprowadzimy metrykę, nazywaną metryką Hamminga. Dla dwóch ciągów $a$ i $b$ z tej przestrzemi odległość Hamminga jest równa liczbie jedynek w słowie $a XOR b$, np. odległość pomiędzy ciągami 10\textbf{0}11\textbf{1}01 i 10\textbf{1}11\textbf{0}01 wynosi 2.
+
+\subsection{Przeszukiwanie przestrzeni w algorytmie PSO}
+
+Przeszukiwanie przestrzeni automatów realizowane jest poprzez wygenerowanie pewnej ilości cząstek (nazywanych rojem) poruszających się według określonych zasad i dążących do osiągnięcia postawionego celu. Za cel najczęściej przyjmuje się minimalizację wartości pewnej funkcji nazywanej funkcją celu. W tym projekcie będzie to funkcja $f:A \rightarrow N$ ($A$ - zbiór automatów, $N$ - liczby naturalne), która dla danego automatu zwraca liczbę błędnie zaklasyfikowanych słów.\\
+
+W trakcie kolejnych kroków zdyskretyzowanego czasu cząstki przemieszczają się do nowych pozycji, symulując adaptację roju do środowiska poszukując optimum. “Liderem” roju zostaje cząstka o najlepszym dotychczas znanym położeniu. Dla każdej cząstki możemy przyporządkować pewnych “sąsiadów”, którymi są wybrane cząstki z roju. Sąsiedzi określani będą raz, na początku obliczeń. “Liderem sąsiadów” dla każdej cząstki jest sąsiad, o najlepszym dotychczas znalezionym położeniu. Położenia cząstek w obszarze przeszukiwania stanowią potencjalne rozwiązania.\\
+
+Algorytm PSO funkcjonuje według następującego schematu:
+
+\begin{enumerate}
+\item Nadanie cząstkom roju losowych położeń.
+\item Dokonanie oceny położenia cząsteczek za pomocą funkcji dopasowania (fitness).
+\item Zmiana zapisu w pamięci cząstek dotycząca najlepszych własnych położeń oraz najlepszych położeń liderów sąsiadów. Wyłonienie lidera roju.
+\item Aktualizacja wektora prędkości każdej cząstki
+
+\begin{displaymath}
+v_{k+1}^i = w_{1k}^i v_{k}^i + w_{2k}^i[c_{1} r_{1k}^i(p_{k}^{li} - x_{k}^i) + c_{2} r_{2k}^i(p_{k}^{g} - x_{k}^i) + c_{3} r_{3k}^i(p_{k}^{ni} - x_{k}^i)] \hspace{15mm} (1)
+\end{displaymath}
+
+\item Aktualizacja położenia każdej cząstki
+
+\begin{displaymath}
+x_{k+1}^i = x_{k}^i + v_{k+1}^i \hspace{15mm} (2)
+\end{displaymath}
+
+gdzie
 
 \begin{itemize}
-\item[•] któraś z cząstek nie osiągnie założonej wartości minimalnej błędu;
+\item[$x_{k}^i$] -- wektor położenia $i$-tej cząstki,
+\item[$v_{k}^i$] -- odpowiedni wektor prędkości,
+\item[$p_{k}^{li}$] -- najlepsze dotąd znalezione położenie $i$-tej cząstki,
+\item[$p_{k}^{ni}$] -- najlepsze dotąd znalezione położenie lidera sąsiadów $i$-tej cząstki,
+\item[$p_{k}^g$] - najlepsze dotąd znalezione położenie lidera roju,
+\item[$w_{1k}^i, w_{2k}^i$] - współczynniki wagowe, określane na poziomie $i$-tej cząstki.
+\end{itemize}
+\end{enumerate}
+
+W powyższych oznaczeniach dolny indeks k określa kolejny krok iteracji. Współczynniki $c_{1}, c_{2}, c_{3}$ są ustalonymi mnożnikami wagowymi. Współczynniki  są liczbami losowymi o rozkładzie równomiernym w przedziale [0, 1]. Generowane są w kolejnych krokach iteracji dla każdej cząstki.\\
+
+Wielkość $w_{1k}^i$ jest mnożnikiem interpretowanym jako współczynnik bezwładności ruchu cząstki. Wartości współczynników wagowych dobierane są w zależności od zachowania się cząstek roju. Jeżeli cząstka przemieściła się do lepszego położenia, czyli nastąpiła poprawa wartości funkcji celu, to w kolejnym kroku wartość $w_{2k}^i$  przyjmuje się jako równą 0, natomiast wartość $w_{1k}^i$ $\geq$ 1, zezwalając na swobodny ruch w tym kierunku i dalsze przyspieszanie cząstki (stan 1). Gdy cząstka nie poprawiła swego dopasowania, wartości obu współczynników przyjmuje się równe 1 i nowe położenie jest określane z wykorzystaniem historii ruchu (stan 2).\\
+
+Punkty 2-5 należy wykonywać w pętli dopóki oba warunki będą spełnione:
+
+\begin{itemize}
+\item[•] któraś z cząstek nie osiągnie założonej wartości minimalnej błędu,
 \item[•] nie zostanie osiągnięta z góry wyznaczona ilość iteracji ruchu.
 \end{itemize}
+
+Jeden przebieg pętli odpowiada krokowi czasowemu dla poruszającego się roju. Wartość kroku czasowego przyjmuje się jako jednostkową.
+Cząstki poruszają się ruchem odcinkowo prostolinijnym. Postać równań (1) i (2) wynika z drugiej zasady dynamiki Newtona, gdzie wypadkowa siła wywołująca przyspieszenie każdej cząstki powstaje wskutek działania sił od “naciągniętych sprężyn” pomiędzy położeniami aktualnym a najlepszymi położeniami: własnym, lidera sąsiada oraz lidera roju. Kolejny wektor prędkości czasu jest wynikiem jej przyspieszenia w kierunku nowego, potencjalnie lepszego położenia, bazując na stale zmieniających się najlepszych wcześniej znanych położeniach.\\
+
+Dla każdej wartości $i$ = 1, 2, 3, …  algorytm PSO uruchamiany będzie w przestrzeni z automatami o $i$ stanach. Warto zwrócić uwagę, że istnieje możliwość znalezienia kilku automatów spełniających warunki zakończenia algorytmu PSO. Aby zminimalizować ryzyko wybrania niewłaściwego automatu, po zakończeniu obliczeń dla każdej wartości parametru $i$ najlepszy automat dla danej ilości stanów będzie testowany na zbiorze testowym. Ostateczna decyzja wyboru najlepszego rozwiązania podjęta będzie na podstawie uzyskanej wartości funkcji celu na tym zbiorze.
 
 \end{document}
