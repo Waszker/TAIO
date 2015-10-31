@@ -1,4 +1,6 @@
-﻿namespace TAIO.PSO
+﻿using System;
+
+namespace TAIO.PSO
 {
     /// <summary>
     /// Class representing particle in PSO algorithm.
@@ -36,8 +38,17 @@
 
         private void UpdateVelocity(Position globalBestPosition, int c1, int c2, Position localBestPosition = null)
         {
-            // TODO: Change that
-            _velocity = null;
+            // TODO: Refactor this method
+            Random r = new Random();
+            Position result1 = PersonalBestPosition.Substract(Position);
+            Position result2 = globalBestPosition.Substract(Position);
+            result1.Multiply(r.NextDouble() * c1);
+            result2.Multiply(r.NextDouble() * c2);
+
+            Velocity velocity1 = result1.ConvertToVelocity();
+            Velocity velocity2 = result2.ConvertToVelocity();
+            velocity1.Add(velocity2);
+            _velocity.Add(velocity1);
         }
     }
 }

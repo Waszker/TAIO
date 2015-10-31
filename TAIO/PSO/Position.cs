@@ -39,11 +39,69 @@ namespace TAIO.PSO
             UpdateTargetFunctionValue();
         }
 
+        /// <summary>
+        /// Compares Position object's function value to other.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
         public int CompareTo(Position x)
         {
             return TargetFunctionValue.CompareTo(x.TargetFunctionValue);
         }
 
+        /// <summary>
+        /// Multiplies all values by certain value. Used in PSO Algorithm.
+        /// </summary>
+        /// <param name="value"></param>
+        public void Multiply(double value)
+        {
+            for (int i = 0; i < _onePositions.GetLength(0); i++)
+                for (int j = 0; j < _onePositions.GetLength(1); j++)
+                    _onePositions[i, j] = (int)(_onePositions[i, j] * value);
+        }
+
+        /// <summary>
+        /// Returns Velocity object constructed from position. This object "looks" the same - vectors are identical.
+        /// </summary>
+        /// <returns></returns>
+        public Velocity ConvertToVelocity()
+        {
+            Velocity result = new Velocity(_onePositions.GetLength(0), _onePositions.GetLength(1));
+            for (int i = 0; i < result.Velocities.Length; i++)
+            {
+                for(int j = 0; j < _onePositions.GetLength(1); j++)
+                {
+                    result.Velocities[i].PVelocities[j] = _onePositions[i, j];
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Returns new vector being the result of substraction.
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
+        public Position Substract(Position position)
+        {
+            if (position._onePositions.GetLength(0) != _onePositions.GetLength(0) || position._onePositions.GetLength(1) != _onePositions.GetLength(1))
+                throw new ArgumentException("Both positions should belong to the space with equal number of dimensions.");
+
+            Position result = new Position(_onePositions.GetLength(0), _onePositions.GetLength(1));
+            for (int i = 0; i < _onePositions.GetLength(0); i++)
+                for (int j = 0; j < _onePositions.GetLength(1); j++)
+                    result._onePositions[i, j] = _onePositions[i, j] - position._onePositions[i, j];
+
+            return result;
+        }
+
+        /// <summary>
+        /// Returns deep clone of provided object.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public static T DeepClone<T>(T obj)
         {
             using (var ms = new MemoryStream())
