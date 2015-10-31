@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using TAIO.Automata;
+using TAIO.Parser;
 
 
 namespace TAIO
@@ -33,15 +33,17 @@ namespace TAIO
 
         private void uploadFileButton_Click(object sender, EventArgs e)
         {
-            OpenFileDialog theDialog = new OpenFileDialog();
-            theDialog.Title = "Open Text File";
-            theDialog.Filter = "TXT files|*.txt";
-            theDialog.InitialDirectory = @"C:\";
+            OpenFileDialog theDialog = new OpenFileDialog
+            {
+                Title = @"Open Text File",
+                Filter = @"TXT files|*.txt",
+                InitialDirectory = @"C:\"
+            };
             if (theDialog.ShowDialog() == DialogResult.OK)
             {
                 string filename = theDialog.FileName;              
                 string[][] functionTables = null;
-                string[] alphabetLetters = InputFileParser.Parse(filename,
+                string[] alphabetLetters = new ImposedInputFileParser().Parse(filename,
                         out functionTables);
                 automaton = new Automata.Automaton(alphabetLetters, functionTables);
 

@@ -1,15 +1,16 @@
 ﻿using System;
+using System.Linq;
 
 namespace TAIO.PSO
 {
     /// <summary>
     /// Class representing particle in PSO algorithm.
     /// </summary>
-    class Particle
+    public class Particle
     {
         public Position PersonalBestPosition { get; private set; }
         private Velocity _velocity;
-        public Position Position { get; }
+        public Position Position { get; set; }
 
         public Particle(int symbolCount, int stateCount)
         {
@@ -25,7 +26,33 @@ namespace TAIO.PSO
         /// <returns></returns>
         public double DistanceTo(Particle particle)
         {
-            throw new System.NotImplementedException("This method will be implemented by Paweł Kużmicz ^_^");
+            // Construct words
+            bool[] currentParticleWord = ConstructWord(Position.OnePositions);
+            bool[] anotherParticleWord = ConstructWord(particle.Position.OnePositions);
+
+            return currentParticleWord.Where((t, i) => t != anotherParticleWord[i]).Count();
+        }
+
+        private bool[] ConstructWord(int[,] onePositions)
+        {
+            // Dimentions size
+            int alphabetLength = onePositions.GetLength(0);
+            int statesNumber = onePositions.GetLength(1);
+
+            // Result word
+            bool[] word = new bool[(int) (alphabetLength * Math.Pow(statesNumber, 2))];
+
+            // onePositions.GetLength(0) = number of alphabet symbols
+            for (int i = 0; i < onePositions.GetLength(0); i++)
+            {
+                for (int j = 0; j < onePositions.GetLength(1); j++)
+                {
+                    int position = (int) (i*Math.Pow(statesNumber, 2) + statesNumber*j + onePositions[i, j]);
+                    word[position] = true;
+                }
+            }
+
+            return word;
         }
 
         public void MoveParticle(Position globalBestPosition, int c1, int c2, Position localBestPosition = null)

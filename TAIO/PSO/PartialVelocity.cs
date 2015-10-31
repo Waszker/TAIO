@@ -5,7 +5,7 @@ namespace TAIO.PSO
     /// <summary>
     /// Class representing velocity at the plane corresponding to one alphabet symbol.
     /// </summary>
-    class PartialVelocity
+    public class PartialVelocity
     {
         // Velocities for every state on symbol's plane
         public int[] PVelocities { get; }

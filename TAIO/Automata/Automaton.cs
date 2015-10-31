@@ -14,7 +14,11 @@ namespace TAIO.Automata
     /// </summary>
     class Automaton
     {
-        private List<State> _states;
+        //TODO: Automaton class needs to be changed
+
+        private readonly List<State> _states;
+
+        #region Constructors
 
         /// <summary>
         /// Takes alphabet letters as string array convertible to char array and function table for each state.
@@ -23,7 +27,27 @@ namespace TAIO.Automata
         /// <param name="functionTables"></param>
         public Automaton(string[] alphabetLetters, string[][] functionTables)
         {
-            _states = new List<State>();
+            _states = CreateAutomaton(alphabetLetters, functionTables);
+        }
+
+        /// <summary>
+        /// Takes Position object as parameter and creates instance of Automaton class
+        /// </summary>
+        /// <param name="bestPositionSoFar"></param>
+        public Automaton(Position bestPositionSoFar)
+        {
+            int alphabetLength = bestPositionSoFar.AlphabetLength;
+            string[][] functionsTable = new string[alphabetLength][];
+
+            for (int i = 0; i < alphabetLength; i++)
+                functionsTable[i] = Array.ConvertAll(bestPositionSoFar.OnePositions.SliceDim(i), input => input.ToString());
+
+            _states = CreateAutomaton(new string[alphabetLength], functionsTable);
+        }
+
+        private List<State> CreateAutomaton(string[] alphabetLetters, string[][] functionTables)
+        {
+            List<State> states = new List<State>();
             char[] alphabet = new char[alphabetLetters.Length];
 
             // Converting string alphabet to char array
@@ -38,14 +62,13 @@ namespace TAIO.Automata
                 for (int j = 0; j < function.Length; j++)
                     int.TryParse(function[j], out stateFunction[j]);
 
-                _states.Add(new State(alphabet, stateFunction));
+                states.Add(new State(alphabet, stateFunction));
             }
+
+            return states;
         }
 
-        public Automaton(Position bestPositionSoFar)
-        {
-            throw new NotImplementedException("This will be handled by Paweł ^_^");
-        }
+        #endregion
 
         /// <summary>
         /// Returns number of active state after computations.
@@ -72,7 +95,6 @@ namespace TAIO.Automata
             }
         }
 
-
         public string GetGraph(string automatonName)
         {
             AdjacencyGraph<int, TaggedEdge<int,int>> g = new AdjacencyGraph<int, TaggedEdge<int, int>>(true);
@@ -92,6 +114,5 @@ namespace TAIO.Automata
             string output = graphviz.Generate(new FileDotEngine(), automatonName);
             return output;
         }
-        
     }
 }

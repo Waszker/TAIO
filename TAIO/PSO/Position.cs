@@ -9,18 +9,24 @@ namespace TAIO.PSO
     /// Represents position of particle inside the system.
     /// </summary>
     [Serializable]
-    class Position : IComparable<Position>
+    public class Position : IComparable<Position>
     {
+        #region Properties
+
         /// <summary>
         /// For each symbol we store information about its array function in form of a vector where we put number of next state.
         /// E.g. [a] -> [2][1][0]  :: for symbol 'a' while being in state q0 we move to state q2
         /// </summary>
-        private int[,] _onePositions;
+        public int[,] OnePositions { get; set; }
+        public int AlphabetLength { get; }
         public int TargetFunctionValue { get; set; }
+
+        #endregion
 
         public Position(int numberOfAutomatonSymbols, int numberOfAutomatonStates)
         {
-            _onePositions = new int[numberOfAutomatonSymbols, numberOfAutomatonStates];
+            AlphabetLength = numberOfAutomatonSymbols;
+            OnePositions = new int[numberOfAutomatonSymbols, numberOfAutomatonStates];
             UpdateTargetFunctionValue();
         }
 
@@ -33,7 +39,7 @@ namespace TAIO.PSO
             // Updating position is in fact moving "ones" inside array
             for (int symbol = 0; symbol < velocity.Velocities.Length; symbol++)
                 for (int state = 0; state < velocity.Velocities[symbol].PVelocities.Length; state++)
-                    _onePositions[symbol, state] = (_onePositions[symbol, state] + velocity.Velocities[symbol].PVelocities[state]) % _onePositions.GetLength(1);
+                    OnePositions[symbol, state] = (OnePositions[symbol, state] + velocity.Velocities[symbol].PVelocities[state]) % OnePositions.GetLength(1);
 
             // Update target function value
             UpdateTargetFunctionValue();
@@ -55,9 +61,9 @@ namespace TAIO.PSO
         /// <param name="value"></param>
         public void Multiply(double value)
         {
-            for (int i = 0; i < _onePositions.GetLength(0); i++)
-                for (int j = 0; j < _onePositions.GetLength(1); j++)
-                    _onePositions[i, j] = (int)(_onePositions[i, j] * value);
+            for (int i = 0; i < OnePositions.GetLength(0); i++)
+                for (int j = 0; j < OnePositions.GetLength(1); j++)
+                    OnePositions[i, j] = (int)(OnePositions[i, j] * value);
         }
 
         /// <summary>
@@ -66,12 +72,12 @@ namespace TAIO.PSO
         /// <returns></returns>
         public Velocity ConvertToVelocity()
         {
-            Velocity result = new Velocity(_onePositions.GetLength(0), _onePositions.GetLength(1));
+            Velocity result = new Velocity(OnePositions.GetLength(0), OnePositions.GetLength(1));
             for (int i = 0; i < result.Velocities.Length; i++)
             {
-                for(int j = 0; j < _onePositions.GetLength(1); j++)
+                for(int j = 0; j < OnePositions.GetLength(1); j++)
                 {
-                    result.Velocities[i].PVelocities[j] = _onePositions[i, j];
+                    result.Velocities[i].PVelocities[j] = OnePositions[i, j];
                 }
             }
 
@@ -85,13 +91,13 @@ namespace TAIO.PSO
         /// <returns></returns>
         public Position Substract(Position position)
         {
-            if (position._onePositions.GetLength(0) != _onePositions.GetLength(0) || position._onePositions.GetLength(1) != _onePositions.GetLength(1))
+            if (position.OnePositions.GetLength(0) != OnePositions.GetLength(0) || position.OnePositions.GetLength(1) != OnePositions.GetLength(1))
                 throw new ArgumentException("Both positions should belong to the space with equal number of dimensions.");
 
-            Position result = new Position(_onePositions.GetLength(0), _onePositions.GetLength(1));
-            for (int i = 0; i < _onePositions.GetLength(0); i++)
-                for (int j = 0; j < _onePositions.GetLength(1); j++)
-                    result._onePositions[i, j] = _onePositions[i, j] - position._onePositions[i, j];
+            Position result = new Position(OnePositions.GetLength(0), OnePositions.GetLength(1));
+            for (int i = 0; i < OnePositions.GetLength(0); i++)
+                for (int j = 0; j < OnePositions.GetLength(1); j++)
+                    result.OnePositions[i, j] = OnePositions[i, j] - position.OnePositions[i, j];
 
             return result;
         }

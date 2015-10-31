@@ -5,7 +5,7 @@ namespace TAIO.PSO
     /// <summary>
     /// Represents velocity in machine space.
     /// </summary>
-    class Velocity
+    public class Velocity
     {
         public PartialVelocity[] Velocities { get; }
 

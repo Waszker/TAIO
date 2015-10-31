@@ -86,7 +86,10 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="InputFileParser.cs" />
+    <Compile Include="ArrayExtension.cs" />
+    <Compile Include="Parser\ImposedInputFileParser.cs" />
+    <Compile Include="Parser\InputFileParser.cs" />
+    <Compile Include="Parser\IParser.cs" />
     <Compile Include="PictureWindow.cs">
       <SubType>Form</SubType>
     </Compile>

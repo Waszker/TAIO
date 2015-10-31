@@ -1,20 +1,30 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
-namespace TAIO
+namespace TAIO.Parser
 {
     /// <summary>
     /// Implementation of input file parser
     /// </summary>
-    abstract class InputFileParser
+    public class InputFileParser : IParser
     {
         /// <summary>
         /// Returns data needed for automaton construction
         /// </summary>
         /// <param name="path">Input file path</param>
         /// <param name="functionTables"></param>
-        public static string[] Parse(string path, out string[][] functionTables)
+        public string[] Parse(string path, out string[][] functionTables)
         {
-            string[] inputFileLines = File.ReadAllLines(path);
+            string[] inputFileLines = null;
+
+            try
+            {
+                inputFileLines = File.ReadAllLines(path);
+            }
+            catch (Exception ex)
+            {
+                throw new IOException(ex.Message);
+            }
 
             // Get states number
             int statesNumber = inputFileLines.Length - 1;
