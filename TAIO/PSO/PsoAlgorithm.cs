@@ -7,6 +7,9 @@ using TAIO.Automata;
 
 namespace TAIO.PSO
 {
+    /// <summary>
+    /// Class needed for PSO algorithm, solving problem of finding best automaton within space of all automatons with certain number of states.
+    /// </summary>
     class PsoAlgorithm
     {
         private double _minErrorLevel;
@@ -15,6 +18,14 @@ namespace TAIO.PSO
         private int _alphabetCount;
         private Particle[] _particles;
 
+        /// <summary>
+        /// Creates instance using provided information.
+        /// </summary>
+        /// <param name="minErrorLevel"></param>
+        /// <param name="maxIterationCount"></param>
+        /// <param name="maxStateCount"></param>
+        /// <param name="alphabetCount"></param>
+        /// <param name="particlesNumber"></param>
         public PsoAlgorithm(double minErrorLevel, int maxIterationCount, int maxStateCount, int alphabetCount, int particlesNumber)
         {
             _minErrorLevel = minErrorLevel;
@@ -24,52 +35,69 @@ namespace TAIO.PSO
             _particles = new Particle[particlesNumber];
         }
 
+        /// <summary>
+        /// Runs PSO algorithm and returns best, found automaton.
+        /// </summary>
         public Automaton RunAlgorithm()
         {
-            Position bestPositionSoFar = null;
-            int lowestErrorSoFar = int.MaxValue;
+            List<Automaton> automatons = new List<Automaton>();
 
             for (int numberOfStates = 1; numberOfStates < _maxStateCount; numberOfStates++)
             {
-                int c1, c2;
-                int iteration = 0, errors = int.MaxValue;
-                GenerateParticles(numberOfStates);
-                Position globalBest;
-
-                // Possible changes
-                c1 = c2 = 2;
-
-                do
-                {
-                    // Update global best
-                    globalBest = _particles[0].PersonalBestPosition;
-                    foreach (Particle p in _particles)
-                        if (p.PersonalBestPosition.CompareTo(globalBest) == 1)
-                            globalBest = p.PersonalBestPosition;
-
-                    // Move particles and check errors
-                    foreach (Particle p in _particles)
-                    {
-                        p.MoveParticle(globalBest, c1, c2);
-                        int currentErrors = TargetFunction.GetFunctionValue(p.Position);
-                        if (currentErrors < errors) errors = currentErrors;
-                        if(errors < lowestErrorSoFar)
-                        {
-                            lowestErrorSoFar = errors;
-                            bestPositionSoFar = Position.DeepClone(p.Position);
-                        }
-                    }
-
-                } while (iteration < _maxIterationCount || errors < _minErrorLevel);
+                automatons.Add(GetBestAutomatonFromSpace(numberOfStates));
             }
 
-            return new Automaton(bestPositionSoFar);
+            return EvaluateBestAutomaton(automatons);
         }
 
         private void GenerateParticles(int stateCount)
         {
             for (int i = 0; i < _particles.Length; i++)
                 _particles[i] = new Particle(_alphabetCount, stateCount);
+        }
+
+        private Automaton GetBestAutomatonFromSpace(int numberOfStates)
+        {
+            Position bestPositionSoFar = null;
+            int lowestErrorSoFar = int.MaxValue;
+            int c1, c2;
+            int iteration = 0, errors = int.MaxValue;
+            GenerateParticles(numberOfStates);
+            Position globalBest;
+
+            // Possible changes
+            c1 = c2 = 2;
+
+            do
+            {
+                // Update global best
+                globalBest = _particles[0].PersonalBestPosition;
+                foreach (Particle p in _particles)
+                    if (p.PersonalBestPosition.CompareTo(globalBest) == 1)
+                        globalBest = p.PersonalBestPosition;
+
+                // Move particles and check errors
+                foreach (Particle p in _particles)
+                {
+                    p.MoveParticle(globalBest, c1, c2);
+                    int currentErrors = TargetFunction.GetFunctionValue(p.Position);
+                    if (currentErrors < errors) errors = currentErrors;
+                    if (errors < lowestErrorSoFar)
+                    {
+                        lowestErrorSoFar = errors;
+                        bestPositionSoFar = Position.DeepClone(p.Position);
+                    }
+                }
+
+            } while (iteration < _maxIterationCount || errors < _minErrorLevel);
+
+            return new Automaton(bestPositionSoFar);
+        }
+
+        private Automaton EvaluateBestAutomaton(List<Automaton> automatons)
+        {
+            // TODO: Get best automaton by using test words
+            return null;
         }
     }
 }
