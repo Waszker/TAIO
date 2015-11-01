@@ -17,6 +17,7 @@ namespace TAIO.Automata
         //TODO: Automaton class needs to be changed
 
         private readonly List<State> _states;
+        private readonly int alphabetLen;
 
         #region Constructors
 
@@ -28,6 +29,7 @@ namespace TAIO.Automata
         public Automaton(string[] alphabetLetters, string[][] functionTables)
         {
             _states = CreateAutomaton(alphabetLetters, functionTables);
+            alphabetLen = alphabetLetters.Length;
         }
 
         /// <summary>
@@ -98,14 +100,13 @@ namespace TAIO.Automata
         public string GetGraph(string automatonName)
         {
             AdjacencyGraph<int, TaggedEdge<int,int>> g = new AdjacencyGraph<int, TaggedEdge<int, int>>(true);
-
             for (int i = 0; i < _states.Count; i++)
                 g.AddVertex(i);
 
             for (int i = 0; i < _states.Count; i++)
             {
-                g.AddEdge(new TaggedEdge<int, int>(i, _states.ElementAt(i).GetNextStateNumber('0'), 0));
-                g.AddEdge(new TaggedEdge<int, int>(i, _states.ElementAt(i).GetNextStateNumber('1'), 1));
+                for(int j=0;j< alphabetLen; j++)
+                    g.AddEdge(new TaggedEdge<int, int>(i, _states.ElementAt(i).GetNextStateNumber(Convert.ToChar(j+48)), j));
             }
 
             GraphvizAlgorithm<int, TaggedEdge<int, int>> graphviz = new GraphvizAlgorithm<int, TaggedEdge<int, int>>(g);
