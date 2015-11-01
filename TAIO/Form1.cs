@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows.Forms;
 using TAIO.Automata;
 using TAIO.Parser;
+using TAIO.PSO;
 
 
 namespace TAIO
@@ -46,6 +47,11 @@ namespace TAIO
                 string[] alphabetLetters = new ImposedInputFileParser().Parse(filename,
                         out functionTables);
                 automaton = new Automata.Automaton(alphabetLetters, functionTables);
+
+                Position position = new Position(2, 3) { OnePositions = new[,] { { 1, 2, 1 }, { 2, 2, 1 } } };
+                Automaton testAutomaton = new Automaton(position);
+
+                Type automatonType = testAutomaton.GetType();
 
                 showInputPictureButton.Enabled = true;
                 findResultButton.Enabled = true;

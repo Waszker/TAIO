@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using QuickGraph;
 using QuickGraph.Graphviz;
@@ -12,7 +11,7 @@ namespace TAIO.Automata
     /// <summary>
     /// Class representing finite, deterministic automaton.
     /// </summary>
-    class Automaton
+    public class Automaton
     {
         //TODO: Automaton class needs to be changed
 
@@ -38,13 +37,28 @@ namespace TAIO.Automata
         /// <param name="bestPositionSoFar"></param>
         public Automaton(Position bestPositionSoFar)
         {
-            int alphabetLength = bestPositionSoFar.AlphabetLength;
-            string[][] functionsTable = new string[alphabetLength][];
+            int alphabetLength = bestPositionSoFar.OnePositions.GetLength(0);
+            int numberOfStates = bestPositionSoFar.OnePositions.GetLength(1);
 
-            for (int i = 0; i < alphabetLength; i++)
-                functionsTable[i] = Array.ConvertAll(bestPositionSoFar.OnePositions.SliceDim(i), input => input.ToString());
+            string[][] functionsTable = new string[numberOfStates][];
 
-            _states = CreateAutomaton(new string[alphabetLength], functionsTable);
+            #region Temp Structure
+
+            List<string>[] functions = new List<string>[numberOfStates];
+
+            for (int i = 0; i < numberOfStates; i++)
+                functions[i] = new List<string>();
+
+            #endregion
+
+            for (int i = 0; i < bestPositionSoFar.OnePositions.GetLength(1); i++)
+                for (int j = 0; j < bestPositionSoFar.OnePositions.GetLength(0); j++)
+                    functions[i].Add(bestPositionSoFar.OnePositions[j, i].ToString());
+
+            for (int i = 0; i < numberOfStates; i++)
+                functionsTable[i] = functions[i].ToArray();
+
+            _states = CreateAutomaton(Utils.EnumerateAlphabetSymbols(alphabetLength), functionsTable);
         }
 
         private List<State> CreateAutomaton(string[] alphabetLetters, string[][] functionTables)

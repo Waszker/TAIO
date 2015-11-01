@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace TAIO.Parser
@@ -40,9 +41,8 @@ namespace TAIO.Parser
                 string[] states = inputFileLines[i + 1].Split(',');
                 functionTables[i] = states;
             }
-
-            // We don't have information about letters
-            return new string[numberOfAlphabetLetters];
+            
+            return Utils.EnumerateAlphabetSymbols(numberOfAlphabetLetters);
         }
     }
 }
