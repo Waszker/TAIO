@@ -18,14 +18,14 @@ namespace TAIO.PSO
         /// E.g. [a] -> [2][1][0]  :: for symbol 'a' while being in state q0 we move to state q2
         /// </summary>
         public int[,] OnePositions { get; set; }
-        public int AlphabetLength { get; }
+        public int NumberOfStates { get; }
         public int TargetFunctionValue { get; set; }
 
         #endregion
 
         public Position(int numberOfAutomatonSymbols, int numberOfAutomatonStates)
         {
-            AlphabetLength = numberOfAutomatonSymbols;
+            NumberOfStates = numberOfAutomatonStates;
             OnePositions = new int[numberOfAutomatonSymbols, numberOfAutomatonStates];
             UpdateTargetFunctionValue();
         }
