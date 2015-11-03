@@ -31,7 +31,8 @@ namespace TAIO.PSO
 
             for (int i = 0; i < numberOfAutomatonSymbols; i++)
                 for (int j = 0; j < numberOfAutomatonStates; j++)
-                    OnePositions[i, j] = (new Random(i * j + i + j + (j % 2) + seed)).Next(numberOfAutomatonStates);
+                    OnePositions[i, j] = (new Random((int)DateTime.Now.Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds *
+                        (i * j + i + j + (j % 2) + seed))).Next(numberOfAutomatonStates);
 
             UpdateTargetFunctionValue();
         }
@@ -46,7 +47,7 @@ namespace TAIO.PSO
             for (int symbol = 0; symbol < velocity.Velocities.Length; symbol++)
                 for (int state = 0; state < velocity.Velocities[symbol].PVelocities.Length; state++)
                     OnePositions[symbol, state] = Math.Abs(OnePositions[symbol, state] +
-                                                   velocity.Velocities[symbol].PVelocities[state])%
+                                                   velocity.Velocities[symbol].PVelocities[state]) %
                                                   OnePositions.GetLength(1);
 
             // Update target function value
@@ -71,7 +72,7 @@ namespace TAIO.PSO
         {
             for (int i = 0; i < OnePositions.GetLength(0); i++)
                 for (int j = 0; j < OnePositions.GetLength(1); j++)
-                    OnePositions[i, j] = (int) (OnePositions[i, j]*value);
+                    OnePositions[i, j] = (int)(OnePositions[i, j] * value);
         }
 
         /// <summary>
@@ -125,7 +126,7 @@ namespace TAIO.PSO
                 formatter.Serialize(ms, obj);
                 ms.Position = 0;
 
-                return (T) formatter.Deserialize(ms);
+                return (T)formatter.Deserialize(ms);
             }
         }
 

@@ -40,6 +40,10 @@ namespace TAIO.PSO
                 PVelocities[i] = partialVelocityValues[i];
         }
 
+        /// <summary>
+        /// Adds one PartialVelocity instance to other.
+        /// </summary>
+        /// <param name="pVelocity"></param>
         public void Add(PartialVelocity pVelocity)
         {
             if(PVelocities.Length != pVelocity.PVelocities.Length)
