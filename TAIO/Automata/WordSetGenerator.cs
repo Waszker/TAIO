@@ -6,7 +6,7 @@ namespace TAIO.Automata
     public class WordSetGenerator
     {
         private readonly char[] _letters;
-        public List<string> Words { get; }
+        public List<string> Words { get; set; }
 
         public WordSetGenerator(char[] letters)
         {
