@@ -7,7 +7,7 @@ namespace TAIO.PSO
     /// </summary>
     public class Velocity
     {
-        public PartialVelocity[] Velocities { get; }
+        public PartialVelocity[] Velocities { get; set; }
 
         public Velocity(int numberOfAutomatonSymbols, int numberOfAutomatonStates)
         {

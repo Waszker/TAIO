@@ -10,19 +10,26 @@ namespace TAIO.Automata
     class TargetFunction
     {
         private static Automaton _secretAutomaton;
+        private static List<string> _trainingSet;
+        private static List<string> _testSet;
 
-        public TargetFunction(Automaton automaton)
+        public TargetFunction(Automaton automaton, List<string> trainingSet, List<string> testSet) 
         {
             _secretAutomaton = automaton;
+            _trainingSet = trainingSet;
+            _testSet = testSet;
         }
         
         public static int GetFunctionValue(Position position)
         {
-            // TODO: 
-            // 1) Generate Automaton
-            // 2) Foreach word -> check if compatible
-            // 3) Return number of errors
-            return 0;
+            int errorNumber = 0;
+            Automaton foundAutomaton = new Automaton(position);
+
+            foreach (string word in _trainingSet)
+                if (_secretAutomaton.GetFinalState(word) != foundAutomaton.GetFinalState(word))
+                    errorNumber++;
+
+            return errorNumber;
         }
     }
 }
