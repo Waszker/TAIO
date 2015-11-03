@@ -15,6 +15,7 @@ namespace TAIO
     public partial class Form1 : Form
     {
         private Automaton automaton;
+        private Automaton foundAutomaton;
         private string[] alphabetLetters;
 
         public Form1()
@@ -70,8 +71,24 @@ namespace TAIO
         {
             WordSetGenerator w = new WordSetGenerator(alphabetLetters);
             w.GenerateRecusivelyVariationsWithRepeats(new StringBuilder(), 0, 5);
-            w.GenerateRecusivelyVariationsWithRepeats(new StringBuilder(), 6, 10);
+            w.GenerateRecusivelyVariationsWithoutRepeats(new StringBuilder(), 6, 10);
             TargetFunction targetFunction = new TargetFunction(automaton, w.TrainingWords, w.TestingWords);
+
+            PsoAlgorithm pso = new PsoAlgorithm((double)min_err_level.Value, (int)max_iteration_count.Value, (int)max_state_number.Value, alphabetLetters.Length, 100);
+            foundAutomaton = pso.RunAlgorithm();
+            showOutputPictureButton.Enabled = true;
+
+        }
+
+        private void showOutputPictureButton_Click(object sender, EventArgs e)
+        {
+            foundAutomaton.GetGraph("OutputAutomaton");
+            System.Threading.Thread.Sleep(1000); //CHANGE THIS SHIT
+            if (File.Exists("OutputAutomaton.jpg"))
+            {
+                PictureWindow pw = new PictureWindow("Output Automaton", "OutputAutomaton.jpg");
+                pw.Show();
+            }
         }
     }
 }

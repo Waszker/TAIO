@@ -211,6 +211,7 @@
             this.showOutputPictureButton.TabIndex = 10;
             this.showOutputPictureButton.Text = "Show output automaton";
             this.showOutputPictureButton.UseVisualStyleBackColor = true;
+            this.showOutputPictureButton.Click += new System.EventHandler(this.showOutputPictureButton_Click);
             // 
             // findResultButton
             // 
