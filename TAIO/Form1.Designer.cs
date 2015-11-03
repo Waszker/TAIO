@@ -224,6 +224,7 @@
             this.findResultButton.TabIndex = 11;
             this.findResultButton.Text = "Find result automaton";
             this.findResultButton.UseVisualStyleBackColor = true;
+            this.findResultButton.Click += new System.EventHandler(this.findResultButton_Click);
             // 
             // progressBar1
             // 

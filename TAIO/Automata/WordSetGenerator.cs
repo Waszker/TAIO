@@ -5,19 +5,15 @@ namespace TAIO.Automata
 {
     public class WordSetGenerator
     {
-        private readonly char[] _letters;
-        public List<string> Words { get; set; }
+        private readonly string[] _letters;
+        public List<string> TestingWords { get; set; }
+        public List<string> TrainingWords { get; set; }
 
-        public WordSetGenerator(char[] letters)
+        public WordSetGenerator(string[] letters)
         {
             _letters = letters;
-            Words = new List<string>();
-        }
-
-        public void GenerateWords(int maxLength)
-        {
-            StringBuilder stringBuilder = new StringBuilder();
-            GenerateRecusivelyVariationsWithRepeats(stringBuilder, 0, 4);
+            TrainingWords = new List<string>();
+            TestingWords = new List<string>();
         }
 
         public void GenerateRecusivelyVariationsWithRepeats(StringBuilder builder, int recursionLevel, int maxRecursionLevel)
@@ -25,9 +21,9 @@ namespace TAIO.Automata
             if (recursionLevel == maxRecursionLevel) return;
             for(int i = 0; i < _letters.Length; i++)
             {
-                char letter = _letters[i];
+                string letter = _letters[i];
                 builder.Append(letter);
-                Words.Add(builder.ToString());
+                TrainingWords.Add(builder.ToString());
                 GenerateRecusivelyVariationsWithRepeats(builder, recursionLevel+1, maxRecursionLevel);
                 builder.Remove(builder.Length - 1, 1);
             }
@@ -38,11 +34,11 @@ namespace TAIO.Automata
             if (recursionLevel == maxRecursionLevel) return;
             for (int i = 0; i < _letters.Length; i++)
             {
-                char letter = _letters[i];
-                if (!builder.ToString().Contains(letter + ""))
+                string letter = _letters[i];
+                if (!builder.ToString().Contains(letter))
                 {
                     builder.Append(letter);
-                    Words.Add(builder.ToString());
+                    TestingWords.Add(builder.ToString());
                     GenerateRecusivelyVariationsWithoutRepeats(builder, recursionLevel + 1, maxRecursionLevel);
                     builder.Remove(builder.Length - 1, 1);
                 }

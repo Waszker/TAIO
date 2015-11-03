@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using TAIO.Automata;
 using TAIO.Parser;
@@ -14,6 +15,7 @@ namespace TAIO
     public partial class Form1 : Form
     {
         private Automaton automaton;
+        private string[] alphabetLetters;
 
         public Form1()
         {
@@ -44,7 +46,7 @@ namespace TAIO
             {
                 string filename = theDialog.FileName;              
                 string[][] functionTables = null;
-                string[] alphabetLetters = new ImposedInputFileParser().Parse(filename,
+                alphabetLetters = new ImposedInputFileParser().Parse(filename,
                         out functionTables);
                 automaton = new Automata.Automaton(alphabetLetters, functionTables);
 
@@ -67,6 +69,14 @@ namespace TAIO
                 PictureWindow pw = new PictureWindow("Input Automaton", "InputAutomaton.jpg");
                 pw.Show();
             }
+        }
+
+        private void findResultButton_Click(object sender, EventArgs e)
+        {
+            WordSetGenerator w = new WordSetGenerator(alphabetLetters);
+            w.GenerateRecusivelyVariationsWithRepeats(new StringBuilder(), 0, 5);
+            w.GenerateRecusivelyVariationsWithRepeats(new StringBuilder(), 6, 10);
+            TargetFunction targetFunction = new TargetFunction(automaton, w.TrainingWords, w.TestingWords);
         }
     }
 }

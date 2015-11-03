@@ -9,11 +9,11 @@ namespace Tests
         [TestMethod]
         public void GenerateVariationsTest()
         {
-            char[] letters = { 'A', 'B', 'C' };
+            string[] letters = { "A", "B", "C" };
             WordSetGenerator wordSetGenerator = new WordSetGenerator(letters);
             int maxLength = 3;
             wordSetGenerator.GenerateRecusivelyVariationsWithRepeats(new System.Text.StringBuilder(), 0, maxLength);
-            var words = wordSetGenerator.Words;
+            var words = wordSetGenerator.TrainingWords;
             int expectedAmount = 0;
             int amountOfLetters = letters.Length;
             int temp = 1;
@@ -28,11 +28,11 @@ namespace Tests
         [TestMethod]
         public void GenerateVariationsWithoutRepetTest()
         {
-            char[] letters = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' };
+            string[] letters = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
             WordSetGenerator wordSetGenerator = new WordSetGenerator(letters);
             int maxLength = 10;
             wordSetGenerator.GenerateRecusivelyVariationsWithoutRepeats(new System.Text.StringBuilder(), 0, maxLength);
-            var words = wordSetGenerator.Words;
+            var words = wordSetGenerator.TestingWords;
             int expected = 0;
             int amountOfLetters = letters.Length;
             int temp = 1;
