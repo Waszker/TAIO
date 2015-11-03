@@ -17,10 +17,10 @@ namespace TAIO.Automata
         public void GenerateWords(int maxLength)
         {
             StringBuilder stringBuilder = new StringBuilder();
-            GenerateRecusivelyWords(stringBuilder, 0, 4);
+            GenerateRecusivelyVariationsWithRepeats(stringBuilder, 0, 4);
         }
 
-        public void GenerateRecusivelyWords(StringBuilder builder, int recursionLevel, int maxRecursionLevel)
+        public void GenerateRecusivelyVariationsWithRepeats(StringBuilder builder, int recursionLevel, int maxRecursionLevel)
         {
             if (recursionLevel == maxRecursionLevel) return;
             for(int i = 0; i < _letters.Length; i++)
@@ -28,8 +28,24 @@ namespace TAIO.Automata
                 char letter = _letters[i];
                 builder.Append(letter);
                 Words.Add(builder.ToString());
-                GenerateRecusivelyWords(builder, recursionLevel+1, maxRecursionLevel);
+                GenerateRecusivelyVariationsWithRepeats(builder, recursionLevel+1, maxRecursionLevel);
                 builder.Remove(builder.Length - 1, 1);
+            }
+        }
+
+        public void GenerateRecusivelyVariationsWithoutRepeats(StringBuilder builder, int recursionLevel, int maxRecursionLevel)
+        {
+            if (recursionLevel == maxRecursionLevel) return;
+            for (int i = 0; i < _letters.Length; i++)
+            {
+                char letter = _letters[i];
+                if (!builder.ToString().Contains(letter + ""))
+                {
+                    builder.Append(letter);
+                    Words.Add(builder.ToString());
+                    GenerateRecusivelyVariationsWithoutRepeats(builder, recursionLevel + 1, maxRecursionLevel);
+                    builder.Remove(builder.Length - 1, 1);
+                }
             }
         }
     }
