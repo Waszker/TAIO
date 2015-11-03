@@ -42,7 +42,7 @@ namespace TAIO.PSO
         {
             List<Automaton> automatons = new List<Automaton>();
 
-            for (int numberOfStates = 1; numberOfStates < _maxStateCount; numberOfStates++)
+            for (int numberOfStates = 1; numberOfStates <= _maxStateCount; numberOfStates++)
             {
                 automatons.Add(GetBestAutomatonFromSpace(numberOfStates));
             }
@@ -89,7 +89,8 @@ namespace TAIO.PSO
                     }
                 }
 
-            } while (iteration < _maxIterationCount || errors < _minErrorLevel);
+                iteration++;
+            } while (iteration < _maxIterationCount);
 
             return new Automaton(bestPositionSoFar);
         }

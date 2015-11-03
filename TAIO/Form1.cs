@@ -81,6 +81,7 @@ namespace TAIO
             Debug.WriteLine("Running PSO");
             PsoAlgorithm pso = new PsoAlgorithm((double)min_err_level.Value, (int)max_iteration_count.Value, (int)max_state_number.Value, alphabetLetters.Length, 100);
             foundAutomaton = pso.RunAlgorithm();
+            Debug.WriteLine("Ended PSO");
             showOutputPictureButton.Enabled = true;
 
         }
