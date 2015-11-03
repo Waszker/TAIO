@@ -97,7 +97,7 @@ namespace TAIO.PSO
         private Automaton EvaluateBestAutomaton(List<Automaton> automatons)
         {
             // TODO: Get best automaton by using test words
-            return null;
+            return automatons.Count > 0 ? automatons[0] : null;
         }
     }
 }
