@@ -31,5 +31,16 @@ namespace TAIO.Automata
 
             return errorNumber;
         }
+
+        public static int GetFunctionValueForAutomaton(Automaton automaton)
+        {
+            int errorNumber = 0;
+
+            foreach (string word in _testSet)
+                if (_secretAutomaton.GetFinalState(word) != automaton.GetFinalState(word))
+                    errorNumber++;
+
+            return errorNumber;
+        }
     }
 }

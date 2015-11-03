@@ -12,9 +12,9 @@ namespace TAIO.PSO
         private Velocity _velocity;
         public Position Position { get; set; }
 
-        public Particle(int symbolCount, int stateCount)
+        public Particle(int symbolCount, int stateCount, int seed = 0)
         {
-            Position = new Position(symbolCount, stateCount);
+            Position = new Position(symbolCount, stateCount, seed);
             PersonalBestPosition = Position;
             _velocity = new Velocity(symbolCount, stateCount);
         }
@@ -60,7 +60,7 @@ namespace TAIO.PSO
             // TODO: Implement
             UpdateVelocity(globalBestPosition, c1, c2, localBestPosition);
             Position.UpdatePosition(_velocity);
-            if (Position.CompareTo(PersonalBestPosition) == 1) PersonalBestPosition = Position;
+            if (Position.CompareTo(PersonalBestPosition) < 0) PersonalBestPosition = Position;
         }
 
         private void UpdateVelocity(Position globalBestPosition, int c1, int c2, Position localBestPosition = null)

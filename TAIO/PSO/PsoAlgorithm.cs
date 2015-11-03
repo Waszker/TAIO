@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,7 +54,7 @@ namespace TAIO.PSO
         private void GenerateParticles(int stateCount)
         {
             for (int i = 0; i < _particles.Length; i++)
-                _particles[i] = new Particle(_alphabetCount, stateCount);
+                _particles[i] = new Particle(_alphabetCount, stateCount, i * (i % 2) + i + i*3);
         }
 
         private Automaton GetBestAutomatonFromSpace(int numberOfStates)
@@ -73,7 +74,7 @@ namespace TAIO.PSO
                 // Update global best
                 globalBest = _particles[0].PersonalBestPosition;
                 foreach (Particle p in _particles)
-                    if (p.PersonalBestPosition.CompareTo(globalBest) == 1)
+                    if (p.PersonalBestPosition.CompareTo(globalBest) < 0)
                         globalBest = p.PersonalBestPosition;
 
                 // Move particles and check errors
@@ -84,6 +85,7 @@ namespace TAIO.PSO
                     if (currentErrors < errors) errors = currentErrors;
                     if (errors < lowestErrorSoFar)
                     {
+                        Debug.WriteLine("Found better particle! Updating... {0} {1} {2}", numberOfStates, errors, lowestErrorSoFar);
                         lowestErrorSoFar = errors;
                         bestPositionSoFar = Position.DeepClone(p.Position);
                     }
@@ -97,8 +99,19 @@ namespace TAIO.PSO
 
         private Automaton EvaluateBestAutomaton(List<Automaton> automatons)
         {
-            // TODO: Get best automaton by using test words
-            return automatons.Count > 0 ? automatons[0] : null;
+            int bestError = int.MaxValue;
+            int bestAutomatonIndex = 0;
+
+            for (int i = 0; i < automatons.Count; i++)
+            {
+                int automatonError = TargetFunction.GetFunctionValueForAutomaton(automatons[i]);
+                if (automatonError < bestError)
+                {
+                    bestAutomatonIndex = i;
+                }
+            }
+
+            return automatons[bestAutomatonIndex];
         }
     }
 }

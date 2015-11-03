@@ -24,10 +24,15 @@ namespace TAIO.PSO
 
         #endregion
 
-        public Position(int numberOfAutomatonSymbols, int numberOfAutomatonStates)
+        public Position(int numberOfAutomatonSymbols, int numberOfAutomatonStates, int seed)
         {
             NumberOfStates = numberOfAutomatonStates;
             OnePositions = new int[numberOfAutomatonSymbols, numberOfAutomatonStates];
+
+            for (int i = 0; i < numberOfAutomatonSymbols; i++)
+                for (int j = 0; j < numberOfAutomatonStates; j++)
+                    OnePositions[i, j] = (new Random(i * j + i + j + (j % 2) + seed)).Next(numberOfAutomatonStates);
+
             UpdateTargetFunctionValue();
         }
 
@@ -40,7 +45,7 @@ namespace TAIO.PSO
             // Updating position is in fact moving "ones" inside array
             for (int symbol = 0; symbol < velocity.Velocities.Length; symbol++)
                 for (int state = 0; state < velocity.Velocities[symbol].PVelocities.Length; state++)
-                    OnePositions[symbol, state] = (OnePositions[symbol, state] +
+                    OnePositions[symbol, state] = Math.Abs(OnePositions[symbol, state] +
                                                    velocity.Velocities[symbol].PVelocities[state])%
                                                   OnePositions.GetLength(1);
 
@@ -98,7 +103,7 @@ namespace TAIO.PSO
                 position.OnePositions.GetLength(1) != OnePositions.GetLength(1))
                 throw new ArgumentException("Both positions should belong to the space with equal number of dimensions.");
 
-            Position result = new Position(OnePositions.GetLength(0), OnePositions.GetLength(1));
+            Position result = new Position(OnePositions.GetLength(0), OnePositions.GetLength(1), 0);
             for (int i = 0; i < OnePositions.GetLength(0); i++)
                 for (int j = 0; j < OnePositions.GetLength(1); j++)
                     result.OnePositions[i, j] = OnePositions[i, j] - position.OnePositions[i, j];

@@ -11,7 +11,7 @@ namespace Tests
         public void AutomatonConstructionFromPositionObjectTest()
         {
             // Arrange
-            Position position = new Position(2, 3) { OnePositions = new[,] { { 1, 2, 1 }, { 2, 2, 1 } } };
+            Position position = new Position(2, 3, 0) { OnePositions = new[,] { { 1, 2, 1 }, { 2, 2, 1 } } };
 
             // Act
             Automaton automaton = new Automaton(position);

@@ -39,5 +39,16 @@ namespace TAIO.PSO
             for (int i = 0; i < partialVelocityValues.Length; i++)
                 PVelocities[i] = partialVelocityValues[i];
         }
+
+        public void Add(PartialVelocity pVelocity)
+        {
+            if(PVelocities.Length != pVelocity.PVelocities.Length)
+            {
+                throw new ArgumentException("Both partial velocity vectors must be equal in length.");
+            }
+
+            for (int i = 0; i < PVelocities.Length; i++)
+                PVelocities[i] = pVelocity.PVelocities[i];
+        }
     }
 }

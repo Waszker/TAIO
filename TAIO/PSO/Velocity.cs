@@ -24,7 +24,8 @@ namespace TAIO.PSO
                 throw new ArgumentException("Both velocity vectors must be equal in length.");
             }
 
-            // TODO: Make velocity addition.
+            for (int i = 0; i < Velocities.Length; i++)
+                Velocities[i].Add(velocity.Velocities[i]);
         }
     }
 }
