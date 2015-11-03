@@ -18,7 +18,8 @@ namespace TAIO.PSO
         /// E.g. [a] -> [2][1][0]  :: for symbol 'a' while being in state q0 we move to state q2
         /// </summary>
         public int[,] OnePositions { get; set; }
-        public int NumberOfStates { get; set; }
+
+        public int NumberOfStates { get; }
         public int TargetFunctionValue { get; set; }
 
         #endregion
@@ -39,7 +40,9 @@ namespace TAIO.PSO
             // Updating position is in fact moving "ones" inside array
             for (int symbol = 0; symbol < velocity.Velocities.Length; symbol++)
                 for (int state = 0; state < velocity.Velocities[symbol].PVelocities.Length; state++)
-                    OnePositions[symbol, state] = (OnePositions[symbol, state] + velocity.Velocities[symbol].PVelocities[state]) % OnePositions.GetLength(1);
+                    OnePositions[symbol, state] = (OnePositions[symbol, state] +
+                                                   velocity.Velocities[symbol].PVelocities[state])%
+                                                  OnePositions.GetLength(1);
 
             // Update target function value
             UpdateTargetFunctionValue();
@@ -63,7 +66,7 @@ namespace TAIO.PSO
         {
             for (int i = 0; i < OnePositions.GetLength(0); i++)
                 for (int j = 0; j < OnePositions.GetLength(1); j++)
-                    OnePositions[i, j] = (int)(OnePositions[i, j] * value);
+                    OnePositions[i, j] = (int) (OnePositions[i, j]*value);
         }
 
         /// <summary>
@@ -75,7 +78,7 @@ namespace TAIO.PSO
             Velocity result = new Velocity(OnePositions.GetLength(0), OnePositions.GetLength(1));
             for (int i = 0; i < result.Velocities.Length; i++)
             {
-                for(int j = 0; j < OnePositions.GetLength(1); j++)
+                for (int j = 0; j < OnePositions.GetLength(1); j++)
                 {
                     result.Velocities[i].PVelocities[j] = OnePositions[i, j];
                 }
@@ -91,7 +94,8 @@ namespace TAIO.PSO
         /// <returns></returns>
         public Position Substract(Position position)
         {
-            if (position.OnePositions.GetLength(0) != OnePositions.GetLength(0) || position.OnePositions.GetLength(1) != OnePositions.GetLength(1))
+            if (position.OnePositions.GetLength(0) != OnePositions.GetLength(0) ||
+                position.OnePositions.GetLength(1) != OnePositions.GetLength(1))
                 throw new ArgumentException("Both positions should belong to the space with equal number of dimensions.");
 
             Position result = new Position(OnePositions.GetLength(0), OnePositions.GetLength(1));
@@ -116,7 +120,7 @@ namespace TAIO.PSO
                 formatter.Serialize(ms, obj);
                 ms.Position = 0;
 
-                return (T)formatter.Deserialize(ms);
+                return (T) formatter.Deserialize(ms);
             }
         }
 
