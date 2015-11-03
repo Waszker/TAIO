@@ -19,7 +19,7 @@ namespace TAIO.PSO
         /// </summary>
         public int[,] OnePositions { get; set; }
 
-        public int NumberOfStates { get; }
+        public int NumberOfStates { get; set; }
         public int TargetFunctionValue { get; set; }
 
         #endregion
