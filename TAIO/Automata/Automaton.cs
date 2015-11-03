@@ -39,6 +39,7 @@ namespace TAIO.Automata
         {
             int alphabetLength = bestPositionSoFar.OnePositions.GetLength(0);
             int numberOfStates = bestPositionSoFar.OnePositions.GetLength(1);
+            alphabetLen = alphabetLength;
 
             string[][] functionsTable = new string[numberOfStates][];
 
