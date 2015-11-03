@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -70,14 +71,14 @@ namespace TAIO
         private void findResultButton_Click(object sender, EventArgs e)
         {
             WordSetGenerator w = new WordSetGenerator(alphabetLetters);
-            Console.WriteLine("Starting word sets generation");
+            Debug.WriteLine("Starting word sets generation");
             w.GenerateRecusivelyVariationsWithRepeats(new StringBuilder(), 0, 5);
-            Console.WriteLine("Finished training word sets generation");
+            Debug.WriteLine("Finished training word sets generation");
             w.GenerateRecusivelyVariationsWithoutRepeats(new StringBuilder(), 6, 10);
-            Console.WriteLine("Finished test word sets generation");
+            Debug.WriteLine("Finished test word sets generation");
             TargetFunction targetFunction = new TargetFunction(automaton, w.TrainingWords, w.TestingWords);
 
-            Console.WriteLine("Running PSO");
+            Debug.WriteLine("Running PSO");
             PsoAlgorithm pso = new PsoAlgorithm((double)min_err_level.Value, (int)max_iteration_count.Value, (int)max_state_number.Value, alphabetLetters.Length, 100);
             foundAutomaton = pso.RunAlgorithm();
             showOutputPictureButton.Enabled = true;
