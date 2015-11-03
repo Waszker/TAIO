@@ -2,7 +2,6 @@
 
 namespace TAIO
 {
-<<<<<<< HEAD
     /// <summary>
     /// Store some help methods
     /// </summary>
@@ -13,10 +12,6 @@ namespace TAIO
         /// </summary>
         /// <param name="numberOfAlphabetSymbols">Number of letters in alphabet</param>
         /// <returns></returns>
-=======
-    public static class Utils
-    {
->>>>>>> 623040547bde4fc3afa4f1bd7e837ce7aa1045ba
         public static string[] EnumerateAlphabetSymbols(int numberOfAlphabetSymbols)
         {
             List<string> alphabetLetters = new List<string>();
