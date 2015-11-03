@@ -69,9 +69,17 @@ namespace TAIO
 
         private void findResultButton_Click(object sender, EventArgs e)
         {
-            WordSetGenerator w = new WordSetGenerator(alphabetLetters);
+            string[] alphabet = new String[Math.Max(10, alphabetLetters.Length)];
+            if (alphabetLetters.Length < 10)
+            {
+                for( int i = 0; i < 10; i++)
+                {
+                    alphabet[i] = alphabetLetters[i % alphabetLetters.Length];
+                }
+            }
+            WordSetGenerator w = new WordSetGenerator(alphabet);
             w.GenerateRecusivelyVariationsWithRepeats(new StringBuilder(), 0, 5);
-            w.GenerateRecusivelyVariationsWithoutRepeats(new StringBuilder(), 6, 10);
+            w.GenerateRecusivelyVariationsWithoutRepeats(new StringBuilder(), 0, 10);
             TargetFunction targetFunction = new TargetFunction(automaton, w.TrainingWords, w.TestingWords);
 
             PsoAlgorithm pso = new PsoAlgorithm((double)min_err_level.Value, (int)max_iteration_count.Value, (int)max_state_number.Value, alphabetLetters.Length, 100);
