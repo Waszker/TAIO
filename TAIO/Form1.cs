@@ -18,11 +18,12 @@ namespace TAIO
         private Automaton automaton;
         private Automaton foundAutomaton;
         private string[] alphabetLetters;
+        private int automatoncounter;
 
         public Form1()
         {
             InitializeComponent();
-
+            automatoncounter = 0;
             // Example parser usage
             /*string[][] functionTables = null;
             string[] alphabetLetters = InputFileParser.Parse(
@@ -57,16 +58,6 @@ namespace TAIO
             }
         }
 
-        private void inputPicture_Click(object sender, EventArgs e)
-        {
-            automaton.GetGraph("InputAutomaton");
-            System.Threading.Thread.Sleep(1000); //CHANGE THIS SHIT
-            if (File.Exists("InputAutomaton.jpg"))
-            {
-                PictureWindow pw = new PictureWindow("Input Automaton", "InputAutomaton.jpg");
-                pw.Show();
-            }
-        }
 
         private void findResultButton_Click(object sender, EventArgs e)
         {
@@ -86,15 +77,29 @@ namespace TAIO
 
         }
 
+        private void inputPicture_Click(object sender, EventArgs e)
+        {
+            automatoncounter++;
+            automaton.GetGraph("InputAutomaton"+automatoncounter.ToString());
+            System.Threading.Thread.Sleep(1000); //CHANGE THIS SHIT
+            if (File.Exists("InputAutomaton" + automatoncounter.ToString()+".jpg"))
+            {
+                PictureWindow pw = new PictureWindow("Input Automaton", "InputAutomaton" + automatoncounter.ToString() + ".jpg");
+                pw.Show();   
+            }
+        }
+
         private void showOutputPictureButton_Click(object sender, EventArgs e)
         {
-            foundAutomaton.GetGraph("OutputAutomaton");
+            automatoncounter++;
+            foundAutomaton.GetGraph("OutputAutomaton" + automatoncounter.ToString());
             System.Threading.Thread.Sleep(1000); //CHANGE THIS SHIT
-            if (File.Exists("OutputAutomaton.jpg"))
+            if (File.Exists("OutputAutomaton" + automatoncounter.ToString() + ".jpg"))
             {
-                PictureWindow pw = new PictureWindow("Output Automaton", "OutputAutomaton.jpg");
+                PictureWindow pw = new PictureWindow("Output Automaton", "OutputAutomaton" + automatoncounter.ToString() + ".jpg");
                 pw.Show();
             }
         }
+     
     }
 }
