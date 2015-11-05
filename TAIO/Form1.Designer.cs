@@ -142,9 +142,19 @@
             0,
             0,
             0});
+            this.max_state_number.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.max_state_number.Name = "max_state_number";
             this.max_state_number.Size = new System.Drawing.Size(58, 20);
             this.max_state_number.TabIndex = 6;
+            this.max_state_number.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label1
             // 
