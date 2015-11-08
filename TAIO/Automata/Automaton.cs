@@ -112,19 +112,41 @@ namespace TAIO.Automata
             }
         }
 
+
         public string GetGraph(string automatonName)
         {
-            AdjacencyGraph<int, TaggedEdge<int,int>> g = new AdjacencyGraph<int, TaggedEdge<int, int>>(true);
+            string[,] matrix = new string[_states.Count, _states.Count];
             for (int i = 0; i < _states.Count; i++)
-                g.AddVertex(i);
+                for (int j = 0; j < _states.Count; j++)
+                    matrix[i, j] = "";
 
             for (int i = 0; i < _states.Count; i++)
             {
-                for(int j=0;j< alphabetLen; j++)
-                    g.AddEdge(new TaggedEdge<int, int>(i, _states.ElementAt(i).GetNextStateNumber(System.Convert.ToChar(j+48)), j));
+                for (int j = 0; j < alphabetLen; j++)
+                {
+                    matrix[i, _states.ElementAt(i).GetNextStateNumber(System.Convert.ToChar(j + 48))] += (","+j.ToString());
+                }
             }
 
-            GraphvizAlgorithm<int, TaggedEdge<int, int>> graphviz = new GraphvizAlgorithm<int, TaggedEdge<int, int>>(g);
+            for (int i = 0; i < _states.Count; i++)
+                for (int j = 0; j < _states.Count; j++)
+                    if(matrix[i, j]!="")
+                        matrix[i, j]=matrix[i,j].Substring(1);
+
+
+            AdjacencyGraph<int, TaggedEdge<int, string>> g = new AdjacencyGraph<int, TaggedEdge<int, string>>(true);
+            for (int i = 0; i < _states.Count; i++)
+                g.AddVertex(i);
+            
+
+            for (int i = 0; i < _states.Count; i++)
+                for (int j = 0; j < _states.Count; j++)
+                {
+                    if (matrix[i, j] != "")
+                        g.AddEdge(new TaggedEdge<int, string>(i, j, matrix[i,j]));
+                }
+
+            GraphvizAlgorithm<int, TaggedEdge<int, string>> graphviz = new GraphvizAlgorithm<int, TaggedEdge<int, string>>(g);
             graphviz.ImageType = GraphvizImageType.Png;
             graphviz.FormatEdge += (sender, args) => { args.EdgeFormatter.Label.Value = args.Edge.Tag.ToString(); };
             string output = graphviz.Generate(new FileDotEngine(), automatonName);
