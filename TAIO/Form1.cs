@@ -63,9 +63,9 @@ namespace TAIO
         {
             WordSetGenerator w = new WordSetGenerator(alphabetLetters);
             Debug.WriteLine("Starting word sets generation");
-            w.GenerateRecusivelyVariationsWithRepeats(new StringBuilder(), 0, 5);
+            w.GenerateRecusivelyVariationsWithRepeats(new StringBuilder(), 0, 5); //add parameter - words_in_training_set
             Debug.WriteLine("Finished training word sets generation");
-            w.GenerateRecusivelyVariationsWithoutRepeats(new StringBuilder(), 6, 10);
+            w.GenerateRecusivelyVariationsWithoutRepeats(new StringBuilder(), 6, 10); //add parameter - words_in_test_set
             Debug.WriteLine("Finished test word sets generation");
             TargetFunction targetFunction = new TargetFunction(automaton, w.TrainingWords, w.TestingWords);
 
