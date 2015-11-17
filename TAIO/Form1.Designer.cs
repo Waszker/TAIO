@@ -46,17 +46,17 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.label8 = new System.Windows.Forms.Label();
-            this.words_in_training_set = new System.Windows.Forms.NumericUpDown();
-            this.label9 = new System.Windows.Forms.Label();
             this.words_in_test_set = new System.Windows.Forms.NumericUpDown();
+            this.label9 = new System.Windows.Forms.Label();
+            this.words_in_training_set = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.max_iteration_count)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.min_err_level)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.max_state_number)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.words_in_training_set)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.words_in_test_set)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.words_in_training_set)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -309,19 +309,42 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(203, 104);
             this.tableLayoutPanel2.TabIndex = 17;
             // 
-            // label8
+            // words_in_test_set
             // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.words_in_test_set.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.words_in_test_set.Location = new System.Drawing.Point(110, 67);
+            this.words_in_test_set.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.words_in_test_set.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.words_in_test_set.Name = "words_in_test_set";
+            this.words_in_test_set.Size = new System.Drawing.Size(89, 20);
+            this.words_in_test_set.TabIndex = 7;
+            this.words_in_test_set.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label9
+            // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label8.Location = new System.Drawing.Point(4, 1);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(99, 50);
-            this.label8.TabIndex = 2;
-            this.label8.Text = "Training set";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label9.Location = new System.Drawing.Point(4, 52);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(99, 51);
+            this.label9.TabIndex = 6;
+            this.label9.Text = "Testing word max length";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // words_in_training_set
             // 
@@ -346,42 +369,19 @@
             0,
             0});
             // 
-            // label9
+            // label8
             // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label9.Location = new System.Drawing.Point(4, 52);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(99, 51);
-            this.label9.TabIndex = 6;
-            this.label9.Text = "Test set";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // words_in_test_set
-            // 
-            this.words_in_test_set.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.words_in_test_set.Location = new System.Drawing.Point(110, 67);
-            this.words_in_test_set.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.words_in_test_set.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.words_in_test_set.Name = "words_in_test_set";
-            this.words_in_test_set.Size = new System.Drawing.Size(89, 20);
-            this.words_in_test_set.TabIndex = 7;
-            this.words_in_test_set.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label8.Location = new System.Drawing.Point(4, 1);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(99, 50);
+            this.label8.TabIndex = 2;
+            this.label8.Text = "Training word max length";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form1
             // 
@@ -413,8 +413,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.max_state_number)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.words_in_training_set)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.words_in_test_set)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.words_in_training_set)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

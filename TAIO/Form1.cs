@@ -15,6 +15,11 @@ namespace TAIO
     /// </summary>
     public partial class Form1 : Form
     {
+        private readonly int defaultTestingWordMaxLength = 10;
+        private readonly int defaultTrainingWordMaxLength = 5;
+        private readonly int defaultTestingWordMinLength = 6;
+        private int testingWordMaxLength = 10;
+        private int trainingWordMaxLength = 5;
         private Automaton automaton;
         private Automaton foundAutomaton;
         private string[] alphabetLetters;
@@ -61,11 +66,23 @@ namespace TAIO
 
         private void findResultButton_Click(object sender, EventArgs e)
         {
-            WordSetGenerator w = new WordSetGenerator(alphabetLetters);
+            if(words_in_training_set.Value < defaultTrainingWordMaxLength)
+            {
+                words_in_training_set.Value = defaultTrainingWordMaxLength;
+            }
+            trainingWordMaxLength = (int)words_in_training_set.Value;
+            if(words_in_test_set.Value < defaultTestingWordMaxLength)
+            {
+                words_in_test_set.Value = defaultTestingWordMaxLength;
+            }
+            testingWordMaxLength = (int)words_in_test_set.Value;
+            string[] trainingLetters = prepareAlphabet(trainingWordMaxLength);
+            string[] testingLetters = prepareAlphabet(testingWordMaxLength);
+            WordSetGenerator w = new WordSetGenerator(testingLetters, trainingLetters, defaultTestingWordMinLength);
             Debug.WriteLine("Starting word sets generation");
-            w.GenerateRecusivelyVariationsWithRepeats(new StringBuilder(), 0, 5); //add parameter - words_in_training_set
+            w.GenerateRecusivelyVariationsWithRepeats(new StringBuilder(), 0, trainingWordMaxLength);
             Debug.WriteLine("Finished training word sets generation");
-            w.GenerateRecusivelyVariationsWithoutRepeats(new StringBuilder(), 6, 10); //add parameter - words_in_test_set
+            w.GenerateRecusivelyVariationsWithoutRepeats(new StringBuilder(), 0, testingWordMaxLength, new bool[testingLetters.Length]);
             Debug.WriteLine("Finished test word sets generation");
             TargetFunction targetFunction = new TargetFunction(automaton, w.TrainingWords, w.TestingWords);
 
@@ -75,6 +92,17 @@ namespace TAIO
             Debug.WriteLine("Ended PSO");
             showOutputPictureButton.Enabled = true;
 
+        }
+
+        private string[] prepareAlphabet(int expectedMinAlphabetLength)
+        {
+            int newLength = Math.Max(alphabetLetters.Length, expectedMinAlphabetLength);
+            string[] newAlphabet = new string[newLength];
+            for (int i = 0; i < newLength; i++)
+            {
+                newAlphabet[i] = alphabetLetters[i % alphabetLetters.Length];
+            }
+            return newAlphabet;
         }
 
         private void inputPicture_Click(object sender, EventArgs e)

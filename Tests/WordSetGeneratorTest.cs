@@ -10,7 +10,7 @@ namespace Tests
         public void GenerateVariationsTest()
         {
             string[] letters = { "A", "B", "C" };
-            WordSetGenerator wordSetGenerator = new WordSetGenerator(letters);
+            WordSetGenerator wordSetGenerator = new WordSetGenerator(letters, letters, 0);
             int maxLength = 3;
             wordSetGenerator.GenerateRecusivelyVariationsWithRepeats(new System.Text.StringBuilder(), 0, maxLength);
             var words = wordSetGenerator.TrainingWords;
@@ -29,9 +29,9 @@ namespace Tests
         public void GenerateVariationsWithoutRepetTest()
         {
             string[] letters = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
-            WordSetGenerator wordSetGenerator = new WordSetGenerator(letters);
+            WordSetGenerator wordSetGenerator = new WordSetGenerator(letters, letters, 1);
             int maxLength = 10;
-            wordSetGenerator.GenerateRecusivelyVariationsWithoutRepeats(new System.Text.StringBuilder(), 0, maxLength);
+            wordSetGenerator.GenerateRecusivelyVariationsWithoutRepeats(new System.Text.StringBuilder(), 0, maxLength, new bool[letters.Length]);
             var words = wordSetGenerator.TestingWords;
             int expected = 0;
             int amountOfLetters = letters.Length;
