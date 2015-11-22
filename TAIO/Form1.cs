@@ -1,4 +1,7 @@
-﻿using System;
+﻿using QuickGraph;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
@@ -80,9 +83,9 @@ namespace TAIO
             string[] testingLetters = prepareAlphabet(testingWordMaxLength);
             WordSetGenerator w = new WordSetGenerator(testingLetters, trainingLetters, defaultTestingWordMinLength);
             Debug.WriteLine("Starting word sets generation");
-            w.GenerateRecusivelyVariationsWithRepeats(new StringBuilder(), 0, trainingWordMaxLength);
+            w.GenerateTrainingWordsSet(new StringBuilder(), 0, trainingWordMaxLength);
             Debug.WriteLine("Finished training word sets generation");
-            w.GenerateRecusivelyVariationsWithoutRepeats(new StringBuilder(), 0, testingWordMaxLength, new bool[testingLetters.Length]);
+            w.GenerateTestingWordsSet(new StringBuilder(), 0, testingWordMaxLength, new bool[testingLetters.Length]);
             Debug.WriteLine("Finished test word sets generation");
             TargetFunction targetFunction = new TargetFunction(automaton, w.TrainingWords, w.TestingWords);
 
@@ -90,8 +93,8 @@ namespace TAIO
             PsoAlgorithm pso = new PsoAlgorithm((double)min_err_level.Value, (int)max_iteration_count.Value, (int)max_state_number.Value, alphabetLetters.Length, 100);
             foundAutomaton = pso.RunAlgorithm();
             Debug.WriteLine("Ended PSO");
+            Debug.WriteLine("Ended removing unreached states");
             showOutputPictureButton.Enabled = true;
-
         }
 
         private string[] prepareAlphabet(int expectedMinAlphabetLength)

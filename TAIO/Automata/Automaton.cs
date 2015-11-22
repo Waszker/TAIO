@@ -115,6 +115,34 @@ namespace TAIO.Automata
 
         public string GetGraph(string automatonName)
         {
+            bool[] visited = new bool[_states.Count];
+            string[,] matrix = GenerateGraphMatrix(ref visited);
+
+            AdjacencyGraph<int, TaggedEdge<int, string>> g = new AdjacencyGraph<int, TaggedEdge<int, string>>(true);
+            for (int i = 0; i < _states.Count; i++)
+            {
+                if (visited[i])
+                {
+                    g.AddVertex(i);
+                }
+            }
+
+            for (int i = 0; i < _states.Count; i++)
+                for (int j = 0; j < _states.Count; j++)
+                {
+                    if (matrix[i, j] != "")
+                        g.AddEdge(new TaggedEdge<int, string>(i, j, matrix[i, j]));
+                }
+
+            GraphvizAlgorithm<int, TaggedEdge<int, string>> graphviz = new GraphvizAlgorithm<int, TaggedEdge<int, string>>(g);
+            graphviz.ImageType = GraphvizImageType.Png;
+            graphviz.FormatEdge += (sender, args) => { args.EdgeFormatter.Label.Value = args.Edge.Tag.ToString(); };
+            string output = graphviz.Generate(new FileDotEngine(), automatonName);
+            return output;
+        }
+
+        private string[,] GenerateGraphMatrix(ref bool[] visited)
+        {
             string[,] matrix = new string[_states.Count, _states.Count];
             for (int i = 0; i < _states.Count; i++)
                 for (int j = 0; j < _states.Count; j++)
@@ -124,33 +152,54 @@ namespace TAIO.Automata
             {
                 for (int j = 0; j < alphabetLen; j++)
                 {
-                    matrix[i, _states.ElementAt(i).GetNextStateNumber(System.Convert.ToChar(j + 48))] += (","+j.ToString());
+                    matrix[i, _states.ElementAt(i).GetNextStateNumber(System.Convert.ToChar(j + 48))] += ("," + j.ToString());
+                }
+            }
+            CheckGraph(matrix, ref visited, 0);
+            for (int i = 0; i < _states.Count; i++)
+            {
+                if (!visited[i])
+                {
+                    for (int j = 0; j < _states.Count; j++)
+                    {
+                        matrix[i, j] = "";
+                        matrix[j, i] = "";
+                    }
                 }
             }
 
-            for (int i = 0; i < _states.Count; i++)
-                for (int j = 0; j < _states.Count; j++)
-                    if(matrix[i, j]!="")
-                        matrix[i, j]=matrix[i,j].Substring(1);
-
-
-            AdjacencyGraph<int, TaggedEdge<int, string>> g = new AdjacencyGraph<int, TaggedEdge<int, string>>(true);
-            for (int i = 0; i < _states.Count; i++)
-                g.AddVertex(i);
-            
 
             for (int i = 0; i < _states.Count; i++)
                 for (int j = 0; j < _states.Count; j++)
                 {
                     if (matrix[i, j] != "")
-                        g.AddEdge(new TaggedEdge<int, string>(i, j, matrix[i,j]));
+                        matrix[i, j] = matrix[i, j].Substring(1);
                 }
+            return matrix;
+        }
 
-            GraphvizAlgorithm<int, TaggedEdge<int, string>> graphviz = new GraphvizAlgorithm<int, TaggedEdge<int, string>>(g);
-            graphviz.ImageType = GraphvizImageType.Png;
-            graphviz.FormatEdge += (sender, args) => { args.EdgeFormatter.Label.Value = args.Edge.Tag.ToString(); };
-            string output = graphviz.Generate(new FileDotEngine(), automatonName);
-            return output;
+        /// <summary>
+        /// Checks if all vertices can be reached in graph
+        /// </summary>
+        /// <param name="matrix">Matrix of all edges between vertices in graph</param>
+        /// <param name="visited">Array holding information about visited vertices <example>if visited[i] == false means that vertice i is never reached in graph</example></param>
+        /// <param name="vIndex">Index of actual vertice</param>
+        private void CheckGraph(string[,] matrix, ref bool[] visited, int vIndex)
+        {
+            visited[vIndex] = true;
+
+            for (int i = 0; i < visited.Length; i++)
+            {
+                if (matrix[vIndex, i] != null && matrix[vIndex, i] != "")
+                {
+                    if (!visited[i])
+                    {
+                        CheckGraph(matrix, ref visited, i);
+                    }
+                }
+            }
         }
     }
+
+
 }
