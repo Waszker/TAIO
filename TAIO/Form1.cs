@@ -1,7 +1,4 @@
-﻿using QuickGraph;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
@@ -14,7 +11,7 @@ using TAIO.PSO;
 namespace TAIO
 {
     /// <summary>
-    /// Main window class
+    /// Main window class.
     /// </summary>
     public partial class Form1 : Form
     {
@@ -32,17 +29,6 @@ namespace TAIO
         {
             InitializeComponent();
             automatoncounter = 0;
-            // Example parser usage
-            /*string[][] functionTables = null;
-            string[] alphabetLetters = InputFileParser.Parse(
-                    @"...\\input.txt",
-                    out functionTables);
-
-            Automaton automaton = new Automata.Automaton(alphabetLetters, functionTables);
-            int finalState = automaton.GetFinalState("10101011");
-
-            Console.WriteLine(finalState);*/
-            
         }
 
         private void uploadFileButton_Click(object sender, EventArgs e)
@@ -57,15 +43,16 @@ namespace TAIO
             {
                 string filename = theDialog.FileName;              
                 string[][] functionTables = null;
+
+                // Parse input file and generate automaton
                 alphabetLetters = new ImposedInputFileParser().Parse(filename,
                         out functionTables);
-                automaton = new Automata.Automaton(alphabetLetters, functionTables);
+                automaton = new Automaton(alphabetLetters, functionTables);
 
                 showInputPictureButton.Enabled = true;
                 findResultButton.Enabled = true;
             }
         }
-
 
         private void findResultButton_Click(object sender, EventArgs e)
         {
@@ -73,27 +60,37 @@ namespace TAIO
             {
                 words_in_training_set.Value = defaultTrainingWordMaxLength;
             }
-            trainingWordMaxLength = (int)words_in_training_set.Value;
+            trainingWordMaxLength = (int) words_in_training_set.Value;
             if(words_in_test_set.Value < defaultTestingWordMaxLength)
             {
                 words_in_test_set.Value = defaultTestingWordMaxLength;
             }
-            testingWordMaxLength = (int)words_in_test_set.Value;
+            testingWordMaxLength = (int) words_in_test_set.Value;
+
+            // Prepare word sets
             string[] trainingLetters = prepareAlphabet(trainingWordMaxLength);
             string[] testingLetters = prepareAlphabet(testingWordMaxLength);
+
             WordSetGenerator w = new WordSetGenerator(testingLetters, trainingLetters, defaultTestingWordMinLength);
+
+            // Generate training set
             Debug.WriteLine("Starting word sets generation");
             w.GenerateTrainingWordsSet(new StringBuilder(), 0, trainingWordMaxLength);
             Debug.WriteLine("Finished training word sets generation");
+
+            // Generate testing set
             w.GenerateTestingWordsSet(new StringBuilder(), 0, testingWordMaxLength, new bool[testingLetters.Length]);
             Debug.WriteLine("Finished test word sets generation");
+
             TargetFunction targetFunction = new TargetFunction(automaton, w.TrainingWords, w.TestingWords);
 
+            // Start algorithm
             Debug.WriteLine("Running PSO");
             PsoAlgorithm pso = new PsoAlgorithm((double)min_err_level.Value, (int)max_iteration_count.Value, (int)max_state_number.Value, alphabetLetters.Length, 100);
             foundAutomaton = pso.RunAlgorithm();
             Debug.WriteLine("Ended PSO");
             Debug.WriteLine("Ended removing unreached states");
+
             showOutputPictureButton.Enabled = true;
         }
 
@@ -111,26 +108,31 @@ namespace TAIO
         private void inputPicture_Click(object sender, EventArgs e)
         {
             automatoncounter++;
-            automaton.GetGraph("InputAutomaton"+automatoncounter.ToString());
-            System.Threading.Thread.Sleep(1000); //CHANGE THIS SHIT
-            if (File.Exists("InputAutomaton" + automatoncounter.ToString()+".jpg"))
+            automaton.GetGraph("InputAutomaton" + automatoncounter);
+
+            //TODO: Needs to be changed
+            System.Threading.Thread.Sleep(1000);
+
+            if (File.Exists("InputAutomaton" + automatoncounter + ".jpg"))
             {
-                PictureWindow pw = new PictureWindow("Input Automaton", "InputAutomaton" + automatoncounter.ToString() + ".jpg");
-                pw.Show();   
+                PictureWindow pw = new PictureWindow("Input Automaton", "InputAutomaton" + automatoncounter + ".jpg");
+                pw.Show();
             }
         }
 
         private void showOutputPictureButton_Click(object sender, EventArgs e)
         {
             automatoncounter++;
-            foundAutomaton.GetGraph("OutputAutomaton" + automatoncounter.ToString());
-            System.Threading.Thread.Sleep(1000); //CHANGE THIS SHIT
-            if (File.Exists("OutputAutomaton" + automatoncounter.ToString() + ".jpg"))
+            foundAutomaton.GetGraph("OutputAutomaton" + automatoncounter);
+
+            //TODO: Needs to be changed
+            System.Threading.Thread.Sleep(1000);
+
+            if (File.Exists("OutputAutomaton" + automatoncounter + ".jpg"))
             {
-                PictureWindow pw = new PictureWindow("Output Automaton", "OutputAutomaton" + automatoncounter.ToString() + ".jpg");
+                PictureWindow pw = new PictureWindow("Output Automaton", "OutputAutomaton" + automatoncounter + ".jpg");
                 pw.Show();
             }
         }
-     
     }
 }

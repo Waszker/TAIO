@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TAIO.Automata;
 
 namespace TAIO.PSO
@@ -14,10 +10,10 @@ namespace TAIO.PSO
     class PsoAlgorithm
     {
         private double _minErrorLevel;
-        private int _maxIterationCount;
-        private int _maxStateCount;
-        private int _alphabetCount;
-        private Particle[] _particles;
+        private readonly int _maxIterationCount;
+        private readonly int _maxStateCount;
+        private readonly int _alphabetCount;
+        private readonly Particle[] _particles;
 
         /// <summary>
         /// Creates instance using provided information.

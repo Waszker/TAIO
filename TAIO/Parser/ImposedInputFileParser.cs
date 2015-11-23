@@ -1,20 +1,16 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 
 namespace TAIO.Parser
 {
     /// <summary>
-    /// Implementation of parser for input file defined by prof
+    /// Implementation of input file parser.
     /// </summary>
     class ImposedInputFileParser : IParser
     {
         /// <summary>
-        /// Method is used to parse input file with automaton definition
+        /// Method is used to parse input file with automaton definition.
         /// </summary>
-        /// <param name="path">Input file path</param>
-        /// <param name="functionTables"></param>
-        /// <returns></returns>
         public string[] Parse(string path, out string[][] functionTables)
         {
             string[] inputFileLines = null;

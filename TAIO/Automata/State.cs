@@ -12,7 +12,6 @@ namespace TAIO.Automata
         /// <summary>
         /// Initializes class with provided information.
         /// </summary>
-        /// <param name="controlFunctionArray"></param>
         public State(char[] alphabet, int[] controlFunctionArray)
         {
             _controlFunction = new Dictionary<char, int>();
@@ -23,8 +22,6 @@ namespace TAIO.Automata
         /// <summary>
         /// Returns next state number according to controlFunction associated with this state.
         /// </summary>
-        /// <param name="letter"></param>
-        /// <returns></returns>
         public int GetNextStateNumber(char letter)
         {
             int nextStateNumber;

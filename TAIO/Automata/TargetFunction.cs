@@ -1,46 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TAIO.PSO;
 
 namespace TAIO.Automata
 {
+    /// <summary>
+    /// This class represents the target function object and used to count error number for given automan. 
+    /// </summary>
     class TargetFunction
     {
-        private static Automaton _secretAutomaton;
-        private static List<string> _trainingSet;
-        private static List<string> _testSet;
+        private static Automaton secretAutomaton;
+        private static List<string> trainingSet;
+        private static List<string> testSet;
 
+        /// <summary>
+        /// Initialize a new instance of the TargetFunction class.
+        /// </summary>
         public TargetFunction(Automaton automaton, List<string> trainingSet, List<string> testSet) 
         {
-            _secretAutomaton = automaton;
-            _trainingSet = trainingSet;
-            _testSet = testSet;
+            secretAutomaton = automaton;
+            TargetFunction.trainingSet = trainingSet;
+            TargetFunction.testSet = testSet;
         }
         
+        /// <summary>
+        /// This function creates automaton object from given position and counts number of errors. 
+        /// </summary>
         public static int GetFunctionValue(Position position)
         {
-            int errorNumber = 0;
             Automaton foundAutomaton = new Automaton(position);
-
-            foreach (string word in _trainingSet)
-                if (_secretAutomaton.GetFinalState(word) != foundAutomaton.GetFinalState(word))
-                    errorNumber++;
-
-            return errorNumber;
+            return trainingSet.Count(word => secretAutomaton.GetFinalState(word) != foundAutomaton.GetFinalState(word));
         }
 
+        /// <summary>
+        /// This function counts number of errors for given automaton object.
+        /// </summary>
         public static int GetFunctionValueForAutomaton(Automaton automaton)
         {
-            int errorNumber = 0;
-
-            foreach (string word in _testSet)
-                if (_secretAutomaton.GetFinalState(word) != automaton.GetFinalState(word))
-                    errorNumber++;
-
-            return errorNumber;
+            return testSet.Count(word => secretAutomaton.GetFinalState(word) != automaton.GetFinalState(word));
         }
     }
 }
