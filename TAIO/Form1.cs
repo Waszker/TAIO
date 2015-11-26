@@ -49,10 +49,19 @@ namespace TAIO
                 string filename = theDialog.FileName;              
                 string[][] functionTables = null;
 
-                // Parse input file and generate automaton
-                //TODO: try {} catch {} Ania, obsłużysz błędny format pliku?
-                alphabetLetters = new ImposedInputFileParser().Parse(filename,
-                        out functionTables);
+                try
+                {
+                    alphabetLetters = new ImposedInputFileParser().Parse(filename,
+                           out functionTables);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Wrong file format!","Error",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    automaton = null;
+                    return;
+                }
+
+
                 automaton = new Automaton(alphabetLetters, functionTables);
 
                 showInputPictureButton.Enabled = true;
