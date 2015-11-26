@@ -15,6 +15,8 @@ namespace TAIO
     /// </summary>
     public partial class Form1 : Form
     {
+        #region Fields
+
         private readonly int defaultTestingWordMaxLength = 10;
         private readonly int defaultTrainingWordMaxLength = 5;
         private readonly int defaultTestingWordMinLength = 6;
@@ -25,11 +27,15 @@ namespace TAIO
         private string[] alphabetLetters;
         private int automatoncounter;
 
+        #endregion
+
         public Form1()
         {
             InitializeComponent();
             automatoncounter = 0;
         }
+
+        #region UI event handlers
 
         private void uploadFileButton_Click(object sender, EventArgs e)
         {
@@ -45,6 +51,7 @@ namespace TAIO
                 string[][] functionTables = null;
 
                 // Parse input file and generate automaton
+                //TODO: try {} catch {} Ania, obsłużysz błędny format pliku?
                 alphabetLetters = new ImposedInputFileParser().Parse(filename,
                         out functionTables);
                 automaton = new Automaton(alphabetLetters, functionTables);
@@ -56,6 +63,7 @@ namespace TAIO
 
         private void findResultButton_Click(object sender, EventArgs e)
         {
+            //TODO: Zmieńmy te nazwy :-)
             if(words_in_training_set.Value < defaultTrainingWordMaxLength)
             {
                 words_in_training_set.Value = defaultTrainingWordMaxLength;
@@ -74,35 +82,19 @@ namespace TAIO
             WordSetGenerator w = new WordSetGenerator(testingLetters, trainingLetters, defaultTestingWordMinLength);
 
             // Generate training set
-            Debug.WriteLine("Starting word sets generation");
             w.GenerateTrainingWordsSet(new StringBuilder(), 0, trainingWordMaxLength);
-            Debug.WriteLine("Finished training word sets generation");
 
             // Generate testing set
             w.GenerateTestingWordsSet(new StringBuilder(), 0, testingWordMaxLength, new bool[testingLetters.Length]);
-            Debug.WriteLine("Finished test word sets generation");
 
+            //TODO: Change to singleton
             TargetFunction targetFunction = new TargetFunction(automaton, w.TrainingWords, w.TestingWords);
 
-            // Start algorithm
-            Debug.WriteLine("Running PSO");
+            // Start algorithm and then remove unreached states
             PsoAlgorithm pso = new PsoAlgorithm((double)min_err_level.Value, (int)max_iteration_count.Value, (int)max_state_number.Value, alphabetLetters.Length, 100);
             foundAutomaton = pso.RunAlgorithm();
-            Debug.WriteLine("Ended PSO");
-            Debug.WriteLine("Ended removing unreached states");
 
             showOutputPictureButton.Enabled = true;
-        }
-
-        private string[] prepareAlphabet(int expectedMinAlphabetLength)
-        {
-            int newLength = Math.Max(alphabetLetters.Length, expectedMinAlphabetLength);
-            string[] newAlphabet = new string[newLength];
-            for (int i = 0; i < newLength; i++)
-            {
-                newAlphabet[i] = alphabetLetters[i % alphabetLetters.Length];
-            }
-            return newAlphabet;
         }
 
         private void inputPicture_Click(object sender, EventArgs e)
@@ -133,6 +125,19 @@ namespace TAIO
                 PictureWindow pw = new PictureWindow("Output Automaton", "OutputAutomaton" + automatoncounter + ".jpg");
                 pw.Show();
             }
+        }
+
+        #endregion
+
+        private string[] prepareAlphabet(int expectedMinAlphabetLength)
+        {
+            int newLength = Math.Max(alphabetLetters.Length, expectedMinAlphabetLength);
+            string[] newAlphabet = new string[newLength];
+            for (int i = 0; i < newLength; i++)
+            {
+                newAlphabet[i] = alphabetLetters[i%alphabetLetters.Length];
+            }
+            return newAlphabet;
         }
     }
 }

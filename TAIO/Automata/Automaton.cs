@@ -3,7 +3,6 @@ using System.Linq;
 using QuickGraph;
 using QuickGraph.Graphviz;
 using QuickGraph.Graphviz.Dot;
-using System.IO;
 using TAIO.PSO;
 
 namespace TAIO.Automata
@@ -13,31 +12,28 @@ namespace TAIO.Automata
     /// </summary>
     public class Automaton
     {
-        private readonly List<State> states;
-        private readonly int alphabetLen;
+        private readonly List<State> _states;
+        private readonly int _alphabetLength;
 
         #region Constructors
 
         /// <summary>
-        /// Takes alphabet letters as string array convertible to char array and function table for each state.
+        /// Initializes new instance of Automaton class.
         /// </summary>
-        /// <param name="alphabetLetters"></param>
-        /// <param name="functionTables"></param>
         public Automaton(string[] alphabetLetters, string[][] functionTables)
         {
-            states = CreateAutomaton(alphabetLetters, functionTables);
-            alphabetLen = alphabetLetters.Length;
+            _states = CreateAutomaton(alphabetLetters, functionTables);
+            _alphabetLength = alphabetLetters.Length;
         }
 
         /// <summary>
-        /// Takes Position object as parameter and creates instance of Automaton class
+        /// Initializes new instance of Automaton class.
         /// </summary>
-        /// <param name="bestPositionSoFar"></param>
         public Automaton(Position bestPositionSoFar)
         {
             int alphabetLength = bestPositionSoFar.OnePositions.GetLength(0);
             int numberOfStates = bestPositionSoFar.OnePositions.GetLength(1);
-            alphabetLen = alphabetLength;
+            _alphabetLength = alphabetLength;
 
             string[][] functionsTable = new string[numberOfStates][];
 
@@ -57,15 +53,16 @@ namespace TAIO.Automata
             for (int i = 0; i < numberOfStates; i++)
                 functionsTable[i] = functions[i].ToArray();
 
-            states = CreateAutomaton(Utils.EnumerateAlphabetSymbols(alphabetLength), functionsTable);
+            _states = CreateAutomaton(Utils.EnumerateAlphabetSymbols(alphabetLength), functionsTable);
         }
 
+        // Method is used in both constructors
         private List<State> CreateAutomaton(string[] alphabetLetters, string[][] functionTables)
         {
-            List<State> states = new List<State>();
+            List<State> automatonStates = new List<State>();
             char[] alphabet = new char[alphabetLetters.Length];
 
-            // Converting string alphabet to char array
+            // Convert string alphabet to char array
             for (int j = 0; j < alphabetLetters.Length; j++)
                 char.TryParse(alphabetLetters[j], out alphabet[j]);
 
@@ -73,14 +70,14 @@ namespace TAIO.Automata
             foreach (string[] function in functionTables)
             {
                 int[] stateFunction = new int[function.Length];
-                // Converting string function to integer array for State constructor
+
                 for (int j = 0; j < function.Length; j++)
                     int.TryParse(function[j], out stateFunction[j]);
 
-                states.Add(new State(alphabet, stateFunction));
+                automatonStates.Add(new State(alphabet, stateFunction));
             }
 
-            return states;
+            return automatonStates;
         }
 
         #endregion
@@ -88,36 +85,21 @@ namespace TAIO.Automata
         /// <summary>
         /// Returns number of active state after computations.
         /// </summary>
-        /// <param name="word"></param>
-        /// <returns></returns>
         public int GetFinalState(string word)
         {
-            State currentState = states[0];
+            State currentState = _states[0];
             for (int i = 0; i < word.Length; i++)
-                currentState = states.ElementAt(currentState.GetNextStateNumber(word[i]));
-            return states.IndexOf(currentState);
+                currentState = _states.ElementAt(currentState.GetNextStateNumber(word[i]));
+            return _states.IndexOf(currentState);
         }
-
-        public sealed class FileDotEngine : IDotEngine
-        {
-            public string Run(GraphvizImageType imageType, string dot, string outputFileName)
-            {
-                string output = outputFileName;
-                File.WriteAllText(output, dot);
-                var args = string.Format(@"{0} -Tjpg -O", output);
-                System.Diagnostics.Process.Start("TAIO_Execs\\dot.exe", args);
-                return output;
-            }
-        }
-
 
         public string GetGraph(string automatonName)
         {
-            bool[] visited = new bool[states.Count];
+            bool[] visited = new bool[_states.Count];
             string[,] matrix = GenerateGraphMatrix(ref visited);
 
             AdjacencyGraph<int, TaggedEdge<int, string>> g = new AdjacencyGraph<int, TaggedEdge<int, string>>(true);
-            for (int i = 0; i < states.Count; i++)
+            for (int i = 0; i < _states.Count; i++)
             {
                 if (visited[i])
                 {
@@ -125,8 +107,8 @@ namespace TAIO.Automata
                 }
             }
 
-            for (int i = 0; i < states.Count; i++)
-                for (int j = 0; j < states.Count; j++)
+            for (int i = 0; i < _states.Count; i++)
+                for (int j = 0; j < _states.Count; j++)
                 {
                     if (matrix[i, j] != "")
                         g.AddEdge(new TaggedEdge<int, string>(i, j, matrix[i, j]));
@@ -141,24 +123,24 @@ namespace TAIO.Automata
 
         private string[,] GenerateGraphMatrix(ref bool[] visited)
         {
-            string[,] matrix = new string[states.Count, states.Count];
-            for (int i = 0; i < states.Count; i++)
-                for (int j = 0; j < states.Count; j++)
+            string[,] matrix = new string[_states.Count, _states.Count];
+            for (int i = 0; i < _states.Count; i++)
+                for (int j = 0; j < _states.Count; j++)
                     matrix[i, j] = "";
 
-            for (int i = 0; i < states.Count; i++)
+            for (int i = 0; i < _states.Count; i++)
             {
-                for (int j = 0; j < alphabetLen; j++)
+                for (int j = 0; j < _alphabetLength; j++)
                 {
-                    matrix[i, states.ElementAt(i).GetNextStateNumber(System.Convert.ToChar(j + 48))] += ("," + j.ToString());
+                    matrix[i, _states.ElementAt(i).GetNextStateNumber(System.Convert.ToChar(j + 48))] += ("," + j.ToString());
                 }
             }
             CheckGraph(matrix, ref visited, 0);
-            for (int i = 0; i < states.Count; i++)
+            for (int i = 0; i < _states.Count; i++)
             {
                 if (!visited[i])
                 {
-                    for (int j = 0; j < states.Count; j++)
+                    for (int j = 0; j < _states.Count; j++)
                     {
                         matrix[i, j] = "";
                         matrix[j, i] = "";
@@ -167,8 +149,8 @@ namespace TAIO.Automata
             }
 
 
-            for (int i = 0; i < states.Count; i++)
-                for (int j = 0; j < states.Count; j++)
+            for (int i = 0; i < _states.Count; i++)
+                for (int j = 0; j < _states.Count; j++)
                 {
                     if (matrix[i, j] != "")
                         matrix[i, j] = matrix[i, j].Substring(1);
@@ -198,6 +180,4 @@ namespace TAIO.Automata
             }
         }
     }
-
-
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using TAIO.PSO;
 
 namespace TAIO.Automata
@@ -9,35 +10,35 @@ namespace TAIO.Automata
     /// </summary>
     class TargetFunction
     {
-        private static Automaton secretAutomaton;
-        private static List<string> trainingSet;
-        private static List<string> testSet;
+        private static Automaton _secretAutomaton;
+        private static List<string> _trainingSet;
+        private static List<string> _testSet;
 
         /// <summary>
-        /// Initialize a new instance of the TargetFunction class.
+        /// Initialize new instance of TargetFunction class.
         /// </summary>
         public TargetFunction(Automaton automaton, List<string> trainingSet, List<string> testSet) 
         {
-            secretAutomaton = automaton;
-            TargetFunction.trainingSet = trainingSet;
-            TargetFunction.testSet = testSet;
+            _secretAutomaton = automaton;
+            TargetFunction._trainingSet = trainingSet;
+            TargetFunction._testSet = testSet;
         }
-        
+
         /// <summary>
-        /// This function creates automaton object from given position and counts number of errors. 
+        /// This function creates automaton instance from given position and counts number of errors. 
         /// </summary>
         public static int GetFunctionValue(Position position)
         {
             Automaton foundAutomaton = new Automaton(position);
-            return trainingSet.Count(word => secretAutomaton.GetFinalState(word) != foundAutomaton.GetFinalState(word));
+            return _trainingSet.Count(word => _secretAutomaton.GetFinalState(word) != foundAutomaton.GetFinalState(word));
         }
 
         /// <summary>
-        /// This function counts number of errors for given automaton object.
+        /// This function counts number of errors for given automaton instance.
         /// </summary>
         public static int GetFunctionValueForAutomaton(Automaton automaton)
         {
-            return testSet.Count(word => secretAutomaton.GetFinalState(word) != automaton.GetFinalState(word));
+            return _testSet.Count(word => _secretAutomaton.GetFinalState(word) != automaton.GetFinalState(word));
         }
     }
 }

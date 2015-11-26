@@ -7,10 +7,10 @@ namespace TAIO.Automata
     /// </summary>
     class State
     {
-        private Dictionary<char, int> _controlFunction;
+        private readonly Dictionary<char, int> _controlFunction;
 
         /// <summary>
-        /// Initializes class with provided information.
+        /// Initializes new instance of State class.
         /// </summary>
         public State(char[] alphabet, int[] controlFunctionArray)
         {
@@ -20,7 +20,7 @@ namespace TAIO.Automata
         }
 
         /// <summary>
-        /// Returns next state number according to controlFunction associated with this state.
+        /// Returns next state number according to controlFunction.
         /// </summary>
         public int GetNextStateNumber(char letter)
         {
