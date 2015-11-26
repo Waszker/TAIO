@@ -31,9 +31,9 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.max_iteration_count = new System.Windows.Forms.NumericUpDown();
-            this.min_err_level = new System.Windows.Forms.NumericUpDown();
-            this.max_state_number = new System.Windows.Forms.NumericUpDown();
+            this.maxIterationCount = new System.Windows.Forms.NumericUpDown();
+            this.minErrLevel = new System.Windows.Forms.NumericUpDown();
+            this.maxStateNumber = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.uploadFileButton = new System.Windows.Forms.Button();
             this.showInputPictureButton = new System.Windows.Forms.Button();
@@ -46,17 +46,17 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.words_in_test_set = new System.Windows.Forms.NumericUpDown();
+            this.wordsInTestSet = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
-            this.words_in_training_set = new System.Windows.Forms.NumericUpDown();
+            this.wordsInTrainingSet = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.max_iteration_count)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.min_err_level)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.max_state_number)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maxIterationCount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.minErrLevel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maxStateNumber)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.words_in_test_set)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.words_in_training_set)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.wordsInTestSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.wordsInTrainingSet)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -67,9 +67,9 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.max_iteration_count, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.min_err_level, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.max_state_number, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.maxIterationCount, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.minErrLevel, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.maxStateNumber, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(19, 114);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -106,60 +106,60 @@
             this.label3.Text = "Max state number";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // max_iteration_count
+            // maxIterationCount
             // 
-            this.max_iteration_count.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.max_iteration_count.Location = new System.Drawing.Point(194, 16);
-            this.max_iteration_count.Maximum = new decimal(new int[] {
+            this.maxIterationCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.maxIterationCount.Location = new System.Drawing.Point(194, 16);
+            this.maxIterationCount.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
-            this.max_iteration_count.Minimum = new decimal(new int[] {
+            this.maxIterationCount.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.max_iteration_count.Name = "max_iteration_count";
-            this.max_iteration_count.Size = new System.Drawing.Size(58, 20);
-            this.max_iteration_count.TabIndex = 4;
-            this.max_iteration_count.Value = new decimal(new int[] {
+            this.maxIterationCount.Name = "maxIterationCount";
+            this.maxIterationCount.Size = new System.Drawing.Size(58, 20);
+            this.maxIterationCount.TabIndex = 4;
+            this.maxIterationCount.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
             // 
-            // min_err_level
+            // minErrLevel
             // 
-            this.min_err_level.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.min_err_level.Location = new System.Drawing.Point(194, 67);
-            this.min_err_level.Maximum = new decimal(new int[] {
+            this.minErrLevel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.minErrLevel.Location = new System.Drawing.Point(194, 67);
+            this.minErrLevel.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
-            this.min_err_level.Name = "min_err_level";
-            this.min_err_level.Size = new System.Drawing.Size(58, 20);
-            this.min_err_level.TabIndex = 5;
+            this.minErrLevel.Name = "minErrLevel";
+            this.minErrLevel.Size = new System.Drawing.Size(58, 20);
+            this.minErrLevel.TabIndex = 5;
             // 
-            // max_state_number
+            // maxStateNumber
             // 
-            this.max_state_number.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.max_state_number.Location = new System.Drawing.Point(194, 119);
-            this.max_state_number.Maximum = new decimal(new int[] {
+            this.maxStateNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.maxStateNumber.Location = new System.Drawing.Point(194, 119);
+            this.maxStateNumber.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
-            this.max_state_number.Minimum = new decimal(new int[] {
+            this.maxStateNumber.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.max_state_number.Name = "max_state_number";
-            this.max_state_number.Size = new System.Drawing.Size(58, 20);
-            this.max_state_number.TabIndex = 6;
-            this.max_state_number.Value = new decimal(new int[] {
+            this.maxStateNumber.Name = "maxStateNumber";
+            this.maxStateNumber.Size = new System.Drawing.Size(58, 20);
+            this.maxStateNumber.TabIndex = 6;
+            this.maxStateNumber.Value = new decimal(new int[] {
             1,
             0,
             0,
@@ -296,9 +296,9 @@
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.83843F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.16157F));
-            this.tableLayoutPanel2.Controls.Add(this.words_in_test_set, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.wordsInTestSet, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.label9, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.words_in_training_set, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.wordsInTrainingSet, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.label8, 0, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(340, 165);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -309,24 +309,24 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(203, 104);
             this.tableLayoutPanel2.TabIndex = 17;
             // 
-            // words_in_test_set
+            // wordsInTestSet
             // 
-            this.words_in_test_set.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.words_in_test_set.Location = new System.Drawing.Point(110, 67);
-            this.words_in_test_set.Maximum = new decimal(new int[] {
+            this.wordsInTestSet.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.wordsInTestSet.Location = new System.Drawing.Point(110, 67);
+            this.wordsInTestSet.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
-            this.words_in_test_set.Minimum = new decimal(new int[] {
+            this.wordsInTestSet.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.words_in_test_set.Name = "words_in_test_set";
-            this.words_in_test_set.Size = new System.Drawing.Size(89, 20);
-            this.words_in_test_set.TabIndex = 7;
-            this.words_in_test_set.Value = new decimal(new int[] {
+            this.wordsInTestSet.Name = "wordsInTestSet";
+            this.wordsInTestSet.Size = new System.Drawing.Size(89, 20);
+            this.wordsInTestSet.TabIndex = 7;
+            this.wordsInTestSet.Value = new decimal(new int[] {
             1,
             0,
             0,
@@ -346,24 +346,24 @@
             this.label9.Text = "Testing word max length";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // words_in_training_set
+            // wordsInTrainingSet
             // 
-            this.words_in_training_set.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.words_in_training_set.Location = new System.Drawing.Point(110, 16);
-            this.words_in_training_set.Maximum = new decimal(new int[] {
+            this.wordsInTrainingSet.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.wordsInTrainingSet.Location = new System.Drawing.Point(110, 16);
+            this.wordsInTrainingSet.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
-            this.words_in_training_set.Minimum = new decimal(new int[] {
+            this.wordsInTrainingSet.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.words_in_training_set.Name = "words_in_training_set";
-            this.words_in_training_set.Size = new System.Drawing.Size(89, 20);
-            this.words_in_training_set.TabIndex = 5;
-            this.words_in_training_set.Value = new decimal(new int[] {
+            this.wordsInTrainingSet.Name = "wordsInTrainingSet";
+            this.wordsInTrainingSet.Size = new System.Drawing.Size(89, 20);
+            this.wordsInTrainingSet.TabIndex = 5;
+            this.wordsInTrainingSet.Value = new decimal(new int[] {
             1,
             0,
             0,
@@ -408,13 +408,13 @@
             this.Text = "Automaton";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.max_iteration_count)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.min_err_level)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.max_state_number)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maxIterationCount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.minErrLevel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maxStateNumber)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.words_in_test_set)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.words_in_training_set)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.wordsInTestSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.wordsInTrainingSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -427,9 +427,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.NumericUpDown max_iteration_count;
-        private System.Windows.Forms.NumericUpDown min_err_level;
-        private System.Windows.Forms.NumericUpDown max_state_number;
+        private System.Windows.Forms.NumericUpDown maxIterationCount;
+        private System.Windows.Forms.NumericUpDown minErrLevel;
+        private System.Windows.Forms.NumericUpDown maxStateNumber;
         private System.Windows.Forms.Button showInputPictureButton;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button showOutputPictureButton;
@@ -440,9 +440,9 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.NumericUpDown words_in_test_set;
+        private System.Windows.Forms.NumericUpDown wordsInTestSet;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.NumericUpDown words_in_training_set;
+        private System.Windows.Forms.NumericUpDown wordsInTrainingSet;
         private System.Windows.Forms.Label label8;
     }
 }

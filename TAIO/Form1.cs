@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -64,16 +63,16 @@ namespace TAIO
         private void findResultButton_Click(object sender, EventArgs e)
         {
             //TODO: Zmieńmy te nazwy :-)
-            if(words_in_training_set.Value < defaultTrainingWordMaxLength)
+            if(wordsInTrainingSet.Value < defaultTrainingWordMaxLength)
             {
-                words_in_training_set.Value = defaultTrainingWordMaxLength;
+                wordsInTrainingSet.Value = defaultTrainingWordMaxLength;
             }
-            trainingWordMaxLength = (int) words_in_training_set.Value;
-            if(words_in_test_set.Value < defaultTestingWordMaxLength)
+            trainingWordMaxLength = (int) wordsInTrainingSet.Value;
+            if(wordsInTestSet.Value < defaultTestingWordMaxLength)
             {
-                words_in_test_set.Value = defaultTestingWordMaxLength;
+                wordsInTestSet.Value = defaultTestingWordMaxLength;
             }
-            testingWordMaxLength = (int) words_in_test_set.Value;
+            testingWordMaxLength = (int) wordsInTestSet.Value;
 
             // Prepare word sets
             string[] trainingLetters = prepareAlphabet(trainingWordMaxLength);
@@ -91,7 +90,7 @@ namespace TAIO
             TargetFunction targetFunction = new TargetFunction(automaton, w.TrainingWords, w.TestingWords);
 
             // Start algorithm and then remove unreached states
-            PsoAlgorithm pso = new PsoAlgorithm((double)min_err_level.Value, (int)max_iteration_count.Value, (int)max_state_number.Value, alphabetLetters.Length, 100);
+            PsoAlgorithm pso = new PsoAlgorithm((double)minErrLevel.Value, (int)maxIterationCount.Value, (int)maxStateNumber.Value, alphabetLetters.Length, 100);
             foundAutomaton = pso.RunAlgorithm();
 
             showOutputPictureButton.Enabled = true;
