@@ -62,7 +62,6 @@ namespace TAIO
 
         private void findResultButton_Click(object sender, EventArgs e)
         {
-            //TODO: Zmieńmy te nazwy :-)
             if(wordsInTrainingSet.Value < defaultTrainingWordMaxLength)
             {
                 wordsInTrainingSet.Value = defaultTrainingWordMaxLength;
@@ -85,8 +84,7 @@ namespace TAIO
 
             // Generate testing set
             w.GenerateTestingWordsSet(new StringBuilder(), 0, testingWordMaxLength, new bool[testingLetters.Length]);
-
-            //TODO: Change to singleton
+            
             TargetFunction targetFunction = new TargetFunction(automaton, w.TrainingWords, w.TestingWords);
 
             // Start algorithm and then remove unreached states
