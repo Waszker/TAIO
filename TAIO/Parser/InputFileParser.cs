@@ -4,15 +4,13 @@ using System.IO;
 namespace TAIO.Parser
 {
     /// <summary>
-    /// Implementation of input file parser
+    /// Implementation of input file parser.
     /// </summary>
     public class InputFileParser : IParser
     {
         /// <summary>
-        /// Returns data needed for automaton construction
+        /// Returns data needed for automaton construction.
         /// </summary>
-        /// <param name="path">Input file path</param>
-        /// <param name="functionTables"></param>
         public string[] Parse(string path, out string[][] functionTables)
         {
             string[] inputFileLines = null;

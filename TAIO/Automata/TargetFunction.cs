@@ -20,8 +20,8 @@ namespace TAIO.Automata
         public TargetFunction(Automaton automaton, List<string> trainingSet, List<string> testSet) 
         {
             _secretAutomaton = automaton;
-            TargetFunction._trainingSet = trainingSet;
-            TargetFunction._testSet = testSet;
+            _trainingSet = trainingSet;
+            _testSet = testSet;
         }
 
         /// <summary>

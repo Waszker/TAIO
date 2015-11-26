@@ -93,6 +93,7 @@ namespace TAIO.Automata
             return _states.IndexOf(currentState);
         }
 
+        //TODO: Wyrzućmy to z klasy Automaton
         public string GetGraph(string automatonName)
         {
             bool[] visited = new bool[_states.Count];
