@@ -42,7 +42,7 @@ namespace TAIO
             {
                 Title = @"Open Text File",
                 Filter = @"TXT files|*.txt",
-                InitialDirectory = @"C:\"
+                InitialDirectory = Directory.GetCurrentDirectory()
             };
             if (theDialog.ShowDialog() == DialogResult.OK)
             {
