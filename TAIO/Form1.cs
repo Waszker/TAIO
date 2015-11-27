@@ -54,7 +54,7 @@ namespace TAIO
                     alphabetLetters = new ImposedInputFileParser().Parse(filename,
                            out functionTables);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     MessageBox.Show("Wrong file format!","Error",MessageBoxButtons.OK, MessageBoxIcon.Error);
                     automaton = null;
@@ -87,13 +87,13 @@ namespace TAIO
             string[] testingLetters = prepareAlphabet(testingWordMaxLength);
 
             WordSetGenerator w = new WordSetGenerator(testingLetters, trainingLetters, defaultTestingWordMinLength);
-
+            Console.WriteLine("Generating training words!");
             // Generate training set
             w.GenerateTrainingWordsSet(new StringBuilder(), 0, trainingWordMaxLength);
-
+            Console.WriteLine("Generating testing words!");
             // Generate testing set
             w.GenerateTestingWordsSet(new StringBuilder(), 0, testingWordMaxLength, new bool[testingLetters.Length]);
-            
+            Console.WriteLine("Go go go!");
             TargetFunction targetFunction = new TargetFunction(automaton, w.TrainingWords, w.TestingWords);
 
             // Start algorithm and then remove unreached states

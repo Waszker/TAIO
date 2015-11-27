@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
 using TAIO.Automata;
 
 namespace TAIO.PSO
@@ -13,7 +14,7 @@ namespace TAIO.PSO
         private readonly int _maxIterationCount;
         private readonly int _maxStateCount;
         private readonly int _alphabetCount;
-        private readonly Particle[] _particles;
+        private readonly int _particleNumber;
 
         /// <summary>
         /// Creates instance using provided information.
@@ -29,7 +30,7 @@ namespace TAIO.PSO
             _maxIterationCount = maxIterationCount;
             _maxStateCount = maxStateCount;
             _alphabetCount = alphabetCount;
-            _particles = new Particle[particlesNumber];
+            _particleNumber = particlesNumber;
         }
 
         /// <summary>
@@ -38,19 +39,28 @@ namespace TAIO.PSO
         public Automaton RunAlgorithm()
         {
             List<Automaton> automatons = new List<Automaton>();
+            Thread[] threads = new Thread[_maxStateCount];
 
             for (int numberOfStates = 1; numberOfStates <= _maxStateCount; numberOfStates++)
             {
-                automatons.Add(GetBestAutomatonFromSpace(numberOfStates));
+                threads[numberOfStates - 1] = new Thread(() => { automatons.Add(GetBestAutomatonFromSpace(numberOfStates)); });
+                threads[numberOfStates - 1].Start();
             }
+
+            for (int numberOfStates = 1; numberOfStates <= _maxStateCount; numberOfStates++)
+            {
+                threads[numberOfStates - 1].Join();
+                System.Console.WriteLine("PSO join!");
+            }
+            System.Console.WriteLine("PSO end!");
 
             return EvaluateBestAutomaton(automatons);
         }
 
-        private void GenerateParticles(int stateCount)
+        private void GenerateParticles(Particle[] particles, int stateCount)
         {
-            for (int i = 0; i < _particles.Length; i++)
-                _particles[i] = new Particle(_alphabetCount, stateCount, i * (i % 2) + i + i*3);
+            for (int i = 0; i < particles.Length; i++)
+                particles[i] = new Particle(_alphabetCount, stateCount, i * (i % 2) + i + i * 3);
         }
 
         private Automaton GetBestAutomatonFromSpace(int numberOfStates)
@@ -59,22 +69,24 @@ namespace TAIO.PSO
             int lowestErrorSoFar = int.MaxValue;
             int c1, c2;
             int iteration = 0, errors = int.MaxValue;
-            GenerateParticles(numberOfStates);
+            Particle[] particles = new Particle[_particleNumber];
+            GenerateParticles(particles, numberOfStates);
             Position globalBest;
 
             // Possible changes
             c1 = c2 = 2;
+            System.Console.WriteLine("PSO start!");
 
             do
             {
                 // Update global best
-                globalBest = _particles[0].PersonalBestPosition;
-                foreach (Particle p in _particles)
+                globalBest = particles[0].PersonalBestPosition;
+                foreach (Particle p in particles)
                     if (p.PersonalBestPosition.CompareTo(globalBest) < 0)
                         globalBest = p.PersonalBestPosition;
 
                 // Move particles and check errors
-                foreach (Particle p in _particles)
+                foreach (Particle p in particles)
                 {
                     p.MoveParticle(globalBest, c1, c2);
                     int currentErrors = TargetFunction.GetFunctionValue(p.Position);
@@ -88,6 +100,7 @@ namespace TAIO.PSO
                 }
 
                 iteration++;
+                System.Console.WriteLine("Next iteration {0}", iteration);
             } while (iteration < _maxIterationCount);
 
             return new Automaton(bestPositionSoFar);
@@ -97,11 +110,23 @@ namespace TAIO.PSO
         {
             int bestError = int.MaxValue;
             int bestAutomatonIndex = 0;
+            int[] automatonResult = new int[automatons.Count];
+            Thread[] threads = new Thread[automatons.Count];
 
             for (int i = 0; i < automatons.Count; i++)
             {
-                int automatonError = TargetFunction.GetFunctionValueForAutomaton(automatons[i]);
-                if (automatonError < bestError)
+                threads[i] = new Thread(() => automatonResult[i] = TargetFunction.GetFunctionValueForAutomaton(automatons[i]));
+                threads[i].Start();
+            }
+
+            for (int i = 0; i < automatons.Count; i++)
+            {
+                threads[i].Join();
+            }
+
+            for (int i = 0; i < automatons.Count; i++)
+            {
+                if (automatonResult[i] < bestError)
                 {
                     bestAutomatonIndex = i;
                 }

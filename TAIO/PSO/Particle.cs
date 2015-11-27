@@ -57,7 +57,6 @@ namespace TAIO.PSO
 
         public void MoveParticle(Position globalBestPosition, int c1, int c2, Position localBestPosition = null)
         {
-            // TODO: Implement
             UpdateVelocity(globalBestPosition, c1, c2, localBestPosition);
             Position.UpdatePosition(_velocity);
             if (Position.CompareTo(PersonalBestPosition) < 0) PersonalBestPosition = Position;
@@ -65,7 +64,6 @@ namespace TAIO.PSO
 
         private void UpdateVelocity(Position globalBestPosition, int c1, int c2, Position localBestPosition = null)
         {
-            // TODO: Refactor this method
             Random r = new Random();
             Position result1 = PersonalBestPosition.Substract(Position);
             Position result2 = globalBestPosition.Substract(Position);
