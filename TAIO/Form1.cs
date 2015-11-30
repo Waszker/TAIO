@@ -20,7 +20,7 @@ namespace TAIO
         private readonly int defaultTrainingWordMaxLength = 5;
         private readonly int defaultTestingWordMinLength = 6;
         private int testingWordMaxLength = 10;
-        private int trainingWordMaxLength = 5;
+        private int trainingWordMaxLength = 8;
         private Automaton automaton;
         private Automaton foundAutomaton;
         private string[] alphabetLetters;
@@ -71,14 +71,18 @@ namespace TAIO
 
         private void findResultButton_Click(object sender, EventArgs e)
         {
-            if(wordsInTrainingSet.Value < defaultTrainingWordMaxLength)
+            if(wordsInTrainingSet.Value > defaultTrainingWordMaxLength)
             {
                 wordsInTrainingSet.Value = defaultTrainingWordMaxLength;
             }
             trainingWordMaxLength = (int) wordsInTrainingSet.Value;
-            if(wordsInTestSet.Value < defaultTestingWordMaxLength)
+            if(wordsInTestSet.Value > defaultTestingWordMaxLength)
             {
                 wordsInTestSet.Value = defaultTestingWordMaxLength;
+            }
+            if (wordsInTestSet.Value < defaultTestingWordMinLength)
+            {
+                wordsInTestSet.Value = defaultTestingWordMinLength;
             }
             testingWordMaxLength = (int) wordsInTestSet.Value;
 
@@ -93,14 +97,31 @@ namespace TAIO
             Console.WriteLine("Generating testing words!");
             // Generate testing set
             w.GenerateTestingWordsSet(new StringBuilder(), 0, testingWordMaxLength, new bool[testingLetters.Length]);
+            for(int i = 0;  i< NoOfWords.Value; i++)
+            {
+                StringBuilder word = new StringBuilder();
+                StringBuilder word2 = new StringBuilder();
+                Random random = new Random();
+                int length = random.Next((int)wordsInTrainingSet.Value, (int)WordLenght.Value + 1);
+                for(int j = 0; j < length; j++)
+                {
+                    word.Append(alphabetLetters[random.Next() % alphabetLetters.Length]);
+                    word2.Append(alphabetLetters[random.Next() % alphabetLetters.Length]);
+                }
+                w.TrainingWords.Add(word.ToString());
+                w.TestingWords.Add(word2.ToString());
+            }
             Console.WriteLine("Go go go!");
             TargetFunction targetFunction = new TargetFunction(automaton, w.TrainingWords, w.TestingWords);
 
             // Start algorithm and then remove unreached states
             PsoAlgorithm pso = new PsoAlgorithm((double)minErrLevel.Value, (int)maxIterationCount.Value, (int)maxStateNumber.Value, alphabetLetters.Length, 100);
-            foundAutomaton = pso.RunAlgorithm();
+            System.Tuple<Automaton, double> result = pso.RunAlgorithm();
+            foundAutomaton = result.Item1;
 
             showOutputPictureButton.Enabled = true;
+            string errorRate = result.Item2.ToString("N2");
+            MessageBox.Show($"Best automaton found with error rate: {errorRate}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void inputPicture_Click(object sender, EventArgs e)

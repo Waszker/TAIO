@@ -50,6 +50,10 @@
             this.label9 = new System.Windows.Forms.Label();
             this.wordsInTrainingSet = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
+            this.NoOfWords = new System.Windows.Forms.NumericUpDown();
+            this.WordLenght = new System.Windows.Forms.NumericUpDown();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.maxIterationCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minErrLevel)).BeginInit();
@@ -57,6 +61,8 @@
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.wordsInTestSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.wordsInTrainingSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NoOfWords)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WordLenght)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -252,6 +258,7 @@
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(484, 23);
             this.progressBar1.TabIndex = 12;
+            this.progressBar1.Visible = false;
             // 
             // progressBar2
             // 
@@ -259,6 +266,7 @@
             this.progressBar2.Name = "progressBar2";
             this.progressBar2.Size = new System.Drawing.Size(484, 23);
             this.progressBar2.TabIndex = 13;
+            this.progressBar2.Visible = false;
             // 
             // label5
             // 
@@ -269,6 +277,7 @@
             this.label5.Size = new System.Drawing.Size(133, 14);
             this.label5.TabIndex = 14;
             this.label5.Text = "Iteration progress";
+            this.label5.Visible = false;
             // 
             // label6
             // 
@@ -279,6 +288,7 @@
             this.label6.Size = new System.Drawing.Size(147, 14);
             this.label6.TabIndex = 15;
             this.label6.Text = "Computation progress";
+            this.label6.Visible = false;
             // 
             // label7
             // 
@@ -383,12 +393,58 @@
             this.label8.Text = "Training word max length";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // NoOfWords
+            // 
+            this.NoOfWords.Location = new System.Drawing.Point(450, 298);
+            this.NoOfWords.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.NoOfWords.Name = "NoOfWords";
+            this.NoOfWords.Size = new System.Drawing.Size(120, 20);
+            this.NoOfWords.TabIndex = 18;
+            // 
+            // WordLenght
+            // 
+            this.WordLenght.Location = new System.Drawing.Point(450, 328);
+            this.WordLenght.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.WordLenght.Name = "WordLenght";
+            this.WordLenght.Size = new System.Drawing.Size(120, 20);
+            this.WordLenght.TabIndex = 19;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(340, 298);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(85, 13);
+            this.label10.TabIndex = 20;
+            this.label10.Text = "number of words";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(340, 328);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(62, 13);
+            this.label11.TabIndex = 21;
+            this.label11.Text = "word length";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(666, 438);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.WordLenght);
+            this.Controls.Add(this.NoOfWords);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -415,6 +471,8 @@
             this.tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.wordsInTestSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.wordsInTrainingSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NoOfWords)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WordLenght)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -444,6 +502,10 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.NumericUpDown wordsInTrainingSet;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.NumericUpDown NoOfWords;
+        private System.Windows.Forms.NumericUpDown WordLenght;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
     }
 }
 

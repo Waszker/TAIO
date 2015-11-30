@@ -40,5 +40,10 @@ namespace TAIO.Automata
         {
             return _testSet.Count(word => _secretAutomaton.GetFinalState(word) != automaton.GetFinalState(word));
         }
+
+        public static int GetTestSetCount()
+        {
+            return _testSet.Count();
+        }
     }
 }
