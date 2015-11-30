@@ -70,7 +70,7 @@ v[] = v[] + c1 * rand() * (pbest[] - present[]) + c2 * rand() * (gbest[] - prese
 
 present[] = persent[] + v[] \\
 
-Każda cząstka podczas całego cyklu poszukiwania pamięta swoje dotychczasowe najlepsze położenie (miejsce w przestrzeni gdzie znaleziony automat miał najniższą wartość funkcji celu). Cząstka która posiada najlepsze położenie ze wszystkich cząstek zostaje cząstką global best. \\
+Każda cząstka podczas całego cyklu poszukiwania pamięta swoje dotychczasowe najlepsze położenie (miejsce w przestrzeni gdzie znaleziony automat miał najniższą wartość funkcji celu). Cząstka która posiada najlepsze położenie ze wszystkich cząstek zostaje cząstką global best. Jeżeli w trakcie działania algorytmu PSO któraś z cząstek nie będzie zyskiwać lepszych położeń przez więcej niż trzy iteracje zostaje jej przydzielone nowe, zupełnie losowe położenie. Dzięki temu zyskuje się lepszą zbieżność do najlepszego automatu, oraz unika ryzyka uwięzienia w lokalnym minimum. \\
 
 Zmienione zostały również zasady przemieszczania się cząstek w przestrzeni. Cząstki które w danym ruchu miały wyjść poza obszar poszukiwań zamiast być stopowane zostają umieszczone na początku tego obszaru z przeciwległej strony. \\
 
