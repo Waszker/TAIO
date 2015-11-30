@@ -9,6 +9,7 @@ namespace TAIO.PSO
     public class Particle
     {
         public Position PersonalBestPosition { get; private set; }
+        public int timeSinceBestChanged = 0;
         private Velocity _velocity;
         public Position Position { get; set; }
 
@@ -59,7 +60,8 @@ namespace TAIO.PSO
         {
             UpdateVelocity(globalBestPosition, c1, c2, localBestPosition);
             Position.UpdatePosition(_velocity);
-            if (Position.CompareTo(PersonalBestPosition) < 0) PersonalBestPosition = Position;
+            timeSinceBestChanged++;
+            if (Position.CompareTo(PersonalBestPosition) < 0) { PersonalBestPosition = Position; timeSinceBestChanged = 0; }
         }
 
         private void UpdateVelocity(Position globalBestPosition, int c1, int c2, Position localBestPosition = null)

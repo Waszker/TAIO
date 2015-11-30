@@ -36,7 +36,7 @@ namespace TAIO.PSO
         /// <summary>
         /// Runs PSO algorithm and returns best, found automaton.
         /// </summary>
-        public Automaton RunAlgorithm()
+        public System.Tuple<Automaton, double> RunAlgorithm()
         {
             List<Automaton> automatons = new List<Automaton>();
             Thread[] threads = new Thread[_maxStateCount];
@@ -68,7 +68,7 @@ namespace TAIO.PSO
             Position bestPositionSoFar = null;
             int lowestErrorSoFar = int.MaxValue;
             int c1, c2;
-            int iteration = 0, errors = int.MaxValue;
+            int iteration = 0;
             Particle[] particles = new Particle[_particleNumber];
             GenerateParticles(particles, numberOfStates);
             Position globalBest;
@@ -86,15 +86,18 @@ namespace TAIO.PSO
                         globalBest = p.PersonalBestPosition;
 
                 // Move particles and check errors
-                foreach (Particle p in particles)
+                for(int i = 0; i<particles.Length; i++)
                 {
+                    Particle p = particles[i];
                     p.MoveParticle(globalBest, c1, c2);
-                    int currentErrors = TargetFunction.GetFunctionValue(p.Position);
-                    if (currentErrors < errors) errors = currentErrors;
-                    if (errors < lowestErrorSoFar)
+                    if (p.timeSinceBestChanged > 3)
+                        p = particles[i] = new Particle(_alphabetCount, numberOfStates, i * (i % 2) + i + i * 3);
+
+                    int currentErrors = p.Position.TargetFunctionValue;
+                    if (currentErrors < lowestErrorSoFar)
                     {
-                        Debug.WriteLine("Found better particle! Updating... {0} {1} {2}", numberOfStates, errors, lowestErrorSoFar);
-                        lowestErrorSoFar = errors;
+                        Debug.WriteLine("Found better particle! Updating... {0} {1} {2}", numberOfStates, currentErrors, lowestErrorSoFar);
+                        lowestErrorSoFar = currentErrors;
                         bestPositionSoFar = Position.DeepClone(p.Position);
                     }
                 }
@@ -106,7 +109,7 @@ namespace TAIO.PSO
             return new Automaton(bestPositionSoFar);
         }
 
-        private Automaton EvaluateBestAutomaton(List<Automaton> automatons)
+        private System.Tuple<Automaton, double> EvaluateBestAutomaton(List<Automaton> automatons)
         {
             int bestError = int.MaxValue;
             int bestAutomatonIndex = 0;
@@ -115,7 +118,8 @@ namespace TAIO.PSO
 
             for (int i = 0; i < automatons.Count; i++)
             {
-                threads[i] = new Thread(() => automatonResult[i] = TargetFunction.GetFunctionValueForAutomaton(automatons[i]));
+                int g = i;
+                threads[i] = new Thread(() => automatonResult[g] = TargetFunction.GetFunctionValueForAutomaton(automatons[g]));
                 threads[i].Start();
             }
 
@@ -132,7 +136,8 @@ namespace TAIO.PSO
                 }
             }
 
-            return automatons[bestAutomatonIndex];
+            System.Console.WriteLine("{0} errors in {1} words", automatonResult[bestAutomatonIndex], TargetFunction.GetTestSetCount());
+            return new System.Tuple<Automaton, double>(automatons[bestAutomatonIndex], ((double)automatonResult[bestAutomatonIndex]/(double)TargetFunction.GetTestSetCount()));
         }
     }
 }
