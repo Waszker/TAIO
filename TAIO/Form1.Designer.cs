@@ -52,8 +52,12 @@
             this.label8 = new System.Windows.Forms.Label();
             this.NoOfWords = new System.Windows.Forms.NumericUpDown();
             this.WordLenght = new System.Windows.Forms.NumericUpDown();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
+            this.ParticlesNumber = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.maxIterationCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minErrLevel)).BeginInit();
@@ -63,6 +67,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.wordsInTrainingSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NoOfWords)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WordLenght)).BeginInit();
+            this.tableLayoutPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ParticlesNumber)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -71,6 +77,8 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.Controls.Add(this.ParticlesNumber, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.label10, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.maxIterationCount, 1, 0);
@@ -79,11 +87,12 @@
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(19, 114);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(256, 156);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(256, 208);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // label2
@@ -107,7 +116,7 @@
             this.label3.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label3.Location = new System.Drawing.Point(4, 103);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(183, 52);
+            this.label3.Size = new System.Drawing.Size(183, 50);
             this.label3.TabIndex = 3;
             this.label3.Text = "Max state number";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -151,7 +160,7 @@
             // maxStateNumber
             // 
             this.maxStateNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.maxStateNumber.Location = new System.Drawing.Point(194, 119);
+            this.maxStateNumber.Location = new System.Drawing.Point(194, 118);
             this.maxStateNumber.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -194,7 +203,7 @@
             this.uploadFileButton.Location = new System.Drawing.Point(19, 17);
             this.uploadFileButton.Margin = new System.Windows.Forms.Padding(10, 3, 3, 3);
             this.uploadFileButton.Name = "uploadFileButton";
-            this.uploadFileButton.Size = new System.Drawing.Size(256, 40);
+            this.uploadFileButton.Size = new System.Drawing.Size(256, 54);
             this.uploadFileButton.TabIndex = 0;
             this.uploadFileButton.Text = "Load automaton file";
             this.uploadFileButton.UseVisualStyleBackColor = true;
@@ -206,9 +215,9 @@
             this.showInputPictureButton.FlatAppearance.BorderSize = 2;
             this.showInputPictureButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.showInputPictureButton.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.showInputPictureButton.Location = new System.Drawing.Point(413, 17);
+            this.showInputPictureButton.Location = new System.Drawing.Point(336, 17);
             this.showInputPictureButton.Name = "showInputPictureButton";
-            this.showInputPictureButton.Size = new System.Drawing.Size(241, 40);
+            this.showInputPictureButton.Size = new System.Drawing.Size(318, 40);
             this.showInputPictureButton.TabIndex = 8;
             this.showInputPictureButton.Text = "Show input automaton";
             this.showInputPictureButton.UseVisualStyleBackColor = true;
@@ -230,9 +239,9 @@
             this.showOutputPictureButton.FlatAppearance.BorderSize = 2;
             this.showOutputPictureButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.showOutputPictureButton.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.showOutputPictureButton.Location = new System.Drawing.Point(413, 66);
+            this.showOutputPictureButton.Location = new System.Drawing.Point(336, 66);
             this.showOutputPictureButton.Name = "showOutputPictureButton";
-            this.showOutputPictureButton.Size = new System.Drawing.Size(241, 40);
+            this.showOutputPictureButton.Size = new System.Drawing.Size(318, 40);
             this.showOutputPictureButton.TabIndex = 10;
             this.showOutputPictureButton.Text = "Show output automaton";
             this.showOutputPictureButton.UseVisualStyleBackColor = true;
@@ -244,7 +253,7 @@
             this.findResultButton.FlatAppearance.BorderSize = 4;
             this.findResultButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.findResultButton.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.findResultButton.Location = new System.Drawing.Point(19, 298);
+            this.findResultButton.Location = new System.Drawing.Point(19, 348);
             this.findResultButton.Name = "findResultButton";
             this.findResultButton.Size = new System.Drawing.Size(256, 51);
             this.findResultButton.TabIndex = 11;
@@ -254,7 +263,7 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(170, 375);
+            this.progressBar1.Location = new System.Drawing.Point(167, 417);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(484, 23);
             this.progressBar1.TabIndex = 12;
@@ -262,7 +271,7 @@
             // 
             // progressBar2
             // 
-            this.progressBar2.Location = new System.Drawing.Point(170, 405);
+            this.progressBar2.Location = new System.Drawing.Point(167, 447);
             this.progressBar2.Name = "progressBar2";
             this.progressBar2.Size = new System.Drawing.Size(484, 23);
             this.progressBar2.TabIndex = 13;
@@ -272,7 +281,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label5.Location = new System.Drawing.Point(19, 375);
+            this.label5.Location = new System.Drawing.Point(16, 417);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(133, 14);
             this.label5.TabIndex = 14;
@@ -283,7 +292,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label6.Location = new System.Drawing.Point(19, 405);
+            this.label6.Location = new System.Drawing.Point(16, 447);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(147, 14);
             this.label6.TabIndex = 15;
@@ -294,11 +303,11 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label7.Location = new System.Drawing.Point(343, 140);
+            this.label7.Location = new System.Drawing.Point(339, 126);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(200, 22);
+            this.label7.Size = new System.Drawing.Size(140, 22);
             this.label7.TabIndex = 16;
-            this.label7.Text = "Cardinality of sets";
+            this.label7.Text = "Words in sets";
             // 
             // tableLayoutPanel2
             // 
@@ -310,7 +319,7 @@
             this.tableLayoutPanel2.Controls.Add(this.label9, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.wordsInTrainingSet, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.label8, 0, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(340, 165);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(336, 151);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
@@ -395,56 +404,140 @@
             // 
             // NoOfWords
             // 
-            this.NoOfWords.Location = new System.Drawing.Point(450, 298);
+            this.NoOfWords.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.NoOfWords.Location = new System.Drawing.Point(110, 16);
             this.NoOfWords.Maximum = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
             this.NoOfWords.Name = "NoOfWords";
-            this.NoOfWords.Size = new System.Drawing.Size(120, 20);
+            this.NoOfWords.Size = new System.Drawing.Size(89, 20);
             this.NoOfWords.TabIndex = 18;
             // 
             // WordLenght
             // 
-            this.WordLenght.Location = new System.Drawing.Point(450, 328);
+            this.WordLenght.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.WordLenght.Location = new System.Drawing.Point(110, 67);
             this.WordLenght.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
+            this.WordLenght.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.WordLenght.Name = "WordLenght";
-            this.WordLenght.Size = new System.Drawing.Size(120, 20);
+            this.WordLenght.Size = new System.Drawing.Size(89, 20);
             this.WordLenght.TabIndex = 19;
+            this.WordLenght.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.83843F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.16157F));
+            this.tableLayoutPanel3.Controls.Add(this.label12, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.label13, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.WordLenght, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.NoOfWords, 1, 0);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(336, 296);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(203, 103);
+            this.tableLayoutPanel3.TabIndex = 22;
+            // 
+            // label12
+            // 
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label12.Location = new System.Drawing.Point(4, 52);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(99, 50);
+            this.label12.TabIndex = 6;
+            this.label12.Text = "Word length";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label13
+            // 
+            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label13.Location = new System.Drawing.Point(4, 1);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(99, 50);
+            this.label13.TabIndex = 2;
+            this.label13.Text = "Number of words";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label14.Location = new System.Drawing.Point(339, 269);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(260, 22);
+            this.label14.TabIndex = 23;
+            this.label14.Text = "Additional training words";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(340, 298);
+            this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label10.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label10.Location = new System.Drawing.Point(4, 154);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(85, 13);
-            this.label10.TabIndex = 20;
-            this.label10.Text = "number of words";
+            this.label10.Size = new System.Drawing.Size(183, 53);
+            this.label10.TabIndex = 7;
+            this.label10.Text = "Particles number";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label11
+            // ParticlesNumber
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(340, 328);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(62, 13);
-            this.label11.TabIndex = 21;
-            this.label11.Text = "word length";
+            this.ParticlesNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.ParticlesNumber.Location = new System.Drawing.Point(194, 170);
+            this.ParticlesNumber.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.ParticlesNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.ParticlesNumber.Name = "ParticlesNumber";
+            this.ParticlesNumber.Size = new System.Drawing.Size(58, 20);
+            this.ParticlesNumber.TabIndex = 24;
+            this.ParticlesNumber.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(666, 438);
-            this.Controls.Add(this.label11);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.WordLenght);
-            this.Controls.Add(this.NoOfWords);
+            this.ClientSize = new System.Drawing.Size(666, 482);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.tableLayoutPanel3);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -473,6 +566,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.wordsInTrainingSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NoOfWords)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.WordLenght)).EndInit();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ParticlesNumber)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -504,8 +600,12 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.NumericUpDown NoOfWords;
         private System.Windows.Forms.NumericUpDown WordLenght;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.NumericUpDown ParticlesNumber;
     }
 }
 
