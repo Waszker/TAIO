@@ -74,4 +74,6 @@ Każda cząstka podczas całego cyklu poszukiwania pamięta swoje dotychczasowe 
 
 Zmienione zostały również zasady przemieszczania się cząstek w przestrzeni. Cząstki które w danym ruchu miały wyjść poza obszar poszukiwań zamiast być stopowane zostają umieszczone na początku tego obszaru z przeciwległej strony. \\
 
+Kluczowe okzazało się rozszerzenie generowanych dotychczas zbiorów - treningowego i testowego. Do zbioru treningowego zostały dodane losowe słowa (zawierające losowe litery alfabetu) o losowej długości z przedziału $[x1,x2]$ , gdzie x1 jest maksymalną długością słowa treningowego generowanego poprzednią metodą (przy użyciu wariacji z powtórzeniami) a x2 jest nowym parametrem oznaczającym maksmalną długość losowego słowa. W przypadku gdy x2 $<$ x1 nie generowane są żadne dodatkowe słowa. Użytkownik może również określić maksymalną ilość słów losowych. Dodatkowo dla każdego nowego słowa s1 dopisanego do zbioru treningowego tworzone jest słowo s2 tej samej długości lecz również o losowej zawartości, które jest dopisywane do zbioru słów testowych. \\
+
 \end{document}
