@@ -1,0 +1,77 @@
+
+%%%%%%%%%%%%%%%%%%%%%%% file typeinst.tex %%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% This is the LaTeX source for the instructions to authors using
+% the LaTeX document class 'llncs.cls' for contributions to
+% the Lecture Notes in Computer Sciences series.
+% http://www.springer.com/lncs       Springer Heidelberg 2006/05/04
+%
+% It may be used as a template for your own input - copy it
+% to a new file with a new name and use it as the basis
+% for your article.
+%
+% NB: the document class 'llncs' has its own and detailed documentation, see
+% ftp://ftp.springer.de/data/pubftp/pub/tex/latex/llncs/latex2e/llncsdoc.pdf
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass[runningheads,a4paper]{llncs}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amssymb}
+\setcounter{tocdepth}{3}
+\usepackage{graphicx}
+\usepackage[polish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{polski}
+\usepackage{color}
+
+\newcommand{\keywords}[1]{\par\addvspace\baselineskip
+\noindent\keywordname\enspace\ignorespaces#1}
+
+\begin{document}
+\vspace{-100pt}
+\mainmatter  % start of an individual contribution
+% first the title is needed
+\title{Konstrukcja automatu deterministycznego skończonego sprawdzającego zachodzenie relacji indukowanej przez język dla słów z danego języka (dokumentacja uzupełniająca)\\Teoria algorytmów i obliczeń}
+
+% a short form should be given in case it is too long for the running head
+\titlerunning{Uzupe?niaj?ca dokumetacja projektu TAIO}
+
+% the name(s) of the author(s) follow(s) next
+%
+% NB: Chinese authors should write their first names(s) in front of
+% their surnames. This ensures that the names appear correctly in
+% the running heads and the author index.
+%
+\author{Anna Zawadzka\and Sylwia Nowak\and Pavel Kuzmich\and Piotr Waszkiewicz}
+%
+\authorrunning{}
+% (feature abused for this document to repeat the title also on left hand pages)
+
+%
+% NB: a more complex sample for affiliations and the mapping to the
+% corresponding authors can be found in the file "llncs.dem"
+% (search for the string "\mainmatter" where a contribution starts).
+% "llncs.dem" accompanies the document class "llncs.cls".
+%
+
+\toctitle{Lecture Notes in Computer Science}
+\tocauthor{Authors' Instructions}
+\maketitle
+
+\section{Opis zmian}
+
+Podczas realizacji postawionego zadania w dużym stopniu starano się utrzymać zgodność z dokumentacją przygotowaną przed rozpoczęciem pracy. Zarówno proces generowania zbiorów słów treningowych i testowych, konwencja zapisu położenia i prędkości cząstek oraz cyfrowa reprezentacja automatu skończonego nie uległy zmianie. \\
+
+Poprawiono jednak działanie algorytmu PSO. W przeciwieństwie do zaproponowanej wcześniej wersji nowa nie uwzględnia położenia sąsiadów w szacowaniu nowych prędkości. Obecnie wzór na wyliczenie nowej prędkości cząstki wygląda następująco: \\
+
+v[] = v[] + c1 * rand() * (pbest[] - present[]) + c2 * rand() * (gbest[] - present[]) \\
+
+present[] = persent[] + v[] \\
+
+Każda cząstka podczas całego cyklu poszukiwania pamięta swoje dotychczasowe najlepsze położenie (miejsce w przestrzeni gdzie znaleziony automat miał najniższą wartość funkcji celu). Cząstka która posiada najlepsze położenie ze wszystkich cząstek zostaje cząstką global best. \\
+
+Zmienione zostały również zasady przemieszczania się cząstek w przestrzeni. Cząstki które w danym ruchu miały wyjść poza obszar poszukiwań zamiast być stopowane zostają umieszczone na początku tego obszaru z przeciwległej strony. \\
+
+\end{document}
