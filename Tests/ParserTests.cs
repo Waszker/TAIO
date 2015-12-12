@@ -9,7 +9,7 @@ namespace Tests
     [TestClass]
     public class ParserTests
     {
-        IParser parser = new ImposedInputFileParser();
+        IParser parser = new InputFileParser();
 
         [TestMethod]
         [ExpectedException(typeof(IOException))]

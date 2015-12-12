@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 
 namespace TAIO.Parser
@@ -9,7 +9,7 @@ namespace TAIO.Parser
     public class InputFileParser : IParser
     {
         /// <summary>
-        /// Returns data needed for automaton construction.
+        /// Method is used to parse input file with automaton definition.
         /// </summary>
         public string[] Parse(string path, out string[][] functionTables)
         {
@@ -25,20 +25,20 @@ namespace TAIO.Parser
             }
 
             // Get states number
-            int statesNumber = inputFileLines.Length - 1;
+            int statesNumber = int.Parse(inputFileLines[0].Split(',')[0]);
 
-            // Get alphabet letters
-            string[] alphabetLetters = inputFileLines[0].Split(';');
+            //Get number of alphabet letters
+            int numberOfAlphabetLetters = int.Parse(inputFileLines[0].Split(',')[1]);
 
             // Get function table for each automaton state
             functionTables = new string[statesNumber][];
             for (int i = 0; i < statesNumber; i++)
             {
-                string[] states = inputFileLines[i + 1].Split(';');
+                string[] states = inputFileLines[i + 1].Split(',');
                 functionTables[i] = states;
             }
-
-            return alphabetLetters;
+            
+            return Utils.EnumerateAlphabetSymbols(numberOfAlphabetLetters);
         }
     }
 }

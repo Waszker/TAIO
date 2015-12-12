@@ -1,5 +1,6 @@
-﻿using QuickGraph;
+﻿﻿using QuickGraph;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -13,6 +14,7 @@ namespace TAIO
     /// <summary>
     /// Main window class.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public partial class Form1 : Form
     {
         #region Fields
@@ -56,7 +58,7 @@ namespace TAIO
 
                 try
                 {
-                    alphabetLetters = new ImposedInputFileParser().Parse(filename,
+                    alphabetLetters = new InputFileParser().Parse(filename,
                            out functionTables);
                 }
                 catch (Exception)
