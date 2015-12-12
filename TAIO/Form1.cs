@@ -194,7 +194,7 @@ namespace TAIO
             {
                 for (int j = 0; j < basicStates.Length; j++)
                 {
-                    automaton = Automaton.GetRandomAutomaton(maxNumberOfLetters, basicStates[j]);
+                    automaton = Automaton.GetRandomAutomaton(alphabetLetters, basicStates[j]);
                     showInputPictureButton.Enabled = true;
                     goto LOL;
                     findResultButton_Click(sender, e);

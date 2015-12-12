@@ -134,20 +134,14 @@ namespace TAIO.Automata
         /// <param name="numberOfLetters"></param>
         /// <param name="numberOfStates"></param>
         /// <returns></returns>
-        static public Automaton GetRandomAutomaton(int numberOfLetters, int numberOfStates)
+        static public Automaton GetRandomAutomaton(string[] alphabetLetters, int numberOfStates)
         {
-            string[] alphabetLetters = new string[numberOfLetters];
-            for (int i = 0; i < numberOfLetters; i++)
-                alphabetLetters[i] = ((char)('0' + i)).ToString();
-
             string[][] functionTable = new string[numberOfStates][];
-            for (int i = 0; i < numberOfStates; i++) functionTable[i] = new string[numberOfLetters];
+            for (int i = 0; i < numberOfStates; i++) functionTable[i] = new string[alphabetLetters.Length];
 
             for (int i = 0; i < numberOfStates; i++)
-                for (int j = 0; j < numberOfLetters; j++)
-                {
+                for (int j = 0; j < alphabetLetters.Length; j++)
                     functionTable[i][j] = (new System.Random().Next() % numberOfStates).ToString();
-                }
 
             return new Automaton(alphabetLetters, functionTable);
         }
