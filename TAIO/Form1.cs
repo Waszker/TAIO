@@ -28,6 +28,10 @@ namespace TAIO
 
         #endregion
 
+
+        /// <summary>
+        /// Creates main window
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
