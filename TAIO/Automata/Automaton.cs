@@ -126,6 +126,30 @@ namespace TAIO.Automata
             return output;
         }
 
+        /// <summary>
+        /// Returns some random generated automaton.
+        /// </summary>
+        /// <param name="numberOfLetters"></param>
+        /// <param name="numberOfStates"></param>
+        /// <returns></returns>
+        static public Automaton GetRandomAutomaton(int numberOfLetters, int numberOfStates)
+        {
+            string[] alphabetLetters = new string[numberOfLetters];
+            for (int i = 0; i < numberOfLetters; i++)
+                alphabetLetters[i] = ((char)('0' + i)).ToString();
+
+            string[][] functionTable = new string[numberOfStates][];
+            for (int i = 0; i < numberOfStates; i++) functionTable[i] = new string[numberOfLetters];
+
+            for (int i = 0; i < numberOfStates; i++)
+                for (int j = 0; j < numberOfLetters; j++)
+                {
+                    functionTable[i][j] = (new System.Random().Next() % numberOfStates).ToString();
+                }
+
+            return new Automaton(alphabetLetters, functionTable);
+        }
+
         private string[,] GenerateGraphMatrix(ref bool[] visited)
         {
             string[,] matrix = new string[_states.Count, _states.Count];
