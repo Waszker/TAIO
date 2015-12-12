@@ -56,6 +56,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ParticlesNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxIterationCount)).BeginInit();
@@ -233,7 +234,7 @@
             this.uploadFileButton.FlatAppearance.BorderSize = 2;
             this.uploadFileButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.uploadFileButton.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.uploadFileButton.Location = new System.Drawing.Point(19, 12);
+            this.uploadFileButton.Location = new System.Drawing.Point(19, 34);
             this.uploadFileButton.Margin = new System.Windows.Forms.Padding(10, 3, 3, 3);
             this.uploadFileButton.Name = "uploadFileButton";
             this.uploadFileButton.Size = new System.Drawing.Size(256, 54);
@@ -296,7 +297,7 @@
             // 
             // progressBar2
             // 
-            this.progressBar2.Location = new System.Drawing.Point(170, 419);
+            this.progressBar2.Location = new System.Drawing.Point(170, 461);
             this.progressBar2.Name = "progressBar2";
             this.progressBar2.Size = new System.Drawing.Size(484, 23);
             this.progressBar2.TabIndex = 13;
@@ -306,7 +307,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label6.Location = new System.Drawing.Point(19, 419);
+            this.label6.Location = new System.Drawing.Point(19, 461);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(147, 14);
             this.label6.TabIndex = 15;
@@ -509,12 +510,27 @@
             this.label14.TabIndex = 23;
             this.label14.Text = "Additional training words";
             // 
+            // button1
+            // 
+            this.button1.Enabled = false;
+            this.button1.FlatAppearance.BorderSize = 4;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button1.Location = new System.Drawing.Point(19, 407);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(635, 51);
+            this.button1.TabIndex = 24;
+            this.button1.Text = "Run tests";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(666, 453);
+            this.ClientSize = new System.Drawing.Size(666, 496);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.tableLayoutPanel3);
             this.Controls.Add(this.tableLayoutPanel2);
@@ -581,6 +597,7 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.NumericUpDown ParticlesNumber;
+        private System.Windows.Forms.Button button1;
     }
 }
 
