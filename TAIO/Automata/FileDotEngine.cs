@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using QuickGraph.Graphviz;
 using QuickGraph.Graphviz.Dot;
 
@@ -10,6 +9,13 @@ namespace TAIO.Automata
     /// </summary>
     public sealed class FileDotEngine : IDotEngine
     {
+        /// <summary>
+        /// Runs graph generation code.
+        /// </summary>
+        /// <param name="imageType"></param>
+        /// <param name="dot"></param>
+        /// <param name="outputFileName"></param>
+        /// <returns></returns>
         public string Run(GraphvizImageType imageType, string dot, string outputFileName)
         {
             string output = outputFileName;
