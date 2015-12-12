@@ -188,11 +188,11 @@ namespace TAIO
         {
             int[] basicStates = new int[] { 4, 6, 10, 15, 20, 30, 50, 80 };
             int automataAmount = 10;
-            int maxNumberOfLetters = 5;
             alphabetLetters = new string[] { "0", "1", "2", "3", "4" };
-            for (int i = 0; i < automataAmount; i++)
+
+            for (int j = 0; j < basicStates.Length; j++)
             {
-                for (int j = 0; j < basicStates.Length; j++)
+                for (int i = 0; i < automataAmount; i++)
                 {
                     automaton = Automaton.GetRandomAutomaton(alphabetLetters, basicStates[j]);
                     showInputPictureButton.Enabled = true;
