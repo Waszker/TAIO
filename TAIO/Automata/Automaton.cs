@@ -136,12 +136,13 @@ namespace TAIO.Automata
         /// <returns></returns>
         static public Automaton GetRandomAutomaton(string[] alphabetLetters, int numberOfStates)
         {
+            System.Random r = new System.Random();
             string[][] functionTable = new string[numberOfStates][];
             for (int i = 0; i < numberOfStates; i++) functionTable[i] = new string[alphabetLetters.Length];
 
             for (int i = 0; i < numberOfStates; i++)
                 for (int j = 0; j < alphabetLetters.Length; j++)
-                    functionTable[i][j] = (new System.Random().Next() % numberOfStates).ToString();
+                    functionTable[i][j] = (r.Next() % numberOfStates).ToString();
 
             return new Automaton(alphabetLetters, functionTable);
         }
