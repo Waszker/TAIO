@@ -11,11 +11,6 @@ namespace Tests
     [TestClass()]
     public class ParticleTests
     {
-        [TestMethod()]
-        public void ParticleTest()
-        {
-            Assert.Fail();
-        }
 
         [TestMethod()]
         public void DistanceToTest()
