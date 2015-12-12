@@ -41,13 +41,13 @@ namespace TAIO.PSO
             List<Automaton> automatons = new List<Automaton>();
             Thread[] threads = new Thread[_maxStateCount];
 
-            for (int numberOfStates = 1; numberOfStates <= _maxStateCount; numberOfStates++)
+            for (int numberOfStates = 3; numberOfStates <= _maxStateCount; numberOfStates++)
             {
                 threads[numberOfStates - 1] = new Thread(() => { automatons.Add(GetBestAutomatonFromSpace(numberOfStates)); });
                 threads[numberOfStates - 1].Start();
             }
 
-            for (int numberOfStates = 1; numberOfStates <= _maxStateCount; numberOfStates++)
+            for (int numberOfStates = 3; numberOfStates <= _maxStateCount; numberOfStates++)
             {
                 threads[numberOfStates - 1].Join();
                 System.Console.WriteLine("PSO join!");

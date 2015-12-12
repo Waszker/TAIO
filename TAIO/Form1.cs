@@ -126,10 +126,10 @@ namespace TAIO
 
             showOutputPictureButton.Enabled = true;
             string errorRate = result.Item2.ToString("N2");
-            MessageBox.Show($"Best automaton found with error rate: {errorRate}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //MessageBox.Show($"Best automaton found with error rate: {errorRate}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             AdjacencyGraph<int, TaggedEdge<int, string>> g;
             foundAutomaton.GetGraph("OutputAutomaton" + automatoncounter, out g);
-            GenerateFile(g);
+            GenerateFile(g, errorRate, automaton.States.Count);
         }
 
         private void inputPicture_Click(object sender, EventArgs e)
@@ -185,7 +185,7 @@ namespace TAIO
         private void GenerateTests(object sender, EventArgs e)
         {
             int[] basicStates = new int[] { 4, 6, 10, 15 };
-            int automataAmount = 1;
+            int automataAmount = 10;
             int maxNumberOfLetters = 5;
             alphabetLetters = new string[] { "0", "1", "2", "3", "4" };
             for (int i = 0; i < automataAmount; i++)
@@ -199,7 +199,7 @@ namespace TAIO
             }
         }
 
-        private void GenerateFile(AdjacencyGraph<int, TaggedEdge<int, string>> g)
+        private void GenerateFile(AdjacencyGraph<int, TaggedEdge<int, string>> g, string errorRate, int originalStatesCount)
         {
             string path = @"resultAutomaton" + (DateTime.Now.ToString()).Replace(" ", "-").Replace(":","-") + ".txt"; 
             StringBuilder output = new StringBuilder();
@@ -259,6 +259,8 @@ namespace TAIO
             {
                 tw.Write(stateCounter + ", " + alphabetLetters.Length);
                 tw.WriteLine(output);
+                tw.WriteLine("Error rate: " +errorRate);
+                tw.WriteLine("Number of states in input automaton: " + originalStatesCount);
                 tw.Close();
             }
         }
