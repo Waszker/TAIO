@@ -3,9 +3,15 @@ using TAIO.Automata;
 
 namespace Tests
 {
+    /// <summary>
+    /// Class testing generating trainning and testing words sets
+    /// </summary>
     [TestClass]
     public class WordSetGeneratorTest
     {
+        /// <summary>
+        /// Testing generating words with variations with repeat algorithm for trainig words set
+        /// </summary>
         [TestMethod]
         public void GenerateVariationsTest()
         {
@@ -25,6 +31,9 @@ namespace Tests
             Assert.AreEqual(expectedAmount, words.Count);
         }
 
+        /// <summary>
+        /// Testing generating words with variations without repeat algorithm for testing words set
+        /// </summary>
         [TestMethod]
         public void GenerateVariationsWithoutRepetTest()
         {

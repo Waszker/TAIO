@@ -8,11 +8,28 @@ namespace TAIO.PSO
     /// </summary>
     public class Particle
     {
+        /// <summary>
+        /// Personal best position of particle found during PSO algorthm run.
+        /// </summary>
         public Position PersonalBestPosition { get; private set; }
-        public int timeSinceBestChanged = 0;
-        private Velocity _velocity;
-        public Position Position { get; set; }
 
+        /// <summary>
+        /// Number of iterations since particle has changed it position.
+        /// </summary>
+        public int timeSinceBestChanged = 0;
+
+        /// <summary>
+        /// Particle position in search space.
+        /// </summary>
+        public Position Position { get; set; }
+        private Velocity _velocity;
+
+        /// <summary>
+        /// Creates particle for PSO algorithm that will traverse automata space.
+        /// </summary>
+        /// <param name="symbolCount"></param>
+        /// <param name="stateCount"></param>
+        /// <param name="seed"></param>
         public Particle(int symbolCount, int stateCount, int seed = 0)
         {
             Position = new Position(symbolCount, stateCount, seed);
@@ -34,6 +51,11 @@ namespace TAIO.PSO
             return currentParticleWord.Where((t, i) => t != anotherParticleWord[i]).Count();
         }
 
+        /// <summary>
+        /// TODO: Fix meeeeee!
+        /// </summary>
+        /// <param name="onePositions"></param>
+        /// <returns></returns>
         private bool[] ConstructWord(int[,] onePositions)
         {
             // Dimentions size
@@ -56,6 +78,13 @@ namespace TAIO.PSO
             return word;
         }
 
+        /// <summary>
+        /// Moves particle to another position according to PSO guidelines.
+        /// </summary>
+        /// <param name="globalBestPosition"></param>
+        /// <param name="c1"></param>
+        /// <param name="c2"></param>
+        /// <param name="localBestPosition"></param>
         public void MoveParticle(Position globalBestPosition, int c1, int c2, Position localBestPosition = null)
         {
             UpdateVelocity(globalBestPosition, c1, c2, localBestPosition);
@@ -63,7 +92,7 @@ namespace TAIO.PSO
             timeSinceBestChanged++;
             if (Position.CompareTo(PersonalBestPosition) < 0) { PersonalBestPosition = Position; timeSinceBestChanged = 0; }
         }
-
+        
         private void UpdateVelocity(Position globalBestPosition, int c1, int c2, Position localBestPosition = null)
         {
             Random r = new Random();

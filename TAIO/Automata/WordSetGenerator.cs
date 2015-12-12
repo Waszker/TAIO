@@ -12,11 +12,11 @@ namespace TAIO.Automata
         private readonly string[] _trainingLetters;
         private readonly int _minTestingWordLength;
         /// <summary>
-        /// Test words set
+        /// Set of testing words
         /// </summary>
         public List<string> TestingWords { get; set; }
         /// <summary>
-        /// 
+        /// Set of training words
         /// </summary>
         public List<string> TrainingWords { get; set; }
 
