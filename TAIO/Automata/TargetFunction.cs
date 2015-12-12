@@ -8,7 +8,7 @@ namespace TAIO.Automata
     /// <summary>
     /// This class represents the target function object and used to count error number for given automan. 
     /// </summary>
-    class TargetFunction
+    public class TargetFunction
     {
         private static Automaton _secretAutomaton;
         private static List<string> _trainingSet;
@@ -48,6 +48,15 @@ namespace TAIO.Automata
         public static int GetTestSetCount()
         {
             return _testSet.Count();
+        }
+
+        /// <summary>
+        /// Returns information if target function has been already initialized.
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsInitialized()
+        {
+            return _secretAutomaton != null;
         }
     }
 }
