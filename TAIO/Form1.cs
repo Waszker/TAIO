@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuickGraph;
+using System;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -126,12 +127,16 @@ namespace TAIO
             showOutputPictureButton.Enabled = true;
             string errorRate = result.Item2.ToString("N2");
             MessageBox.Show($"Best automaton found with error rate: {errorRate}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            AdjacencyGraph<int, TaggedEdge<int, string>> g;
+            foundAutomaton.GetGraph("OutputAutomaton" + automatoncounter, out g);
+            GenerateFile(g);
         }
 
         private void inputPicture_Click(object sender, EventArgs e)
         {
             automatoncounter++;
-            automaton.GetGraph("InputAutomaton" + automatoncounter);
+            AdjacencyGraph<int, TaggedEdge<int, string>> g;
+            automaton.GetGraph("InputAutomaton" + automatoncounter, out g);
 
             //TODO: Needs to be changed
             System.Threading.Thread.Sleep(1000);
@@ -146,7 +151,8 @@ namespace TAIO
         private void showOutputPictureButton_Click(object sender, EventArgs e)
         {
             automatoncounter++;
-            foundAutomaton.GetGraph("OutputAutomaton" + automatoncounter);
+            AdjacencyGraph<int, TaggedEdge<int, string>> g;
+            foundAutomaton.GetGraph("OutputAutomaton" + automatoncounter, out g);
 
             //TODO: Needs to be changed
             System.Threading.Thread.Sleep(1000);
@@ -190,6 +196,70 @@ namespace TAIO
                     findResultButton_Click(sender, e);
                     int state = foundAutomaton.GetFinalState("01");
                 }
+            }
+        }
+
+        private void GenerateFile(AdjacencyGraph<int, TaggedEdge<int, string>> g)
+        {
+            string path = @"resultAutomaton" + (DateTime.Now.ToString()).Replace(" ", "-").Replace(":","-") + ".txt"; 
+            StringBuilder output = new StringBuilder();
+            File.Create(path).Dispose();
+
+            int stateCounter = g.VertexCount;
+
+            int[,] stateTable = new int[stateCounter, alphabetLetters.Length];
+            for (int i = 0; i < stateCounter; i++)
+                for (int j = 0; j < alphabetLetters.Length; j++)
+                    stateTable[i, j] = -1;
+            int[] vertices = new int[g.VertexCount];
+
+           
+            int jj=0;
+            foreach (int v in g.Vertices)
+            {
+                vertices[jj] = v;
+                jj++;
+            }
+   
+            foreach (TaggedEdge<int, string> e in g.Edges)
+            {
+                string[] states = e.Tag.Split(',');
+
+                for (int k = 0; k < states.Length; k++)
+                {
+                    int source = -1;
+                    int target = -1;
+                    for(int l=0;l<vertices.Length;l++)
+                    {
+                        if (vertices[l] == e.Source)
+                            source = l;
+                        if (vertices[l] == e.Target)
+                            target = l;
+                    }
+                    stateTable[source, Int32.Parse(states[k])] = target;
+                }
+                    
+            }
+
+            for (int i = 0; i < stateCounter; i++)
+            {
+                StringBuilder row = new StringBuilder();
+                for (int j = 0; j < alphabetLetters.Length; j++)
+                {
+                    if (j > 0)
+                        row.Append(", ");
+                    row.Append(stateTable[i, j]);
+                }
+                output.Append("\r\n");
+                output.Append(row);
+            }
+                
+
+            using (TextWriter tw = new StreamWriter(path))
+            {
+                tw.Write(stateCounter + ", " + alphabetLetters.Length);
+                tw.WriteLine(output);
+                tw.Close();
             }
         }
     }
