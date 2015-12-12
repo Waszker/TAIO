@@ -45,18 +45,24 @@ namespace TAIO.PSO
         public double DistanceTo(Particle particle)
         {
             // Construct words
-            bool[] currentParticleWord = ConstructWord(Position.OnePositions);
-            bool[] anotherParticleWord = ConstructWord(particle.Position.OnePositions);
+            bool[] currentParticleWord = CompressAutomatonRepresentation(Position.OnePositions);
+            bool[] anotherParticleWord = CompressAutomatonRepresentation(particle.Position.OnePositions);
 
             return currentParticleWord.Where((t, i) => t != anotherParticleWord[i]).Count();
         }
 
         /// <summary>
-        /// TODO: Fix meeeeee!
+        /// Compress automaton representation from two dimensional to one dimensional array.
+        /// 
+        /// **************
+        /// 0 1 0
+        /// 1 0 0 -> 1 0 2 
+        /// 0 0 1
+        /// **************
+        /// 
         /// </summary>
-        /// <param name="onePositions"></param>
-        /// <returns></returns>
-        private bool[] ConstructWord(int[,] onePositions)
+        /// <returns>Compressed automaton respresentation</returns>
+        private bool[] CompressAutomatonRepresentation(int[,] onePositions)
         {
             // Dimentions size
             int alphabetLength = onePositions.GetLength(0);
