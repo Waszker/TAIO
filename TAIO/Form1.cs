@@ -186,7 +186,7 @@ namespace TAIO
 
         private void GenerateTests(object sender, EventArgs e)
         {
-            int[] basicStates = new int[] { 4, 6, 10, 15 };
+            int[] basicStates = new int[] { 4, 6, 10, 15, 20, 30, 50, 80 };
             int automataAmount = 1;
             int maxNumberOfLetters = 5;
             alphabetLetters = new string[] { "0", "1", "2", "3", "4" };
@@ -196,7 +196,6 @@ namespace TAIO
                 {
                     automaton = Automaton.GetRandomAutomaton(maxNumberOfLetters, basicStates[j]);
                     findResultButton_Click(sender, e);
-                    int state = foundAutomaton.GetFinalState("01");
                 }
             }
         }
