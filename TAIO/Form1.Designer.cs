@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.ParticlesNumber = new System.Windows.Forms.NumericUpDown();
+            this.label10 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.maxIterationCount = new System.Windows.Forms.NumericUpDown();
@@ -40,9 +42,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.showOutputPictureButton = new System.Windows.Forms.Button();
             this.findResultButton = new System.Windows.Forms.Button();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.progressBar2 = new System.Windows.Forms.ProgressBar();
-            this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -56,9 +56,8 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.ParticlesNumber = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ParticlesNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxIterationCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minErrLevel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxStateNumber)).BeginInit();
@@ -68,7 +67,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.NoOfWords)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WordLenght)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ParticlesNumber)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -94,6 +92,41 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(256, 208);
             this.tableLayoutPanel1.TabIndex = 1;
+            // 
+            // ParticlesNumber
+            // 
+            this.ParticlesNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.ParticlesNumber.Location = new System.Drawing.Point(194, 170);
+            this.ParticlesNumber.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.ParticlesNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.ParticlesNumber.Name = "ParticlesNumber";
+            this.ParticlesNumber.Size = new System.Drawing.Size(58, 20);
+            this.ParticlesNumber.TabIndex = 24;
+            this.ParticlesNumber.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label10.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label10.Location = new System.Drawing.Point(4, 154);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(183, 53);
+            this.label10.TabIndex = 7;
+            this.label10.Text = "Particles number";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label2
             // 
@@ -200,7 +233,7 @@
             this.uploadFileButton.FlatAppearance.BorderSize = 2;
             this.uploadFileButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.uploadFileButton.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.uploadFileButton.Location = new System.Drawing.Point(19, 17);
+            this.uploadFileButton.Location = new System.Drawing.Point(19, 12);
             this.uploadFileButton.Margin = new System.Windows.Forms.Padding(10, 3, 3, 3);
             this.uploadFileButton.Name = "uploadFileButton";
             this.uploadFileButton.Size = new System.Drawing.Size(256, 54);
@@ -261,38 +294,19 @@
             this.findResultButton.UseVisualStyleBackColor = true;
             this.findResultButton.Click += new System.EventHandler(this.findResultButton_Click);
             // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(167, 417);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(484, 23);
-            this.progressBar1.TabIndex = 12;
-            this.progressBar1.Visible = false;
-            // 
             // progressBar2
             // 
-            this.progressBar2.Location = new System.Drawing.Point(167, 447);
+            this.progressBar2.Location = new System.Drawing.Point(170, 419);
             this.progressBar2.Name = "progressBar2";
             this.progressBar2.Size = new System.Drawing.Size(484, 23);
             this.progressBar2.TabIndex = 13;
             this.progressBar2.Visible = false;
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label5.Location = new System.Drawing.Point(16, 417);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(133, 14);
-            this.label5.TabIndex = 14;
-            this.label5.Text = "Iteration progress";
-            this.label5.Visible = false;
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label6.Location = new System.Drawing.Point(16, 447);
+            this.label6.Location = new System.Drawing.Point(19, 419);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(147, 14);
             this.label6.TabIndex = 15;
@@ -495,55 +509,18 @@
             this.label14.TabIndex = 23;
             this.label14.Text = "Additional training words";
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label10.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label10.Location = new System.Drawing.Point(4, 154);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(183, 53);
-            this.label10.TabIndex = 7;
-            this.label10.Text = "Particles number";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // ParticlesNumber
-            // 
-            this.ParticlesNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.ParticlesNumber.Location = new System.Drawing.Point(194, 170);
-            this.ParticlesNumber.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.ParticlesNumber.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.ParticlesNumber.Name = "ParticlesNumber";
-            this.ParticlesNumber.Size = new System.Drawing.Size(58, 20);
-            this.ParticlesNumber.TabIndex = 24;
-            this.ParticlesNumber.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(666, 482);
+            this.ClientSize = new System.Drawing.Size(666, 453);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.tableLayoutPanel3);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.progressBar2);
-            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.findResultButton);
             this.Controls.Add(this.showOutputPictureButton);
             this.Controls.Add(this.label4);
@@ -557,6 +534,7 @@
             this.Text = "Automaton";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ParticlesNumber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxIterationCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minErrLevel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxStateNumber)).EndInit();
@@ -568,7 +546,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.WordLenght)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ParticlesNumber)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -588,9 +565,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button showOutputPictureButton;
         private System.Windows.Forms.Button findResultButton;
-        private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.ProgressBar progressBar2;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;

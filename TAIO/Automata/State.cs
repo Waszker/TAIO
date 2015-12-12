@@ -5,7 +5,7 @@ namespace TAIO.Automata
     /// <summary>
     /// Class representing automaton state during computation.
     /// </summary>
-    class State
+    public class State
     {
         private readonly Dictionary<char, int> _controlFunction;
 
