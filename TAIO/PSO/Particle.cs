@@ -12,10 +12,12 @@ namespace TAIO.PSO
         /// Personal best position of particle found during PSO algorthm run.
         /// </summary>
         public Position PersonalBestPosition { get; private set; }
+
         /// <summary>
         /// Number of iterations since particle has changed it position.
         /// </summary>
         public int timeSinceBestChanged = 0;
+
         /// <summary>
         /// Particle position in search space.
         /// </summary>
