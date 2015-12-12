@@ -173,19 +173,22 @@ namespace TAIO
 
         private void button1_Click(object sender, EventArgs e)
         {
-            GenerateTests();
+            GenerateTests(sender, e);
         }
 
-        private void GenerateTests()
+        private void GenerateTests(object sender, EventArgs e)
         {
             int[] basicStates = new int[] { 4, 6, 10, 15 };
             int automataAmount = 1;
             int maxNumberOfLetters = 5;
+            alphabetLetters = new string[] { "0", "1", "2", "3", "4" };
             for (int i = 0; i < automataAmount; i++)
             {
                 for (int j = 0; j < basicStates.Length; j++)
                 {
-                    Automaton automata = Automaton.GetRandomAutomaton(maxNumberOfLetters, basicStates[j]);
+                    automaton = Automaton.GetRandomAutomaton(maxNumberOfLetters, basicStates[j]);
+                    findResultButton_Click(sender, e);
+                    int state = foundAutomaton.GetFinalState("01");
                 }
             }
         }
