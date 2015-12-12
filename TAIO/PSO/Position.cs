@@ -34,7 +34,8 @@ namespace TAIO.PSO
                     OnePositions[i, j] = (new Random((int)DateTime.Now.Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds *
                         (i * j + i + j + (j % 2) + seed))).Next(numberOfAutomatonStates);
 
-            UpdateTargetFunctionValue();
+            if (TargetFunction.IsInitialized())
+                UpdateTargetFunctionValue();
         }
 
         /// <summary>
