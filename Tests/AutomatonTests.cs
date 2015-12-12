@@ -1,9 +1,13 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TAIO.PSO;
 using TAIO.Automata;
+using System.IO;
 
 namespace Tests
 {
+    /// <summary>
+    /// Class testing automaton construction and automaton methodes
+    /// </summary>
     [TestClass]
     public class AutomatonTests
     {
@@ -23,6 +27,9 @@ namespace Tests
             Assert.AreEqual(automaton.GetFinalState("101"), 2);
         }
 
+        /// <summary>
+        /// Test receiving final state for input word
+        /// </summary>
         [TestMethod()]
         public void GetFinalStateTest()
         {
@@ -34,11 +41,22 @@ namespace Tests
             Assert.AreEqual(2, finalState);
         }
 
+        /// <summary>
+        /// Test generating graph for automaton
+        /// </summary>
         [TestMethod()]
         public void GetGraphTest()
         {
-            Assert.Fail();
-
+            string testingWord = "01212";
+            string autonatonName = "testowyAutomat";
+            string[] alphabetLetters = new string[] { "0", "1", "2" };
+            string[][] states = new string[][] { new string[] { "1", "0", "0" }, new string[] { "1", "1", "2" }, new string[] { "2", "2", "3" }, new string[] { "3", "3", "3"} };
+            Automaton automaton = new Automaton(alphabetLetters, states);
+            int finalState = automaton.GetFinalState(testingWord);
+            Assert.AreEqual(3, finalState);
+            File.Create(autonatonName).Close();
+            automaton.GetGraph(autonatonName);
+            File.Delete(autonatonName);
         }
     }
 }
