@@ -38,7 +38,12 @@ namespace Tests
         [TestMethod()]
         public void GetFinalStateTest()
         {
-            Assert.Fail();
+            string testingWord = "0101";
+            string[] alphabetLetters = new string[] { "0", "1" };
+            string[][] states = new string[][] { new string[]{ "1", "2"}, new string[]{ "2", "1"}, new string[]{ "2", "2" } };
+            Automaton automaton = new Automaton(alphabetLetters, states);
+            int finalState = automaton.GetFinalState(testingWord);
+            Assert.AreEqual(2, finalState);
         }
 
         [TestMethod()]
