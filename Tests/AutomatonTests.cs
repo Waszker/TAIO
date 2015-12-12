@@ -24,18 +24,6 @@ namespace Tests
         }
 
         [TestMethod()]
-        public void AutomatonTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void AutomatonTest1()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
         public void GetFinalStateTest()
         {
             string testingWord = "0101";
