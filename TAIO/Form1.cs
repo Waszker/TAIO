@@ -171,9 +171,18 @@ namespace TAIO
             return newAlphabet;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void GenerateTests()
         {
-
+            int[] basicStates = new int[] { 4, 6, 10, 15 };
+            int automataAmount = 1;
+            int maxNumberOfLetters = 5;
+            for(int i = 0; i < automataAmount; i++)
+            {
+                for(int j = 0; j < basicStates.Length; j++)
+                {
+                    Automaton automata = Automaton.GetRandomAutomaton(maxNumberOfLetters, basicStates[j]);
+                }
+            }
         }
     }
 }

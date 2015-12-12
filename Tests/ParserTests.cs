@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
+using System.Text;
 using TAIO.Parser;
 
 namespace Tests
@@ -11,7 +12,7 @@ namespace Tests
         IParser parser = new ImposedInputFileParser();
 
         [TestMethod]
-        [ExpectedException(typeof(FileNotFoundException))]
+        [ExpectedException(typeof(IOException))]
         public void NoInputFileTest()
         {
             // Arrange
@@ -26,7 +27,6 @@ namespace Tests
         public void ParseInputFileTest()
         {
             // Arrange
-
             #region Path
 
             string[] directoryPath = Environment.CurrentDirectory.Split(Path.DirectorySeparatorChar);
@@ -47,7 +47,16 @@ namespace Tests
             string[] automaton = parser.Parse($"{path}{Path.DirectorySeparatorChar}{"TAIO"}{Path.DirectorySeparatorChar}test_input.txt", out functionTables);
 
             // Assert
-            Assert.AreEqual(functionTables, supposedTables);
+            Assert.AreEqual(ConvertFunctionTablesToString(functionTables), ConvertFunctionTablesToString(supposedTables));
+        }
+
+        private string ConvertFunctionTablesToString(string[][] functionTables)
+        {
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < functionTables.Length; i++)
+                for (int j = 0; j < functionTables[i].Length; j++)
+                    builder.Append(functionTables[i][j]);
+            return builder.ToString();
         }
     }
 }
