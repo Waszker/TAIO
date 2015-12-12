@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Automata\StateTests.cs" />
     <Compile Include="Automata\TargetFunctionTests.cs" />
+    <Compile Include="ParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AutomatonTests.cs" />
     <Compile Include="PSO\ParticleTests.cs" />

@@ -5,7 +5,7 @@ namespace TAIO.Parser
     /// <summary>
     /// Interface for input file parsers.
     /// </summary>
-    interface IParser
+    public interface IParser
     {
         /// <summary>
         /// Method is used to parse input file with automaton definition.

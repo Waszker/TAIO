@@ -11,7 +11,6 @@ namespace Tests
     [TestClass()]
     public class ParticleTests
     {
-
         [TestMethod()]
         public void DistanceToTest()
         { 
