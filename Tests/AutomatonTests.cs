@@ -2,6 +2,7 @@
 using TAIO.PSO;
 using TAIO.Automata;
 using System.IO;
+using QuickGraph;
 
 namespace Tests
 {
@@ -55,7 +56,8 @@ namespace Tests
             int finalState = automaton.GetFinalState(testingWord);
             Assert.AreEqual(3, finalState);
             File.Create(autonatonName).Close();
-            automaton.GetGraph(autonatonName);
+            AdjacencyGraph<int, TaggedEdge<int, string>> graph;
+            automaton.GetGraph(autonatonName, out graph);
             File.Delete(autonatonName);
         }
     }
