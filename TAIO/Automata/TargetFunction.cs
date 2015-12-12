@@ -30,7 +30,13 @@ namespace TAIO.Automata
         public static int GetFunctionValue(Position position)
         {
             Automaton foundAutomaton = new Automaton(position);
-            return _trainingSet.Count(word => _secretAutomaton.GetFinalState(word) != foundAutomaton.GetFinalState(word));
+            int count = 0;
+            foreach (string word in _trainingSet)
+            {
+                if (_secretAutomaton.GetFinalState(word) != foundAutomaton.GetFinalState(word))
+                    count++;
+            }
+            return count;
         }
 
         /// <summary>
