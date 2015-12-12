@@ -195,10 +195,12 @@ namespace TAIO
                 for (int j = 0; j < basicStates.Length; j++)
                 {
                     automaton = Automaton.GetRandomAutomaton(maxNumberOfLetters, basicStates[j]);
+                    showInputPictureButton.Enabled = true;
+                    goto LOL;
                     findResultButton_Click(sender, e);
-                    int state = foundAutomaton.GetFinalState("01");
                 }
             }
+            LOL: int a = 2;
         }
 
         private void GenerateFile(AdjacencyGraph<int, TaggedEdge<int, string>> g, string errorRate, int originalStatesCount)
