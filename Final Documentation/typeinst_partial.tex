@@ -1,0 +1,208 @@
+
+%%%%%%%%%%%%%%%%%%%%%%% file typeinst.tex %%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% This is the LaTeX source for the instructions to authors using
+% the LaTeX document class 'llncs.cls' for contributions to
+% the Lecture Notes in Computer Sciences series.
+% http://www.springer.com/lncs       Springer Heidelberg 2006/05/04
+%
+% It may be used as a template for your own input - copy it
+% to a new file with a new name and use it as the basis
+% for your article.
+%
+% NB: the document class 'llncs' has its own and detailed documentation, see
+% ftp://ftp.springer.de/data/pubftp/pub/tex/latex/llncs/latex2e/llncsdoc.pdf
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass[runningheads,a4paper]{llncs}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amssymb}
+\setcounter{tocdepth}{3}
+\usepackage{graphicx}
+\usepackage[polish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{polski}
+\usepackage{color}
+
+\newcommand{\keywords}[1]{\par\addvspace\baselineskip
+\noindent\keywordname\enspace\ignorespaces#1}
+
+\begin{document}
+\vspace{-100pt}
+\mainmatter  % start of an individual contribution
+% first the title is needed
+\title{Konstrukcja automatu deterministycznego skończonego sprawdzającego zachodzenie relacji indukowanej przez język dla słów z danego języka (dokumentacja uzupełniająca)\\Teoria algorytmów i obliczeń}
+
+% a short form should be given in case it is too long for the running head
+\titlerunning{Uzupełniająca dokumetacja projektu TAIO}
+
+% the name(s) of the author(s) follow(s) next
+%
+% NB: Chinese authors should write their first names(s) in front of
+% their surnames. This ensures that the names appear correctly in
+% the running heads and the author index.
+%
+\author{Anna Zawadzka\and Sylwia Nowak\and Pavel Kuzmich\and Piotr Waszkiewicz}
+%
+\authorrunning{}
+% (feature abused for this document to repeat the title also on left hand pages)
+
+%
+% NB: a more complex sample for affiliations and the mapping to the
+% corresponding authors can be found in the file "llncs.dem"
+% (search for the string "\mainmatter" where a contribution starts).
+% "llncs.dem" accompanies the document class "llncs.cls".
+%
+
+\toctitle{Lecture Notes in Computer Science}
+\tocauthor{Authors' Instructions}
+\maketitle
+
+\tableofcontents
+
+\section{Wstęp}
+
+\subsection{Cel projektu}
+
+Celem projektu jest stworzenie deterministycznego automatu skończonego realizującego funkcję relacji indukowanej przez język na podstawie odpowiedzi udzielanych przez gotowe, nieznane narzędzie pełniące tę samą rolę.
+
+\subsection{Sposób realizacji w etapach}
+
+\begin{itemize}
+\item[•] Wprowadzenie narzędzia (automatu), pozwalającego sprawdzić czy $\forall_{x,y \in \Sigma^*} x R_{L} y$.
+\item[•] Utworzenie treningowego i testowego zbioru słów.
+\item[•] Znalezienie skończonych automatów deterministycznych spełniających cel projektu z wykorzystaniem algorytmu PSO (Particle Swarm Optimization) i zbioru treningowego słów.
+\item[•] Wybranie najlepszego utworzonego automatu wykorzystując zbiór testowy słów.
+\end{itemize}
+
+\newpage
+
+\section{Szczegółówy opis sposobu realizacji zadania}
+
+\subsection{Automat wejściowy}
+
+Na podstawie automatu wejściowego zostanie stworzone narzędzie sprawdzające, czy dwa słowa są ze sobą w relacji. Informacje o automacie wejściowym będą przechowywane w pliku tekstowym podawanym na wejście programu. Format reprezentacji automatu jest następujący:
+
+\begin{itemize}
+\item[•] Stany numerowane liczbami 1, 2, …, n, gdzie n to liczba stanów, 1 – stan początkowy.
+\item[•] $r$ – liczba symboli w alfabecie.
+\item[•] Tabela funkcji przejścia.
+\end{itemize}
+
+Po wprowadzeniu pliku z opisem automatu będzie można zobaczyć jego graficzną reprezentację w postaci grafu.
+
+\subsection{Zbiór treningowy i zbiór testowy}
+
+Utworzenie treningowego i testowego zbioru słów nastąpi poprzez wygenerowanie odpowiednich zbiorów. Będą one dostępne (nie zmienią się) dopóki zbiór symboli alfabetu pozostanie ten sam. \\
+
+Zbiór treningowy zawierać będzie wszystkie słowa nad alfabetem o długości mniejszej bądź równej długości podanej przez użytkownika (nie większej niż 5). \\
+
+Zbiór testowy składać się będzie ze słów będących wariacjami bez powtórzeń dla słów o  długości nie mniejszej niż 7 i nie większej niż maksymalna ilość stanów poszukiwanego automatu. W przypadku mniejszej ilości symboli alfabetu niż wymagałyby tego wariacje następuje konstrukcja nowego, tymczasowego zbioru poprzez powielenie wszystkich symboli alfabetu i dodanie ich do istniejących już symboli. Nowe symbole będą dodatkowo indeksowane numerem oznaczających w której iteracji zostały dodane. Zapewni to ich rozróżnialność podczas konstrukcji zbiorów.\\
+
+Przykład zbioru: {0, 1}. 
+Zbiór po przygotowaniu do utworzenia wariacji bez powtórzeń dla słów długości 6: {0, 1, $0_{1}$, $1_{1}$, $0_{2}$, $1_{2}$}. \\
+
+Dodatkowo do zbioru treningowego zostały dodane losowe słowa (zawierające losowe litery alfabetu) o losowej długości z przedziału $[x1,x2]$ , gdzie x1 jest maksymalną długością słowa treningowego generowanego poprzednią metodą (przy użyciu wariacji z powtórzeniami) a x2 jest nowym parametrem oznaczającym maksmalną długość losowego słowa. W przypadku gdy x2 $<$ x1 nie generowane są żadne dodatkowe słowa. Użytkownik może również określić maksymalną ilość słów losowych. Dodatkowo dla każdego nowego słowa s1 dopisanego do zbioru treningowego tworzone jest słowo s2 tej samej długości lecz również o losowej zawartości, które jest dopisywane do zbioru słów testowych. \\
+
+Zbiór treningowy i testowy są zbiorami rozłącznymi.\\
+
+
+\subsection{Opis przestrzeni poszukiwania dla algorytmu PSO}
+
+Przestrzeń poszukiwania w algorytmie PSO będą stanowić wszystkie deterministyczne automaty skończone o określonej liczbie stanów, z alfabetem wejściowym równoważnym z alfabetem języka $L$. Zapis cyfrowy każdego automatu można przedstawić jako zbiór macierzy binarnych o wymiarach $|Q|^2$ (gdzie $|Q|$ to ilość stanów automatu). Zbiór ten jest równoliczny ze zbiorem symboli alfabetu automatu (każdemu symbolowi odpowiadać będzie inna macierz). Jeżeli jako dodatkowe założenie przyjmiemy, że w każdym wierszu każdej macierzy znajdować może się tylko jedna jedynka, to wtedy taką macierz traktować możemy jako część tabelki funkcji przejścia automatu, która dla wiersza o numerze i oraz jedynce w kolumnie $j$ odpowiada przejściu ze stanu $q_{i}$ do stanu $q_{j}$ po wczytaniu symbolu przypisanego do tej macierzy. Ponieważ następująca reprezentacja jest nieoptymalna pod względem zużycia pamięci zapis można uprościć do tablicy jednowymiarowej która dla każdego indeksu odpowiadającego numerowi stanu w którym automat znajduje się przed wczytaniem symbolu, przyporządkowuje numer stanu w którym automat znajdzie się po wczytaniu elementu z taśmy.\\
+
+Dla przykładu, po zastosowaniu takiej optymalizacji dla tabeli funkcji przejścia 
+\begin{table}[]
+\centering
+\begin{tabular}{c|c|c|c|}
+symbol                   & $q_{1}$ & $q_{2}$ & $q_{3}$ \\ \hline
+\multicolumn{1}{c|}{$q_{1}$} & 0  & 1  & 0  \\ \hline
+\multicolumn{1}{c|}{$q_{2}$} & 1  & 0  & 0  \\ \hline
+\multicolumn{1}{c|}{$q_{3}$} & 0  & 0  & 1  \\ \hline
+\end{tabular}
+\vspace{0.5cm}
+\caption{Przykładowa tabela funkcji prześcia}
+\end{table}
+
+otrzymamy jako wynik wektor [1 0 2].\\
+
+Przyjmijmy $d = |\Sigma|$ liczba symboli alfabetu, $f = |Q|$ liczba stanów automatu. Tak więc przestrzeń wszystkich automatów stanowić będą wszystkie możliwe ciągi liczb o długości $d*f$ i wartościach z przedziału $[0, f)$. Cząstki poruszające się w przestrzeni będą przyjmowały pozycje będące reprezentacją tych automatów. Dla każdej cząsteczki jej prędkość definiowana będzie jako $V_{p} = (V_{1}, V_{2}, …, V_{d})$ gdzie $V_{i (1 \leq i \leq d)}$ oznacza prędkość cząstki na płaszczyźnie odpowiadającej symbolowi o numerze $i$, definowanej jako $V_{pi} = (V_{1}, V_{2}, …, V_{f})$. $V_{j (1 \leq j \leq f)}$ reprezentuje tutaj prędkość cząstki dla wiersza numer $j$ w macierzy zdefiniowanej wcześnie jako reprezentacja tabeli funkcji przejścia dla danego symbolu. Tak zdefiniowaną prędkość można (podobnie jak położenie) przedstawić w postaci tablicy jednowymiarowej o długości $d*f$ (gdzie $d$ i $f$ - zdefiniowane wcześniej). Zmiana położenia cząstki następuje więc poprzez dodanie wektora prędkości do wektora położenia tym samym otrzymując nowe położenie.
+
+\subsection{Odległość w przeszukiwanej przestrzeni}
+
+Dla tak zdefiniowanej przestrzeni i ciągów liczb długości d*f, które reprezentować będą automaty wprowadzimy metrykę, nazywaną metryką Hamminga. Dla dwóch ciągów $a$ i $b$ z tej przestrzemi odległość Hamminga jest równa liczbie jedynek w słowie $a XOR b$, np. odległość pomiędzy ciągami 10\textbf{0}11\textbf{1}01 i 10\textbf{1}11\textbf{0}01 wynosi 2.
+
+\subsection{Przeszukiwanie przestrzeni w algorytmie PSO}
+
+Przeszukiwanie przestrzeni automatów realizowane jest poprzez wygenerowanie pewnej ilości cząstek (nazywanych rojem) poruszających się według określonych zasad i dążących do osiągnięcia postawionego celu. Za cel najczęściej przyjmuje się minimalizację wartości pewnej funkcji nazywanej funkcją celu. W tym projekcie będzie to funkcja $f:A \rightarrow N$ ($A$ - zbiór automatów, $N$ - liczby naturalne), która dla danego automatu zwraca liczbę błędnie zaklasyfikowanych słów.\\
+
+W trakcie kolejnych kroków zdyskretyzowanego czasu cząstki przemieszczają się do nowych pozycji, symulując adaptację roju do środowiska poszukując optimum. Każda cząstka pamięta swoje dotychczasowe najlepsze położenie (miejsce w przestrzeni gdzie znaleziony automat miał najniższą wartość funkcji celu). “Liderem” roju zostaje ta o najlepszym położeniu z całego roju. Położenia cząstek w obszarze przeszukiwania stanowią potencjalne rozwiązania. \\
+
+Algorytm PSO funkcjonuje według następującego schematu:
+
+\begin{enumerate}
+\item Nadanie cząstkom roju losowych położeń
+\item Dokonanie oceny położenia cząsteczek za pomocą funkcji dopasowania (fitness)
+\item Zmiana zapisu w pamięci cząstek dotycząca najlepszych własnych położeń
+\item Wyłonienie lidera roju
+\item Aktualizacja wektora prędkości każdej cząstki
+
+\begin{displaymath}
+v[] = v[] + c1 * rand() * (pbest[] - present[]) + c2 * rand() * (gbest[] - present[]) \hspace{15mm} (1)
+\end{displaymath}
+
+\item Aktualizacja położenia każdej cząstki - jeżeli położenie nie uległo zmianie przez przynajmniej trzy iteracje losowane zostaje nowe położenie
+
+\begin{displaymath}
+present[] = persent[] + v[] \hspace{15mm} (2)
+\end{displaymath}
+
+gdzie
+
+\begin{itemize}
+\item[$present$] -- wektor położenia $i$-tej cząstki,
+\item[$v$] -- odpowiedni wektor prędkości danej cząstki,
+\item[$pbest$] -- najlepsze dotąd znalezione położenie $i$-tej cząstki,
+\item[$gbest$] - najlepsze dotąd znalezione położenie lidera roju,
+\item[$c1, c2$] - współczynniki wagowe, określane na poziomie $i$-tej cząstki.
+\end{itemize}
+\end{enumerate}
+
+Współczynniki $c1, c2$ są ustalonymi mnożnikami wagowymi. Współczynniki  są liczbami losowymi o rozkładzie równomiernym w przedziale [0, 1]. \\
+
+Jeżeli w trakcie działania algorytmu PSO któraś z cząstek nie będzie zyskiwać lepszych położeń przez więcej niż trzy iteracje zostaje jej przydzielone nowe, zupełnie losowe położenie. Dzięki temu zyskuje się lepszą zbieżność do najlepszego automatu, oraz unika ryzyka uwięzienia w lokalnym minimum. Cząstki które w danym ruchu miałyby wyjść poza obszar poszukiwań zamiast być stopowane zostają umieszczone na początku tego obszaru z przeciwległej strony. \\
+
+Punkty 2-6 należy wykonywać w pętli dopóki oba warunki będą spełnione:
+
+\begin{itemize}
+\item[•] któraś z cząstek nie osiągnie założonej wartości minimalnej błędu,
+\item[•] nie zostanie osiągnięta z góry wyznaczona ilość iteracji ruchu.
+\end{itemize}
+
+Jeden przebieg pętli odpowiada krokowi czasowemu dla poruszającego się roju. Wartość kroku czasowego przyjmuje się jako jednostkową.
+Cząstki poruszają się ruchem odcinkowo prostolinijnym. Postać równań (1) i (2) wynika z drugiej zasady dynamiki Newtona, gdzie wypadkowa siła wywołująca przyspieszenie każdej cząstki powstaje wskutek działania sił od “naciągniętych sprężyn” pomiędzy położeniami aktualnym a najlepszymi położeniami: własnym, lidera sąsiada oraz lidera roju. Kolejny wektor prędkości czasu jest wynikiem jej przyspieszenia w kierunku nowego, potencjalnie lepszego położenia, bazując na stale zmieniających się najlepszych wcześniej znanych położeniach.\\
+
+Dla każdej wartości $i$ = 1, 2, 3, …  algorytm PSO uruchamiany będzie w przestrzeni z automatami o $i$ stanach. Warto zwrócić uwagę, że istnieje możliwość znalezienia kilku automatów spełniających warunki zakończenia algorytmu PSO. Aby zminimalizować ryzyko wybrania niewłaściwego automatu, po zakończeniu obliczeń dla każdej wartości parametru $i$ najlepszy automat dla danej ilości stanów będzie testowany na zbiorze testowym. Ostateczna decyzja wyboru najlepszego rozwiązania podjęta będzie na podstawie uzyskanej wartości funkcji celu na tym zbiorze.
+
+\newpage
+
+\section{Wyniki przeprowadzonych testów}
+
+Podczas sprawdzania skuteczności zaproponowanego rozwiązania wykonano szereg następujących testów. \\
+
+Dla wszystkich symulacji przyjęto alfabet pięcioznakowy. Wykonano po 10 iteracji przeszukiwania przestrzeni dla każdej klasy automatów o 4, 6, 10, 15 stanach z losową funkcją przejścia. Dla algorytmu PSO rozważane były przestrzenie automatów z ilością stanów z zakresu 3 - 15. Zbiór treningowy oraz testowy konstruowane były zgodnie z zasadami przedstawionymi we wcześniejszych sekcjach tego dokumentu. \\
+
+\subsection{Skuteczność aproksymacji automatu o 4 stanach}
+
+\subsection{Skuteczność aproksymacji automatu o 6 stanach}
+
+\subsection{Skuteczność aproksymacji automatu o 10 stanach}
+
+\subsection{Skuteczność aproksymacji automatu o 15 stanach}
+
+
+Dodatkowo przeprowadzone zostały próby aproksymacji automatów o 20, 30, 50, 80 stanach przez inne, o mniejszej liczbie stanów - 4, 6, 8, 10, 12.
+
+\end{document}
