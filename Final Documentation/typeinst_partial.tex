@@ -25,6 +25,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage{polski}
 \usepackage{color}
+\usepackage{booktabs}
+
 
 \newcommand{\keywords}[1]{\par\addvspace\baselineskip
 \noindent\keywordname\enspace\ignorespaces#1}
@@ -204,5 +206,30 @@ Dla wszystkich symulacji przyjęto alfabet pięcioznakowy. Wykonano po 10 iterac
 
 
 Dodatkowo przeprowadzone zostały próby aproksymacji automatów o 20, 30, 50, 80 stanach przez inne, o mniejszej liczbie stanów - 4, 6, 8, 10, 12.
+
+\begin{table}[]
+\centering
+\caption{My caption}
+\label{my-label}
+\begin{tabular}{@{}ccccc@{}}
+\toprule
+        & 4 states & 6 states & 10 states & 15 states \\ \midrule
+1       & 0.02     & 0.47     & 0.17      & 0.18      \\
+2       &          &          &           &           \\
+3       &          &          &           &           \\
+4       &          &          &           &           \\
+5       & 0.71     & 0.11     & 0.4       & 0.08      \\
+6       &          &          &           &           \\
+7       &          &          &           &           \\
+8       &          &          &           &           \\
+9       &          &          &           &           \\
+10      & 0.29     & 0.28     & 0.35      & 0.06      \\
+Average & 0.284    & 0.283    & 0.313     & 0.35      \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}
+\includegraphics[scale=1]{chart.png}
+\end{figure}
 
 \end{document}
