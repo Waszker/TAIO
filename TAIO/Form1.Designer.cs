@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.label5 = new System.Windows.Forms.Label();
             this.ParticlesNumber = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -57,6 +58,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.minStateNumber = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ParticlesNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxIterationCount)).BeginInit();
@@ -68,6 +70,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.NoOfWords)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WordLenght)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.minStateNumber)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -76,28 +79,44 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Controls.Add(this.ParticlesNumber, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label10, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.minStateNumber, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label5, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.ParticlesNumber, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.label10, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.maxIterationCount, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.minErrLevel, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.maxStateNumber, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.maxStateNumber, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(19, 114);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 4;
+            this.tableLayoutPanel1.RowCount = 5;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(256, 208);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(256, 269);
             this.tableLayoutPanel1.TabIndex = 1;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label5.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label5.Location = new System.Drawing.Point(4, 103);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(183, 50);
+            this.label5.TabIndex = 25;
+            this.label5.Text = "Min state number";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ParticlesNumber
             // 
             this.ParticlesNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.ParticlesNumber.Location = new System.Drawing.Point(194, 170);
+            this.ParticlesNumber.Location = new System.Drawing.Point(194, 226);
             this.ParticlesNumber.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -122,9 +141,9 @@
             this.label10.AutoSize = true;
             this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label10.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label10.Location = new System.Drawing.Point(4, 154);
+            this.label10.Location = new System.Drawing.Point(4, 205);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(183, 53);
+            this.label10.Size = new System.Drawing.Size(183, 63);
             this.label10.TabIndex = 7;
             this.label10.Text = "Particles number";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -148,7 +167,7 @@
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label3.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label3.Location = new System.Drawing.Point(4, 103);
+            this.label3.Location = new System.Drawing.Point(4, 154);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(183, 50);
             this.label3.TabIndex = 3;
@@ -194,7 +213,7 @@
             // maxStateNumber
             // 
             this.maxStateNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.maxStateNumber.Location = new System.Drawing.Point(194, 118);
+            this.maxStateNumber.Location = new System.Drawing.Point(194, 169);
             this.maxStateNumber.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -230,11 +249,10 @@
             // 
             // uploadFileButton
             // 
-            this.uploadFileButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.uploadFileButton.FlatAppearance.BorderSize = 2;
             this.uploadFileButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.uploadFileButton.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.uploadFileButton.Location = new System.Drawing.Point(19, 34);
+            this.uploadFileButton.Location = new System.Drawing.Point(19, 17);
             this.uploadFileButton.Margin = new System.Windows.Forms.Padding(10, 3, 3, 3);
             this.uploadFileButton.Name = "uploadFileButton";
             this.uploadFileButton.Size = new System.Drawing.Size(256, 54);
@@ -287,7 +305,7 @@
             this.findResultButton.FlatAppearance.BorderSize = 4;
             this.findResultButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.findResultButton.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.findResultButton.Location = new System.Drawing.Point(19, 348);
+            this.findResultButton.Location = new System.Drawing.Point(22, 408);
             this.findResultButton.Name = "findResultButton";
             this.findResultButton.Size = new System.Drawing.Size(256, 51);
             this.findResultButton.TabIndex = 11;
@@ -297,7 +315,7 @@
             // 
             // progressBar2
             // 
-            this.progressBar2.Location = new System.Drawing.Point(170, 461);
+            this.progressBar2.Location = new System.Drawing.Point(170, 532);
             this.progressBar2.Name = "progressBar2";
             this.progressBar2.Size = new System.Drawing.Size(484, 23);
             this.progressBar2.TabIndex = 13;
@@ -307,7 +325,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label6.Location = new System.Drawing.Point(19, 461);
+            this.label6.Location = new System.Drawing.Point(19, 532);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(147, 14);
             this.label6.TabIndex = 15;
@@ -520,7 +538,7 @@
             this.button1.FlatAppearance.BorderSize = 4;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button1.Location = new System.Drawing.Point(19, 407);
+            this.button1.Location = new System.Drawing.Point(19, 478);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(635, 51);
             this.button1.TabIndex = 24;
@@ -528,12 +546,35 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // minStateNumber
+            // 
+            this.minStateNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.minStateNumber.Location = new System.Drawing.Point(194, 118);
+            this.minStateNumber.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.minStateNumber.Minimum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.minStateNumber.Name = "minStateNumber";
+            this.minStateNumber.Size = new System.Drawing.Size(58, 20);
+            this.minStateNumber.TabIndex = 26;
+            this.minStateNumber.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(666, 496);
+            this.ClientSize = new System.Drawing.Size(666, 549);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.tableLayoutPanel3);
@@ -566,6 +607,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.WordLenght)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.minStateNumber)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -602,6 +644,8 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.NumericUpDown ParticlesNumber;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.NumericUpDown minStateNumber;
     }
 }
 
