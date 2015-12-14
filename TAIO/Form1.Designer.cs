@@ -112,7 +112,7 @@
             this.ParticlesNumber.Size = new System.Drawing.Size(58, 20);
             this.ParticlesNumber.TabIndex = 24;
             this.ParticlesNumber.Value = new decimal(new int[] {
-            1,
+            100,
             0,
             0,
             0});
@@ -173,7 +173,7 @@
             this.maxIterationCount.Size = new System.Drawing.Size(58, 20);
             this.maxIterationCount.TabIndex = 4;
             this.maxIterationCount.Value = new decimal(new int[] {
-            1,
+            10,
             0,
             0,
             0});
@@ -201,7 +201,7 @@
             0,
             0});
             this.maxStateNumber.Minimum = new decimal(new int[] {
-            1,
+            3,
             0,
             0,
             0});
@@ -209,7 +209,7 @@
             this.maxStateNumber.Size = new System.Drawing.Size(58, 20);
             this.maxStateNumber.TabIndex = 6;
             this.maxStateNumber.Value = new decimal(new int[] {
-            1,
+            3,
             0,
             0,
             0});
@@ -361,7 +361,7 @@
             this.wordsInTestSet.Size = new System.Drawing.Size(89, 20);
             this.wordsInTestSet.TabIndex = 7;
             this.wordsInTestSet.Value = new decimal(new int[] {
-            1,
+            7,
             0,
             0,
             0});
@@ -398,7 +398,7 @@
             this.wordsInTrainingSet.Size = new System.Drawing.Size(89, 20);
             this.wordsInTrainingSet.TabIndex = 5;
             this.wordsInTrainingSet.Value = new decimal(new int[] {
-            1,
+            5,
             0,
             0,
             0});
@@ -429,6 +429,11 @@
             this.NoOfWords.Name = "NoOfWords";
             this.NoOfWords.Size = new System.Drawing.Size(89, 20);
             this.NoOfWords.TabIndex = 18;
+            this.NoOfWords.Value = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             // 
             // WordLenght
             // 
@@ -448,7 +453,7 @@
             this.WordLenght.Size = new System.Drawing.Size(89, 20);
             this.WordLenght.TabIndex = 19;
             this.WordLenght.Value = new decimal(new int[] {
-            1,
+            100,
             0,
             0,
             0});
