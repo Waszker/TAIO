@@ -26,6 +26,7 @@
 \usepackage{polski}
 \usepackage{color}
 \usepackage{booktabs}
+\usepackage[section]{placeins}
 
 
 \newcommand{\keywords}[1]{\par\addvspace\baselineskip
@@ -190,24 +191,12 @@ Dla każdej wartości $i$ = 1, 2, 3, …  algorytm PSO uruchamiany będzie w prz
 
 \newpage
 
+\FloatBarrier
 \section{Wyniki przeprowadzonych testów}
 
 Podczas sprawdzania skuteczności zaproponowanego rozwiązania wykonano szereg następujących testów. \\
 
 Dla wszystkich symulacji przyjęto alfabet pięcioznakowy. Wykonano po 10 iteracji przeszukiwania przestrzeni dla każdej klasy automatów o 4, 6, 10, 15 stanach z losową funkcją przejścia. Dla algorytmu PSO rozważane były przestrzenie automatów z ilością stanów z zakresu 3 - 15. Zbiór treningowy oraz testowy konstruowane były zgodnie z zasadami przedstawionymi we wcześniejszych sekcjach tego dokumentu. \\
-
-\subsection{Skuteczność aproksymacji automatu o 4 stanach}
-
-\subsection{Skuteczność aproksymacji automatu o 6 stanach}
-
-\subsection{Skuteczność aproksymacji automatu o 10 stanach}
-
-\subsection{Skuteczność aproksymacji automatu o 15 stanach}
-
-
-Dodatkowo przeprowadzone zostały próby aproksymacji automatów o 20, 30, 50, 80 stanach przez inne, o mniejszej liczbie stanów - 4, 6, 8, 10, 12.
-
-\subsection{Aproksymacja zbioru testowego}
 
 \begin{table}[]
 \centering
@@ -237,7 +226,51 @@ Average & 0.284    & 0.283    & 0.313     & 0.35      \\ \bottomrule
 
 \begin{table}[]
 \centering
-\caption{20 states automaton approximation}
+\caption{Automata approximation - results for training set}
+\label{my-label}
+\begin{tabular}{@{}ccccc@{}}
+\toprule
+        & 4 states & 6 states & 10 states & 15 states \\ \midrule
+1       & 0,05     & 0,07     & 0,62      & 0,08      \\
+2       & 0,09     & 0,11     & 0,09      & 0,35      \\
+3       & 0,56     & 0,04     & 0,12      & 0,28      \\
+4       & 0,06     & 0,62     & 0,05      & 0,71      \\
+5       & 0,13     & 0,09     & 0,36      & 0,23      \\
+6       & 0,08     & 0,10     & 0,15      & 0,15        \\
+7       & 0,62     & 0,53     & 0,11      & 0,29        \\
+8       & 0,49     & 0,06     & 0,54      & 0,64         \\
+9       & 0,22     & 0,79     & 0,61      & 0,21     \\
+10      & 0,08     & 0,08     & 0,16      & 0,11      \\
+Average & 0,24     & 0,25     & 0,28      & 0,31      \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}
+\centering
+\includegraphics[scale=1]{6.png}
+\end{figure}
+
+\FloatBarrier
+\subsection{Skuteczność aproksymacji automatu o 4 stanach}
+
+\FloatBarrier
+\subsection{Skuteczność aproksymacji automatu o 6 stanach}
+
+\FloatBarrier
+\subsection{Skuteczność aproksymacji automatu o 10 stanach}
+
+\FloatBarrier
+\subsection{Skuteczność aproksymacji automatu o 15 stanach}
+
+
+Dodatkowo przeprowadzone zostały próby aproksymacji automatów o 20, 30, 50, 80 stanach przez inne, o mniejszej liczbie stanów - 4, 6, 8, 10, 12.
+
+\FloatBarrier
+\subsection{Skuteczność aproksymacji automatu o 20 stanach}
+
+\begin{table}[]
+\centering
+\caption{20 states automaton approximation testing set}
 \label{my-label}
 \begin{tabular}{@{}cccccc@{}}
 \toprule
@@ -263,7 +296,36 @@ Average & 0,951    & 0,908    & 0,99     & 0,987     & 0,991  \\ \bottomrule
 
 \begin{table}[]
 \centering
-\caption{30 states automaton approximation}
+\caption{20 states automaton approximation training set}
+\label{my-label}
+\begin{tabular}{@{}cccccc@{}}
+\toprule
+        & 4 states & 6 states & 8 states & 10 states & 12 states    \\ \midrule
+1       & 0,89     & 1        & 0,93     & 1         & 0,99 \\
+2       & 0,99     & 0,91     & 1        & 0,81      & 1 \\
+3       & 1        & 0,83     & 0,98     & 1         & 1 \\
+4       & 0,86     & 1        & 0,62     & 0,96      & 0,74   \\
+5       & 1        & 0,98     & 1        & 0,85      & 1   \\
+6       & 1        & 0,97     & 0,99     & 1         & 0,93    \\
+7       & 0,97     & 0,98     & 1        & 0,98      & 1    \\
+8       & 0,85     & 1        & 0,97     & 0,96      & 0,99     \\
+9       & 0,93     & 0,81     & 1        & 1         & 0,97 \\
+10      & 1        & 1        & 0,98     & 1         & 1  \\
+Average & 0,949    & 0,948    & 0,947    & 0,956     & 0,962  \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}
+\centering
+\includegraphics[scale=1]{7.png}
+\end{figure}
+
+\FloatBarrier
+\subsection{Skuteczność aproksymacji automatu o 30 stanach}
+
+\begin{table}[]
+\centering
+\caption{30 states automaton approximation testing set}
 \label{my-label}
 \begin{tabular}{@{}cccccc@{}}
 \toprule
@@ -289,7 +351,36 @@ Average & 0,941    & 0,98     & 0,981    & 0,91      & 0,999  \\ \bottomrule
 
 \begin{table}[]
 \centering
-\caption{50 states automaton approximation}
+\caption{30 states automaton approximation training set}
+\label{my-label}
+\begin{tabular}{@{}cccccc@{}}
+\toprule
+        & 4 states & 6 states & 8 states & 10 states & 12 states    \\ \midrule
+1       & 1        & 0,73     & 0,99     & 1         & 0,93 \\
+2       & 0,98     & 0,98     & 0,88     & 1         & 0,98 \\
+3       & 0,93     & 0,99     & 1        & 0,98      & 1 \\
+4       & 0,75     & 1        & 1        & 0,93      & 0,96   \\
+5       & 1        & 0,94     & 0,78     & 0,82      & 1   \\
+6       & 1        & 0,96     & 0,99     & 0,99      & 0,99    \\
+7       & 0,99     & 0,99     & 1        & 0,98      & 0,75    \\
+8       & 1        & 1        & 0,98     & 1         & 1    \\
+9       & 1        & 0,99     & 1        & 1         & 1 \\
+10      & 0,96     & 1        & 1        & 0,98      & 0,99  \\
+Average & 0,961    & 0,958    & 0,962    & 0,968     & 0,96  \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}
+\centering
+\includegraphics[scale=1]{8.png}
+\end{figure}
+
+\FloatBarrier
+\subsection{Skuteczność aproksymacji automatu o 50 stanach}
+
+\begin{table}[]
+\centering
+\caption{50 states automaton approximation testing set}
 \label{my-label}
 \begin{tabular}{@{}cccccc@{}}
 \toprule
@@ -315,114 +406,7 @@ Average & 0,968    & 0,987    & 0,954    & 0,999     & 0,993  \\ \bottomrule
 
 \begin{table}[]
 \centering
-\caption{80 states automaton approximation}
-\label{my-label}
-\begin{tabular}{@{}cccccc@{}}
-\toprule
-        & 4 states & 6 states & 8 states & 10 states & 12 states    \\ \midrule
-1       & 1        & 0,98     & 1        & 1         & 0,88 \\
-2       & 0,99     & 0,88     & 1        & 1         & 1 \\
-3       & 0,99     & 1        & 1        & 1         & 0,99 \\
-4       & 0,96     & 1        & 0,75     & 0,95      & 1   \\
-5       & 1        & 1        & 1        & 1         & 1   \\
-6       & 0,98     & 0,99     & 1        & 1         & 1    \\
-7       & 1        & 1        & 0,85     & 1         & 1    \\
-8       & 0,99     & 1        & 1        & 1         & 1     \\
-9       & 1        & 1        & 1        & 1         & 1 \\
-10      & 0,99     & 0,95     & 0,85     & 1         & 0,78  \\
-Average & 0,99     & 0,98     & 0,945    & 0,995     & 0,965  \\ \bottomrule
-\end{tabular}
-\end{table}
-
-\begin{figure}
-\centering
-\includegraphics[scale=1]{5.png}
-\end{figure}
-
-\subsection{Aproksymacja zbioru treningowego}
-
-
-\begin{table}[]
-\centering
-\caption{Automata approximation - results for training set}
-\label{my-label}
-\begin{tabular}{@{}ccccc@{}}
-\toprule
-        & 4 states & 6 states & 10 states & 15 states \\ \midrule
-1       & 0,05     & 0,07     & 0,62      & 0,08      \\
-2       & 0,09     & 0,11     & 0,09      & 0,35      \\
-3       & 0,56     & 0,04     & 0,12      & 0,28      \\
-4       & 0,06     & 0,62     & 0,05      & 0,71      \\
-5       & 0,13     & 0,09     & 0,36      & 0,23      \\
-6       & 0,08     & 0,10     & 0,15      & 0,15        \\
-7       & 0,62     & 0,53     & 0,11      & 0,29        \\
-8       & 0,49     & 0,06     & 0,54      & 0,64         \\
-9       & 0,22     & 0,79     & 0,61      & 0,21     \\
-10      & 0,08     & 0,08     & 0,16      & 0,11      \\
-Average & 0,24     & 0,25     & 0,28      & 0,31      \\ \bottomrule
-\end{tabular}
-\end{table}
-
-\begin{figure}
-\centering
-\includegraphics[scale=1]{6.png}
-\end{figure}
-
-\begin{table}[]
-\centering
-\caption{20 states automaton approximation}
-\label{my-label}
-\begin{tabular}{@{}cccccc@{}}
-\toprule
-        & 4 states & 6 states & 8 states & 10 states & 12 states    \\ \midrule
-1       & 0,89     & 1        & 0,93     & 1         & 0,99 \\
-2       & 0,99     & 0,91     & 1        & 0,81      & 1 \\
-3       & 1        & 0,83     & 0,98     & 1         & 1 \\
-4       & 0,86     & 1        & 0,62     & 0,96      & 0,74   \\
-5       & 1        & 0,98     & 1        & 0,85      & 1   \\
-6       & 1        & 0,97     & 0,99     & 1         & 0,93    \\
-7       & 0,97     & 0,98     & 1        & 0,98      & 1    \\
-8       & 0,85     & 1        & 0,97     & 0,96      & 0,99     \\
-9       & 0,93     & 0,81     & 1        & 1         & 0,97 \\
-10      & 1        & 1        & 0,98     & 1         & 1  \\
-Average & 0,949    & 0,948    & 0,947    & 0,956     & 0,962  \\ \bottomrule
-\end{tabular}
-\end{table}
-
-\begin{figure}
-\centering
-\includegraphics[scale=1]{7.png}
-\end{figure}
-
-\begin{table}[]
-\centering
-\caption{30 states automaton approximation}
-\label{my-label}
-\begin{tabular}{@{}cccccc@{}}
-\toprule
-        & 4 states & 6 states & 8 states & 10 states & 12 states    \\ \midrule
-1       & 1        & 0,73     & 0,99     & 1         & 0,93 \\
-2       & 0,98     & 0,98     & 0,88     & 1         & 0,98 \\
-3       & 0,93     & 0,99     & 1        & 0,98      & 1 \\
-4       & 0,75     & 1        & 1        & 0,93      & 0,96   \\
-5       & 1        & 0,94     & 0,78     & 0,82      & 1   \\
-6       & 1        & 0,96     & 0,99     & 0,99      & 0,99    \\
-7       & 0,99     & 0,99     & 1        & 0,98      & 0,75    \\
-8       & 1        & 1        & 0,98     & 1         & 1    \\
-9       & 1        & 0,99     & 1        & 1         & 1 \\
-10      & 0,96     & 1        & 1        & 0,98      & 0,99  \\
-Average & 0,961    & 0,958    & 0,962    & 0,968     & 0,96  \\ \bottomrule
-\end{tabular}
-\end{table}
-
-\begin{figure}
-\centering
-\includegraphics[scale=1]{8.png}
-\end{figure}
-
-\begin{table}[]
-\centering
-\caption{50 states automaton approximation}
+\caption{50 states automaton approximation training set}
 \label{my-label}
 \begin{tabular}{@{}cccccc@{}}
 \toprule
@@ -446,9 +430,40 @@ Average & 0,97    & 0,968     & 0,971    & 0,969     & 0,974  \\ \bottomrule
 \includegraphics[scale=1]{9.png}
 \end{figure}
 
+\FloatBarrier
+\subsection{Skuteczność aproksymacji automatu o 80 stanach}
+
+
 \begin{table}[]
 \centering
-\caption{80 states automaton approximation}
+\caption{80 states automaton approximation testing set}
+\label{my-label}
+\begin{tabular}{@{}cccccc@{}}
+\toprule
+        & 4 states & 6 states & 8 states & 10 states & 12 states    \\ \midrule
+1       & 1        & 0,98     & 1        & 1         & 0,88 \\
+2       & 0,99     & 0,88     & 1        & 1         & 1 \\
+3       & 0,99     & 1        & 1        & 1         & 0,99 \\
+4       & 0,96     & 1        & 0,75     & 0,95      & 1   \\
+5       & 1        & 1        & 1        & 1         & 1   \\
+6       & 0,98     & 0,99     & 1        & 1         & 1    \\
+7       & 1        & 1        & 0,85     & 1         & 1    \\
+8       & 0,99     & 1        & 1        & 1         & 1     \\
+9       & 1        & 1        & 1        & 1         & 1 \\
+10      & 0,99     & 0,95     & 0,85     & 1         & 0,78  \\
+Average & 0,99     & 0,98     & 0,945    & 0,995     & 0,965  \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}
+\centering
+\includegraphics[scale=1]{5.png}
+\end{figure}
+
+
+\begin{table}[]
+\centering
+\caption{80 states automaton approximation training set}
 \label{my-label}
 \begin{tabular}{@{}cccccc@{}}
 \toprule
