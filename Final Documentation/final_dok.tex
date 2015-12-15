@@ -196,7 +196,7 @@ Dla każdej wartości $i$ = 1, 2, 3, …  algorytm PSO uruchamiany będzie w prz
 
 Podczas sprawdzania skuteczności zaproponowanego rozwiązania wykonano szereg następujących testów. \\
 
-Dla wszystkich symulacji przyjęto alfabet pięcioznakowy. Wykonano po 10 iteracji przeszukiwania przestrzeni dla każdej klasy automatów o 4, 6, 10, 15 stanach z losową funkcją przejścia. Dla algorytmu PSO rozważane były przestrzenie automatów z ilością stanów z zakresu 3 - 15. Zbiór treningowy oraz testowy konstruowane były zgodnie z zasadami przedstawionymi we wcześniejszych sekcjach tego dokumentu. \\
+Dla wszystkich symulacji przyjęto alfabet pięcioznakowy. Wykonano po 50 iteracji przeszukiwania przestrzeni dla każdej klasy automatów o 4, 6, 10, 15 stanach z losową funkcją przejścia. Dla algorytmu PSO rozważane były przestrzenie automatów z ilością stanów z zakresu 3 - 15. Liczebność roju wynosiła 100 cząsteczek. Zbiór treningowy oraz testowy konstruowane były zgodnie z zasadami przedstawionymi we wcześniejszych sekcjach tego dokumentu. \\
 
 \begin{table}[]
 \centering
@@ -215,7 +215,7 @@ Dla wszystkich symulacji przyjęto alfabet pięcioznakowy. Wykonano po 10 iterac
 8       & 0,3      & 0,36     & 0,09      & 0,75         \\
 9       & 0,31     & 0,13     & 0,27      & 0,57     \\
 10      & 0.29     & 0.28     & 0.35      & 0.06      \\
-Average & 0.284    & 0.283    & 0.313     & 0.35      \\ \bottomrule
+Average & 0.28    & 0.28    & 0.31     & 0.35      \\ \bottomrule
 \end{tabular}
 \end{table}
 
@@ -253,17 +253,27 @@ Average & 0,24     & 0,25     & 0,28      & 0,31      \\ \bottomrule
 \FloatBarrier
 \subsection{Skuteczność aproksymacji automatu o 4 stanach}
 
+Aproksymacja automatu o 4 stanach zakończyła się znalezieniem automatu o średnim współczynniku błędu na poziomie 0,24 dla zioru treningowego i 0,28 dla zbioru testowego. Oznacza to, że średnio dla 24 wyrazów (lub odpowiednio 28 wyrazów) na 100 relacja przynależności do tej samej klasy abstrakcji zwróciła błędny wynik. Warto zwrócić uwagę na to, że podczas testów zdarzały się zarówno automaty o bardzo niskim wpółczynniku błędu jak i takie których wpółczynnik ten był naprawdę wysoki. Zauważono również zależność pomiędzy liczbą iteracji a liczbą błędnie zaklasyfikowanych wyrazów. Wraz ze wzrostem liczby iteracji dla algorytmu PSO wynikowe automaty osiągały o wiele niższe współczynniki dla zbioru treningowego oraz zauważalnie niższe dla zbioru testowego. \\
+
 \FloatBarrier
 \subsection{Skuteczność aproksymacji automatu o 6 stanach}
+
+Podobnie jak w przypadku poprzednim współczynnik błędu dla znalezionych automatów zazwyczaj nie przekraczał wartości 0,3. Błędy na poziomie większym niż 0,7 można uznać za błąd gruby. \\
 
 \FloatBarrier
 \subsection{Skuteczność aproksymacji automatu o 10 stanach}
 
+W przypadku automatów o 10 stanach wyniki aproksymacji nie odbiegały wiele od wyników z poprzednich prób. Program zwracał dobrze rokujące wyniki a znalezione automaty zazwyczaj miały podobną ilość stanów co poszukiwany automat. Zauważono zależność, że automaty o liczbie stanów większej bądź równej liczbie stanów poszukiwanego narzędzia charakteryzowały się uzyskiwaniem lepszych (mniejszych) współczynników błędu niż automaty o mniejszej liczbie stanów. \\
+
 \FloatBarrier
 \subsection{Skuteczność aproksymacji automatu o 15 stanach}
 
+W przypadku aproksymacji automatów o 15 stanach za pomocą automatów o liczbie stanów z zakresu [3, 15] liczba błędów zaczęła rosnąć. Współczynniki błędu większe niż 0,3 pojawiały się o wiele częściej i można przypuszczać, że pojedynczy wynik 0,8 był dziełem przypadku (wylosowanego automatu wraz z funkcją przejścia). Jedną z prawdopodobnych przyczyn takiego stanu rzeczy była możliwość napotkania automatów o nieosiągalnych stanach podczas przeszukiwania przestrzeni metodą PSO. Automaty takie będące uproszczoną wersją poszukiwanego narzędzia sprawdzającego przynależność do klas abstrakcji nie radzą sobie najlepiej w przypadku wystąpienia dłuższych słow. Ponieważ przestrzeń poszukiwań kończyła się w przestrzeni automatów z 15 stanami istaniała duża szansa na wylosowanie automatów o niepustym zbiorze stanów nieosiągalnych a co za tym idzie - na utratę pewnej części informacji o poszukiwanym automacie. Stąd też pogorszenie wyników aproksymacji. \\
 
-Dodatkowo przeprowadzone zostały próby aproksymacji automatów o 20, 30, 50, 80 stanach przez inne, o mniejszej liczbie stanów - 4, 6, 8, 10, 12.
+
+\FloatBarrier
+\subsection{Dodatkowe próby}
+Dalej przeprowadzone zostały próby aproksymacji automatów o 20, 30, 50, 80 stanach przez inne, o mniejszej liczbie stanów - 4, 6, 8, 10, 12. Celem tych eksperymentów było sprawdzenie czy istnieje szansa na upraszczanie skomplikowanych automatów bez utraty (lub małych stratach) informacji o klasach abstrakcji. \\
 
 \FloatBarrier
 \subsection{Skuteczność aproksymacji automatu o 20 stanach}
@@ -488,6 +498,8 @@ Average & 0,984    & 0,986    & 0,988    & 0,979     & 0,982  \\ \bottomrule
 \includegraphics[scale=1]{10.png}
 \end{figure} 
 
+\FloatBarrier
+\subsection{Podsumowanie i wnioski}
 
-
+Tutaj wrzucić podsumowanie wszystkich prób - zarówno z podpunktu A jak i B. Co wyszło, dlaczego i co można z tego wnioskować.
 \end{document}
