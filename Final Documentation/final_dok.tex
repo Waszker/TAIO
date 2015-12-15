@@ -278,6 +278,8 @@ Dalej przeprowadzone zostały próby aproksymacji automatów o 20, 30, 50, 80 st
 \FloatBarrier
 \subsection{Skuteczność aproksymacji automatu o 20 stanach}
 
+Aproksymacja automatu o 20 stanach automatami o dopowiednio 4, 6, 8, 10 i 12 stanach zakończyła się znalezieniem automatów o średnim współczynniku błędu na poziomie 0,95 dla zbioru treningowego i testowego. Oznacza to, że automaty znalezione nie aproksymują w sposób zadowalający. Warto zauważyć, że dla zbioru treningowego średni współczynnik dla automatów aproksymujących jest prawie stały bez względu na ilość stanów - 0,95. W przeciwieństwie do zbioru treningowego, zbiór testowy posiada średnią aproksymację z przedziału [0,9 1] co oznacza, że prawie dla każdego słowa automat aproksymujący kończył w innym stanie niż automat wejściowy.  \\
+
 \begin{table}[]
 \centering
 \caption{20 states automaton approximation testing set}
@@ -332,6 +334,8 @@ Average & 0,949    & 0,948    & 0,947    & 0,956     & 0,962  \\ \bottomrule
 
 \FloatBarrier
 \subsection{Skuteczność aproksymacji automatu o 30 stanach}
+
+Aproksymacja automatu o 30 stanach automatami o dopowiednio 4, 6, 8, 10 i 12 stanach zakończyła się podobnie do aproksymacji automatu o stanach 20. Warto zauważyć, że analogicznie średni błąd aproksymacji dla zbioru treningowego jest prawie stały na poziomie 0,96. Aproksymacja nieznacznie zwraca większe błędy w porównaniu do automatu o 20 stanach. Poziom błędów można uznać za niesatysfakcjonujący.  \\
 
 \begin{table}[]
 \centering
@@ -388,6 +392,8 @@ Average & 0,961    & 0,958    & 0,962    & 0,968     & 0,96  \\ \bottomrule
 \FloatBarrier
 \subsection{Skuteczność aproksymacji automatu o 50 stanach}
 
+Aproksymacja automatu o 50 stanach automatami o dopowiednio 4, 6, 8, 10 i 12 stanach zakończyła się analogicznie dla poprzednich aproksymacji (dla stanów 20 i 30). Warto zauważyć, że analogicznie średni błąd aproksymacji dla zbioru treningowego jest prawie stały na poziomie 0,97. Aproksymacja nieznacznie zwraca większe błędy w porównaniu do automatu o 20 i 30 stanach. Poziom błędów dla zbioru treningowego wynosi prawie 0,98 co powoduje, że wyniki automatu aproksymującego dają złą odpowiedź dla 98 słów ze zbioru 100 słów testowych. Jest to wynik niezadowalający.\\
+
 \begin{table}[]
 \centering
 \caption{50 states automaton approximation testing set}
@@ -443,6 +449,7 @@ Average & 0,97    & 0,968     & 0,971    & 0,969     & 0,974  \\ \bottomrule
 \FloatBarrier
 \subsection{Skuteczność aproksymacji automatu o 80 stanach}
 
+Aproksymacja automatu o 80 stanach podobnie jak dla poprzednich aproksymacji (dla 20, 30 i 50 stanów) zrówno dla zbioru słów treningowych jak i testowych zwraca wyniki niezadowalające. Przy tej aproksymacji można założyć że współczynnik błędów jest równy 1 dla obu zbiorów. \\
 
 \begin{table}[]
 \centering
@@ -501,5 +508,5 @@ Average & 0,984    & 0,986    & 0,988    & 0,979     & 0,982  \\ \bottomrule
 \FloatBarrier
 \subsection{Podsumowanie i wnioski}
 
-Tutaj wrzucić podsumowanie wszystkich prób - zarówno z podpunktu A jak i B. Co wyszło, dlaczego i co można z tego wnioskować.
+Znalezione automaty przy pomocy PSO nie mogą służyć za automoaty dobrze aproksymujące automaty wejściowe jeżeli ilość stanów automatu aproksymującego różni się znacznie od ilości stanów automatu aproksymowanego. Wyniki dla automatów o ilości stanów 20, 30, 50 oraz 80 potwierdzają tą tezę. Algorytm sprawdza się dobrze dla małych automatów z podobną ilością stanów co automat wejściowy. Zwiększanie ilości iteracji algorytmu pso porawia znacznie współczynnik błędu znalezionego automatu. \\
 \end{document}
