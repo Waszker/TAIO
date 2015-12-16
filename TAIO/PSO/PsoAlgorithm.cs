@@ -12,6 +12,7 @@ namespace TAIO.PSO
     {
         private double _minErrorLevel;
         private readonly int _maxIterationCount;
+        private readonly int _minStateCount;
         private readonly int _maxStateCount;
         private readonly int _alphabetCount;
         private readonly int _particleNumber;
@@ -24,10 +25,11 @@ namespace TAIO.PSO
         /// <param name="maxStateCount"></param>
         /// <param name="alphabetCount"></param>
         /// <param name="particlesNumber"></param>
-        public PsoAlgorithm(double minErrorLevel, int maxIterationCount, int maxStateCount, int alphabetCount, int particlesNumber)
+        public PsoAlgorithm(double minErrorLevel, int maxIterationCount, int minStateCount, int maxStateCount, int alphabetCount, int particlesNumber)
         {
             _minErrorLevel = minErrorLevel;
             _maxIterationCount = maxIterationCount;
+            _minStateCount = minStateCount;
             _maxStateCount = maxStateCount;
             _alphabetCount = alphabetCount;
             _particleNumber = particlesNumber;
@@ -41,13 +43,13 @@ namespace TAIO.PSO
             List<Automaton> automatons = new List<Automaton>();
             Thread[] threads = new Thread[_maxStateCount];
 
-            for (int numberOfStates = 3; numberOfStates <= _maxStateCount; numberOfStates++)
+            for (int numberOfStates = _minStateCount; numberOfStates <= _maxStateCount; numberOfStates++)
             {
                 threads[numberOfStates - 1] = new Thread(() => { automatons.Add(GetBestAutomatonFromSpace(numberOfStates)); });
                 threads[numberOfStates - 1].Start();
             }
 
-            for (int numberOfStates = 3; numberOfStates <= _maxStateCount; numberOfStates++)
+            for (int numberOfStates = _minStateCount; numberOfStates <= _maxStateCount; numberOfStates++)
             {
                 threads[numberOfStates - 1].Join();
                 System.Console.WriteLine("PSO join!");
@@ -86,7 +88,7 @@ namespace TAIO.PSO
                         globalBest = p.PersonalBestPosition;
 
                 // Move particles and check errors
-                for(int i = 0; i<particles.Length; i++)
+                for (int i = 0; i < particles.Length; i++)
                 {
                     Particle p = particles[i];
                     p.MoveParticle(globalBest, c1, c2);
@@ -137,7 +139,7 @@ namespace TAIO.PSO
             }
 
             System.Console.WriteLine("{0} errors in {1} words", automatonResult[bestAutomatonIndex], TargetFunction.GetTestSetCount());
-            return new System.Tuple<Automaton, double>(automatons[bestAutomatonIndex], ((double)automatonResult[bestAutomatonIndex]/(double)TargetFunction.GetTestSetCount()));
+            return new System.Tuple<Automaton, double>(automatons[bestAutomatonIndex], ((double)automatonResult[bestAutomatonIndex] / (double)TargetFunction.GetTestSetCount()));
         }
     }
 }
