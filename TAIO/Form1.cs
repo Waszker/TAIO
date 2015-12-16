@@ -250,7 +250,7 @@ namespace TAIO
                 {
                     if (j > 0)
                         row.Append(", ");
-                    row.Append(stateTable[i, j]);
+                    row.Append((stateTable[i, j]+1));
                 }
                 output.Append("\r\n");
                 output.Append(row);

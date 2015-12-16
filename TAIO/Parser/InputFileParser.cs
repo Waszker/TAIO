@@ -36,6 +36,8 @@ namespace TAIO.Parser
             {
                 string[] states = inputFileLines[i + 1].Split(',');
                 functionTables[i] = states;
+                for (int j = 0; j < functionTables[i].Length; j++)
+                    functionTables[i][j] = (Int32.Parse(functionTables[i][j]) - 1).ToString();
             }
             
             return Utils.EnumerateAlphabetSymbols(numberOfAlphabetLetters);
