@@ -122,7 +122,8 @@ namespace TAIO
             TargetFunction targetFunction = new TargetFunction(automaton, w.TrainingWords, w.TestingWords);
 
             // Start algorithm and then remove unreached states
-            PsoAlgorithm pso = new PsoAlgorithm((double)minErrLevel.Value, (int)maxIterationCount.Value, (int)maxStateNumber.Value, alphabetLetters.Length, (int)ParticlesNumber.Value);
+            PsoAlgorithm pso = new PsoAlgorithm((double)minErrLevel.Value, (int)maxIterationCount.Value, (int)minStateNumber.Value, 
+                (int)maxStateNumber.Value, alphabetLetters.Length, (int)ParticlesNumber.Value);
             System.Tuple<Automaton, double> result = pso.RunAlgorithm();
             foundAutomaton = result.Item1;
 
