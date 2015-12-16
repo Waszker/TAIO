@@ -103,12 +103,12 @@ Utworzenie treningowego i testowego zbioru słów nastąpuje poprzez wygenerowan
 
 Zbiór treningowy zawiera wszystkie słowa nad alfabetem o długości mniejszej bądź równej długości podanej przez użytkownika (nie większej niż 5). \\
 
-Zbiór testowy składa się ze słów będących wariacjami bez powtórzeń dla słów o  długości nie mniejszej niż 7 i nie większej niż maksymalna ilość stanów poszukiwanego automatu. W przypadku mniejszej ilości symboli alfabetu niż wymagałyby tego wariacje następuje konstrukcja nowego, tymczasowego zbioru poprzez powielenie wszystkich symboli alfabetu i dodanie ich do istniejących już symboli. Nowe symbole są dodatkowo indeksowane numerem oznaczającym w której iteracji zostały dodane. Zapewnia to ich rozróżnialność podczas konstrukcji zbiorów.\\
+Zbiór testowy składa się ze słów będących wariacjami bez powtórzeń dla słów o  długości nie mniejszej niż 6 i nie większej niż maksymalna ilość stanów poszukiwanego automatu. W przypadku mniejszej liczby symboli alfabetu niż wymagałyby tego wariacje następuje konstrukcja nowego, tymczasowego zbioru poprzez powielenie wszystkich symboli alfabetu i dodanie ich do istniejących już symboli. Nowe symbole są dodatkowo indeksowane numerem oznaczającym w której iteracji zostały dodane. Zapewnia to ich rozróżnialność podczas konstrukcji zbiorów.\\
 
 Przykład zbioru: {0, 1}. 
 Zbiór po przygotowaniu do utworzenia wariacji bez powtórzeń dla słów długości 6: {0, 1, $0_{1}$, $1_{1}$, $0_{2}$, $1_{2}$}. \\
 
-Dodatkowo do zbioru treningowego zostały dodane losowe słowa (zawierające losowe litery alfabetu) o losowej długości z przedziału $[x1,x2]$ , gdzie $x1$ jest maksymalną długością słowa treningowego generowanego poprzednią metodą (przy użyciu wariacji z powtórzeniami) a $x2$ jest nowym parametrem oznaczającym maksymalną długość losowego słowa. W przypadku gdy $x2 < x1$ nie generowane są żadne dodatkowe słowa. Użytkownik może również określić maksymalną ilość słów losowych. Dodatkowo dla każdego nowego słowa $s1$ dopisanego do zbioru treningowego tworzone jest słowo $s2$ tej samej długości lecz również o losowej zawartości, które jest dopisywane do zbioru słów testowych. \\
+Dodatkowo do zbioru treningowego zostały dodane losowe słowa (zawierające losowe litery alfabetu) o losowej długości z przedziału $[x1,x2]$ , gdzie $x1$ jest maksymalną długością słowa treningowego generowanego poprzednią metodą (przy użyciu wariacji z powtórzeniami) a $x2$ jest nowym parametrem oznaczającym maksymalną długość losowego słowa. W przypadku gdy $x2 < x1$ nie generowane są żadne dodatkowe słowa. Użytkownik może również określić maksymalną liczbę słów losowych. Dodatkowo dla każdego nowego słowa $s1$ dopisanego do zbioru treningowego tworzone jest słowo $s2$ tej samej długości lecz również o losowej zawartości, które jest dopisywane do zbioru słów testowych. \\
 
 Zbiór treningowy i testowy są zbiorami rozłącznymi.\\
 
@@ -139,7 +139,7 @@ Dla tak zdefiniowanej przestrzeni i ciągów liczb długości d*f, które reprez
 
 \subsection{Przeszukiwanie przestrzeni w algorytmie PSO}
 
-Przeszukiwanie przestrzeni automatów realizowane jest poprzez wygenerowanie pewnej ilości cząstek (nazywanych rojem) poruszających się według określonych zasad i dążących do osiągnięcia postawionego celu. Za cel najczęściej przyjmuje się minimalizację wartości pewnej funkcji nazywanej funkcją celu. W tym projekcie jest to funkcja $f:A \rightarrow N$ ($A$ - zbiór automatów, $N$ - liczby naturalne), która dla danego automatu zwraca liczbę błędnie zaklasyfikowanych słów.\\
+Przeszukiwanie przestrzeni automatów realizowane jest poprzez wygenerowanie pewnej liczby cząstek (nazywanych rojem) poruszających się według określonych zasad i dążących do osiągnięcia postawionego celu. Za cel najczęściej przyjmuje się minimalizację wartości pewnej funkcji nazywanej funkcją celu. W tym projekcie jest to funkcja $f:A \rightarrow N$ ($A$ - zbiór automatów, $N$ - liczby naturalne), która dla danego automatu zwraca liczbę błędnie zaklasyfikowanych słów.\\
 
 W trakcie kolejnych kroków zdyskretyzowanego czasu cząstki przemieszczają się do nowych pozycji, symulując adaptację roju do środowiska poszukując optimum. Każda cząstka pamięta swoje dotychczasowe najlepsze położenie (miejsce w przestrzeni gdzie znaleziony automat miał najniższą wartość funkcji celu). “Liderem” roju zostaje ta o najlepszym położeniu z całego roju. Położenia cząstek w obszarze przeszukiwania stanowią potencjalne rozwiązania. \\
 
@@ -303,7 +303,7 @@ Aproksymacja automatu o 20 stanach automatami o dopowiednio 4, 6, 8, 10 i 12 sta
 8       & 0,95     & 1        & 0,97     & 1         & 0,99     \\
 9       & 1        & 0,81     & 1        & 0,95      & 0,92 \\
 10      & 1        & 1        & 1        & 1         & 1  \\ \bottomrule
-Average & 0,951    & 0,908    & 0,99     & 0,987     & 0,991  \\ \bottomrule
+Average & 0,95    & 0,90    & 0,99     & 0,98     & 0,99  \\ \bottomrule
 \end{tabular}
 \vspace{4mm}
 \endminipage\hfill
@@ -362,7 +362,7 @@ Aproksymacja automatu o 30 stanach automatami o dopowiednio 4, 6, 8, 10 i 12 sta
 8       & 1        & 0,98     & 1        & 1         & 1     \\
 9       & 1        & 0,89     & 0,99     & 0,81      & 1 \\
 10      & 0,92     & 1        & 1        & 1         & 1  \\ \bottomrule
-Average & 0,941    & 0,98     & 0,981    & 0,91      & 0,999  \\ \bottomrule
+Average & 0,94    & 0,98     & 0,98    & 0,91      & 0,99  \\ \bottomrule
 \end{tabular}
 \vspace{4mm}
 \endminipage\hfill
@@ -389,7 +389,7 @@ Average & 0,941    & 0,98     & 0,981    & 0,91      & 0,999  \\ \bottomrule
 8       & 1        & 1        & 0,98     & 1         & 1    \\
 9       & 1        & 0,99     & 1        & 1         & 1 \\
 10      & 0,96     & 1        & 1        & 0,98      & 0,99  \\ \bottomrule
-Average & 0,961    & 0,958    & 0,962    & 0,968     & 0,96  \\ \bottomrule
+Average & 0,96    & 0,95    & 0,96    & 0,96     & 0,96  \\ \bottomrule
 \end{tabular}
 \vspace{4mm}
 \endminipage\hfill
@@ -421,7 +421,7 @@ Aproksymacja automatu o 50 stanach automatami o dopowiednio 4, 6, 8, 10 i 12 sta
 8       & 0,89     & 0,99     & 1        & 1         & 1     \\
 9       & 0,98     & 1        & 1        & 1         & 0,99 \\
 10      & 1        & 1        & 1        & 1         & 0,99  \\ \bottomrule
-Average & 0,968    & 0,987    & 0,954    & 0,999     & 0,993  \\ \bottomrule
+Average & 0,96    & 0,98    & 0,95    & 0,99     & 0,99  \\ \bottomrule
 \end{tabular}
 \vspace{4mm}
 \endminipage\hfill
@@ -448,7 +448,7 @@ Average & 0,968    & 0,987    & 0,954    & 0,999     & 0,993  \\ \bottomrule
 8       & 0,98     & 1        & 1        & 1         & 0,99    \\
 9       & 0,89     & 1        & 0,99     & 0,99      & 0,96 \\
 10      & 1        & 1        & 0,98     & 1         & 1  \\ \bottomrule
-Average & 0,97    & 0,968     & 0,971    & 0,969     & 0,974  \\ \bottomrule
+Average & 0,97    & 0,97     & 0,97    & 0,96     & 0,97  \\ \bottomrule
 \end{tabular}
 \vspace{4mm}
 \endminipage\hfill
@@ -480,7 +480,7 @@ Aproksymacja automatu o 80 stanach podobnie jak dla poprzednich aproksymacji (dl
 8       & 0,99     & 1        & 1        & 1         & 1     \\
 9       & 1        & 1        & 1        & 1         & 1 \\
 10      & 0,99     & 0,95     & 0,85     & 1         & 0,78  \\ \bottomrule
-Average & 0,99     & 0,98     & 0,945    & 0,995     & 0,965  \\ \bottomrule
+Average & 0,99     & 0,98     & 0,94    & 0,99     & 0,96  \\ \bottomrule
 \end{tabular}
 \vspace{4mm}
 \endminipage\hfill
@@ -507,7 +507,7 @@ Average & 0,99     & 0,98     & 0,945    & 0,995     & 0,965  \\ \bottomrule
 8       & 1        & 0,94     & 1        & 0,99      & 1    \\
 9       & 0,99     & 0,97     & 0,96     & 1         & 0,98 \\
 10      & 0,98     & 0,99     & 0,99     & 1         & 1  \\ \bottomrule
-Average & 0,984    & 0,986    & 0,988    & 0,979     & 0,982  \\ \bottomrule
+Average & 0,98    & 0,98    & 0,98    & 0,97     & 0,98  \\ \bottomrule
 \end{tabular}
 \vspace{4mm}
 \endminipage\hfill
@@ -517,5 +517,10 @@ Average & 0,984    & 0,986    & 0,988    & 0,979     & 0,982  \\ \bottomrule
 \FloatBarrier
 \subsection{Podsumowanie i wnioski}
 
-Znalezione automaty przy pomocy algorytmu PSO nie mogą służyć za automaty dobrze aproksymujące automaty wejściowe jeżeli ilość stanów automatu aproksymującego różni się znacznie od ilości stanów automatu aproksymowanego. Wyniki dla automatów o ilości stanów 20, 30, 50 oraz 80 potwierdzają tą tezę. Algorytm sprawdza się dobrze dla małych automatów z podobną ilością stanów co automat wejściowy. Zwiększanie ilości iteracji algorytmu PSO poprawia znacznie współczynnik błędu znalezionego automatu. \\
+Znalezione przy pomocy algorytmu PSO automaty nie mogą służyć za automaty dobrze aproksymujące automaty wejściowe jeżeli liczba stanów automatu aproksymującego różni się znacznie od liczby stanów automatu aproksymowanego. Wyniki dla automatów o liczbie stanów 20, 30, 50 oraz 80 potwierdzają tę tezę. Algorytm sprawdza się dobrze dla małych automatów z podobną liczbą stanów co automat wejściowy lub w przypadku gdy przestrzeń przeszukiwań zawiera automaty o większej liczbie stanów niż automat wejściowy. Zwiększanie liczby iteracji algorytmu PSO poprawia znacznie współczynnik błędu znalezionego automatu tak samo jak liczba wpuszczonych cząstek przyspiesza zbieżność wyniku do faktycznego rozwiązania. \\
+
+Istnieje kilka potencjalnych ulepszeń działania zaprezentowanego programu. Jednym z nich jest użycie bardziej skomplikowanego algorytmu PSO biorącego pod uwagę więcej czynników (taki jak położenie sąsiadów, bezwładność poruszanej się cząstki czy wreszcie próba utrzymania prędkości jako wartości ciągłej a dyskretyzowanie jedynie położenia cząsteczki). Zmienić można również reprezentację cyfrową samych automatów - stosując pełny zapis tabeli funkcji przejścia co może skutkować zmianą w sposobie przemieszczania się i umiejscowienia cząstek w przestrzeni poszukiwań. \\
+
+Jeszcze raz podsumowując wszystkie próby można dojść do wniosku, że próba odtworzenia nieznanego automatu tylko na podstawie odpowiedzi na pytanie o przynależność dwóch słów do tej samej klasy abstrakcji dla relacji indukowanej przez język akceptowany przez ten automat jest o tyle trudna, że występuje tutaj brak informacji o liczbie stanów poszukiwanego automatu. Gdyby można było ograniczyć tę liczbę przez jakąś stałą to z dużym prawdopodobieństwem można szacować, że próba ta zakończy się sukcesem. W przeciwnym przypadku więcej będzie zależało od początkowego położenia cząstek w przestrzeni poszukiwań podczas przebiegu algorytmu PSO.
+
 \end{document}
