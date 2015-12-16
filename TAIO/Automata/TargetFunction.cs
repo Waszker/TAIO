@@ -57,6 +57,15 @@ namespace TAIO.Automata
         }
 
         /// <summary>
+        /// Returns number of words in training set.
+        /// </summary>
+        /// <returns></returns>
+        public static int GetTrainingSetCount()
+        {
+            return _trainingSet.Count();
+        }
+
+        /// <summary>
         /// Returns information if target function has been already initialized.
         /// </summary>
         /// <returns></returns>

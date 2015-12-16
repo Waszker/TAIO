@@ -262,7 +262,8 @@ namespace TAIO
             {
                 tw.Write(stateCounter + ", " + alphabetLetters.Length);
                 tw.WriteLine(output);
-                tw.WriteLine("Error rate: " +errorRate);
+                tw.WriteLine("Error rate for training set: " + foundAutomaton.TrainingSetError);
+                tw.WriteLine("Error rate for test set: " +errorRate);
                 tw.WriteLine("Number of states in input automaton: " + originalStatesCount);
                 tw.Close();
             }

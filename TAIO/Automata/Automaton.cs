@@ -12,7 +12,14 @@ namespace TAIO.Automata
     /// </summary>
     public class Automaton
     {
+        /// <summary>
+        /// All automaton states with their transfer functions
+        /// </summary>
         public List<State> States { get; private set;}
+        /// <summary>
+        /// Holds information about error rate for automaton for training set
+        /// </summary>
+        public double TrainingSetError { get; private set; }
         private readonly int _alphabetLength;
 
         #region Constructors
@@ -34,6 +41,7 @@ namespace TAIO.Automata
             int alphabetLength = bestPositionSoFar.OnePositions.GetLength(0);
             int numberOfStates = bestPositionSoFar.OnePositions.GetLength(1);
             _alphabetLength = alphabetLength;
+            TrainingSetError = ((double)bestPositionSoFar.TargetFunctionValue) / TargetFunction.GetTrainingSetCount();
 
             string[][] functionsTable = new string[numberOfStates][];
 
